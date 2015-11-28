@@ -2,12 +2,12 @@
 
 Native Go bindings for Clang's C API.
 
-## Installation/Update Process
+## Install/Update
 
 ```bash
 CGO_CFLAGS="-I`llvm-config --includedir`" \
   CGO_LDFLAGS="-L`llvm-config --libdir`" \
-  go get github.com/zimmski/go-clang-phoenix-bootstrap
+  go get -u github.com/zimmski/go-clang-phoenix-bootstrap
 ```
 
 ## Example/Usage
