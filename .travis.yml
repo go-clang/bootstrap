@@ -28,11 +28,6 @@ script:
   # Install the project
   - make install
 
-  # Do tests and code coverage
-  - ginkgo -r -cover -skipPackage="testdata"
-  - gover
-  - if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then goveralls -coverprofile=gover.coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN; fi
+  # Test without any coverage
+  - make test-verbose
 
-env:
-  # Coveralls.io
-  secure: "YRZnnrSTDDpDQPObiRTRGtM/FNuXvBI9S4KDebPE1D3O0JvAB4X7EWtOfibZbq+FsYqZW7+7lre4C6mAATCnJzEDI0UdDcul7kP1vN7JZTj9KW0VXRGHQP8lyqwUj9a9SIiyEjAJiZ/d/ygO3t+XNHoQ0KETN2sMAINbptqZzvdX4t6uAU/g2UgxDiYtYNVmz261uODNeO+QQD9TvGGxBTy6CAPSLh4fmgplWjoMZdiR+VPPYHK6uijltLzZpeiK9YtWbOZFynT5+zgQu3FwXYchQc7h7XkR/a+dfaB9Vp1WRjgmPx9R+rGADFQZ4XXxPVWJnRY/2H/tLvQUnKexveoQig0wXnb2pj+6KGP+9ANE864XW014pkzrYWtQgehzNiTqxpBxXjZ2c1vHp2rU0wRHdY+IjWOrrjqR1SCJaBGuUWrkJHPvzYb3LatxRPKbDmcL59+E7SkxzutudZJjX+P+pdalSt8rmnlXUnbWt0Vrda+5oh86o5JOGQ0julZTbimSc0Yi7Pi01eWD7KvJwstfyOxmI/ouzYSolRTYL4XDezP0sU92XHbKnU33AflrfRQ4M8wWXpHmZ9YLlT+0x7+GSje6ZcE+O5HLiQ6ZyvxXF4krLdAd6NoSEeDwoiFKUaeMUffeoJ5uVKsLwgNH0PFVv9w0gpcv4od7GY1EuZs="
