@@ -1,13 +1,12 @@
-# go-clang-phoenix-bootstrap [![GoDoc](https://godoc.org/github.com/zimmski/go-clang-phoenix-bootstrap?status.png)](https://godoc.org/github.com/zimmski/go-clang-phoenix-bootstrap) [![Build Status](https://travis-ci.org/zimmski/go-clang-phoenix-bootstrap.svg?branch=master)](https://travis-ci.org/zimmski/go-clang-phoenix-bootstrap) 
+# go-clang-phoenix-bootstrap [![GoDoc](https://godoc.org/github.com/zimmski/go-clang-phoenix-bootstrap?status.png)](https://godoc.org/github.com/zimmski/go-clang-phoenix-bootstrap) [![Build Status](https://travis-ci.org/zimmski/go-clang-phoenix-bootstrap.svg?branch=master)](https://travis-ci.org/zimmski/go-clang-phoenix-bootstrap)
 
 Native Go bindings for Clang's C API.
 
 ## Install/Update
 
 ```bash
-CGO_CFLAGS="-I`llvm-config --includedir`" \
-  CGO_LDFLAGS="-L`llvm-config --libdir`" \
-  go get -u github.com/zimmski/go-clang-phoenix-bootstrap
+CGO_LDFLAGS="-L`llvm-config --libdir`" \
+  go get -u github.com/zimmski/go-clang-phoenix-bootstrap/...
 ```
 
 ## Example/Usage
