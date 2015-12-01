@@ -24,3 +24,7 @@ Use the issue tracker of the https://github.com/go-clang/gen repository.
 ## How is the binding generated?
 
 The go-clang binding generation is in its own repository and can be found at [gen](https://github.com/go-clang/gen).
+
+# License
+
+This project, like all go-clang projects, is licensed under a BSD-3 license which can be found in the [LICENSE file](https://github.com/go-clang/license/blob/master/LICENSE) in [go-clang's license repository](https://github.com/go-clang/license)
