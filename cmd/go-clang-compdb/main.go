@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/zimmski/go-clang-phoenix-bootstrap/clang"
+	"github.com/go-clang/bootstrap/clang"
 )
 
 func main() {
