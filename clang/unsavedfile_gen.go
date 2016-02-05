@@ -30,6 +30,6 @@ func (uf UnsavedFile) Contents() string {
 }
 
 // The length of the unsaved contents of this buffer.
-func (uf UnsavedFile) Length() uint32 {
-	return uint32(uf.c.Length)
+func (uf UnsavedFile) Length() uint64 {
+	return uint64(uf.c.Length)
 }

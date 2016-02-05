@@ -16,6 +16,6 @@ type String struct {
 	c C.CXString
 }
 
-func (s String) Private_flags() uint16 {
-	return uint16(s.c.private_flags)
+func (s String) Private_flags() uint32 {
+	return uint32(s.c.private_flags)
 }

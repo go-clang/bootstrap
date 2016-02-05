@@ -102,8 +102,8 @@ func (t Type) ResultType() Type {
 
 	If a non-function type is passed in, -1 is returned.
 */
-func (t Type) NumArgTypes() int16 {
-	return int16(C.clang_getNumArgTypes(t.c))
+func (t Type) NumArgTypes() int32 {
+	return int32(C.clang_getNumArgTypes(t.c))
 }
 
 /*
@@ -112,7 +112,7 @@ func (t Type) NumArgTypes() int16 {
 	If a non-function type is passed in or the function does not have enough
 	parameters, an invalid type is returned.
 */
-func (t Type) ArgType(i uint16) Type {
+func (t Type) ArgType(i uint32) Type {
 	return Type{C.clang_getArgType(t.c, C.uint(i))}
 }
 

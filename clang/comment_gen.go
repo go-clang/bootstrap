@@ -23,8 +23,8 @@ func (c Comment) Kind() CommentKind {
 
 	Returns number of children of the AST node.
 */
-func (c Comment) NumChildren() uint16 {
-	return uint16(C.clang_Comment_getNumChildren(c.c))
+func (c Comment) NumChildren() uint32 {
+	return uint32(C.clang_Comment_getNumChildren(c.c))
 }
 
 /*
@@ -34,7 +34,7 @@ func (c Comment) NumChildren() uint16 {
 
 	Returns the specified child of the AST node.
 */
-func (c Comment) Child(childIdx uint16) Comment {
+func (c Comment) Child(childIdx uint32) Comment {
 	return Comment{C.clang_Comment_getChild(c.c, C.uint(childIdx))}
 }
 
@@ -99,8 +99,8 @@ func (c Comment) InlineCommandComment_getRenderKind() CommentInlineCommandRender
 
 	Returns number of command arguments.
 */
-func (c Comment) InlineCommandComment_getNumArgs() uint16 {
-	return uint16(C.clang_InlineCommandComment_getNumArgs(c.c))
+func (c Comment) InlineCommandComment_getNumArgs() uint32 {
+	return uint32(C.clang_InlineCommandComment_getNumArgs(c.c))
 }
 
 /*
@@ -110,7 +110,7 @@ func (c Comment) InlineCommandComment_getNumArgs() uint16 {
 
 	Returns text of the specified argument.
 */
-func (c Comment) InlineCommandComment_getArgText(argIdx uint16) string {
+func (c Comment) InlineCommandComment_getArgText(argIdx uint32) string {
 	o := cxstring{C.clang_InlineCommandComment_getArgText(c.c, C.uint(argIdx))}
 	defer o.Dispose()
 
@@ -146,8 +146,8 @@ func (c Comment) HTMLStartTagComment_IsSelfClosing() bool {
 
 	Returns number of attributes (name-value pairs) attached to the start tag.
 */
-func (c Comment) HTMLStartTag_getNumAttrs() uint16 {
-	return uint16(C.clang_HTMLStartTag_getNumAttrs(c.c))
+func (c Comment) HTMLStartTag_getNumAttrs() uint32 {
+	return uint32(C.clang_HTMLStartTag_getNumAttrs(c.c))
 }
 
 /*
@@ -157,7 +157,7 @@ func (c Comment) HTMLStartTag_getNumAttrs() uint16 {
 
 	Returns name of the specified attribute.
 */
-func (c Comment) HTMLStartTag_getAttrName(attrIdx uint16) string {
+func (c Comment) HTMLStartTag_getAttrName(attrIdx uint32) string {
 	o := cxstring{C.clang_HTMLStartTag_getAttrName(c.c, C.uint(attrIdx))}
 	defer o.Dispose()
 
@@ -171,7 +171,7 @@ func (c Comment) HTMLStartTag_getAttrName(attrIdx uint16) string {
 
 	Returns value of the specified attribute.
 */
-func (c Comment) HTMLStartTag_getAttrValue(attrIdx uint16) string {
+func (c Comment) HTMLStartTag_getAttrValue(attrIdx uint32) string {
 	o := cxstring{C.clang_HTMLStartTag_getAttrValue(c.c, C.uint(attrIdx))}
 	defer o.Dispose()
 
@@ -195,8 +195,8 @@ func (c Comment) BlockCommandComment_getCommandName() string {
 
 	Returns number of word-like arguments.
 */
-func (c Comment) BlockCommandComment_getNumArgs() uint16 {
-	return uint16(C.clang_BlockCommandComment_getNumArgs(c.c))
+func (c Comment) BlockCommandComment_getNumArgs() uint32 {
+	return uint32(C.clang_BlockCommandComment_getNumArgs(c.c))
 }
 
 /*
@@ -206,7 +206,7 @@ func (c Comment) BlockCommandComment_getNumArgs() uint16 {
 
 	Returns text of the specified word-like argument.
 */
-func (c Comment) BlockCommandComment_getArgText(argIdx uint16) string {
+func (c Comment) BlockCommandComment_getArgText(argIdx uint32) string {
 	o := cxstring{C.clang_BlockCommandComment_getArgText(c.c, C.uint(argIdx))}
 	defer o.Dispose()
 
@@ -253,8 +253,8 @@ func (c Comment) ParamCommandComment_IsParamIndexValid() bool {
 
 	Returns zero-based parameter index in function prototype.
 */
-func (c Comment) ParamCommandComment_getParamIndex() uint16 {
-	return uint16(C.clang_ParamCommandComment_getParamIndex(c.c))
+func (c Comment) ParamCommandComment_getParamIndex() uint32 {
+	return uint32(C.clang_ParamCommandComment_getParamIndex(c.c))
 }
 
 /*
@@ -318,8 +318,8 @@ func (c Comment) TParamCommandComment_IsParamPositionValid() bool {
 	for C and TT nesting depth is 0,
 	for T nesting depth is 1.
 */
-func (c Comment) TParamCommandComment_getDepth() uint16 {
-	return uint16(C.clang_TParamCommandComment_getDepth(c.c))
+func (c Comment) TParamCommandComment_getDepth() uint32 {
+	return uint32(C.clang_TParamCommandComment_getDepth(c.c))
 }
 
 /*
@@ -340,8 +340,8 @@ func (c Comment) TParamCommandComment_getDepth() uint16 {
 	at depth 0 T's index is 1 (same as TT's),
 	at depth 1 T's index is 0.
 */
-func (c Comment) TParamCommandComment_getIndex(depth uint16) uint16 {
-	return uint16(C.clang_TParamCommandComment_getIndex(c.c, C.uint(depth)))
+func (c Comment) TParamCommandComment_getIndex(depth uint32) uint32 {
+	return uint32(C.clang_TParamCommandComment_getIndex(c.c, C.uint(depth)))
 }
 
 /*

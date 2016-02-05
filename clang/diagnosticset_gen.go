@@ -11,8 +11,8 @@ type DiagnosticSet struct {
 }
 
 // Determine the number of diagnostics in a CXDiagnosticSet.
-func (ds DiagnosticSet) NumDiagnosticsInSet() uint16 {
-	return uint16(C.clang_getNumDiagnosticsInSet(ds.c))
+func (ds DiagnosticSet) NumDiagnosticsInSet() uint32 {
+	return uint32(C.clang_getNumDiagnosticsInSet(ds.c))
 }
 
 /*
@@ -24,7 +24,7 @@ func (ds DiagnosticSet) NumDiagnosticsInSet() uint16 {
 	Returns the requested diagnostic. This diagnostic must be freed
 	via a call to clang_disposeDiagnostic().
 */
-func (ds DiagnosticSet) DiagnosticInSet(index uint16) Diagnostic {
+func (ds DiagnosticSet) DiagnosticInSet(index uint32) Diagnostic {
 	return Diagnostic{C.clang_getDiagnosticInSet(ds.c, C.uint(index))}
 }
 

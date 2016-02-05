@@ -30,7 +30,7 @@ type CompletionString struct {
 
 	Returns the kind of the chunk at the index chunk_number.
 */
-func (cs CompletionString) ChunkKind(chunkNumber uint16) CompletionChunkKind {
+func (cs CompletionString) ChunkKind(chunkNumber uint32) CompletionChunkKind {
 	return CompletionChunkKind(C.clang_getCompletionChunkKind(cs.c, C.uint(chunkNumber)))
 }
 
@@ -44,7 +44,7 @@ func (cs CompletionString) ChunkKind(chunkNumber uint16) CompletionChunkKind {
 
 	Returns the text associated with the chunk at index chunk_number.
 */
-func (cs CompletionString) ChunkText(chunkNumber uint16) string {
+func (cs CompletionString) ChunkText(chunkNumber uint32) string {
 	o := cxstring{C.clang_getCompletionChunkText(cs.c, C.uint(chunkNumber))}
 	defer o.Dispose()
 
@@ -62,13 +62,13 @@ func (cs CompletionString) ChunkText(chunkNumber uint16) string {
 	Returns the completion string associated with the chunk at index
 	chunk_number.
 */
-func (cs CompletionString) ChunkCompletionString(chunkNumber uint16) CompletionString {
+func (cs CompletionString) ChunkCompletionString(chunkNumber uint32) CompletionString {
 	return CompletionString{C.clang_getCompletionChunkCompletionString(cs.c, C.uint(chunkNumber))}
 }
 
 // Retrieve the number of chunks in the given code-completion string.
-func (cs CompletionString) NumChunks() uint16 {
-	return uint16(C.clang_getNumCompletionChunks(cs.c))
+func (cs CompletionString) NumChunks() uint32 {
+	return uint32(C.clang_getNumCompletionChunks(cs.c))
 }
 
 /*
@@ -83,8 +83,8 @@ func (cs CompletionString) NumChunks() uint16 {
 	Returns The priority of this completion string. Smaller values indicate
 	higher-priority (more likely) completions.
 */
-func (cs CompletionString) Priority() uint16 {
-	return uint16(C.clang_getCompletionPriority(cs.c))
+func (cs CompletionString) Priority() uint32 {
+	return uint32(C.clang_getCompletionPriority(cs.c))
 }
 
 /*
@@ -108,8 +108,8 @@ func (cs CompletionString) Availability() AvailabilityKind {
 	Returns the number of annotations associated with the given completion
 	string.
 */
-func (cs CompletionString) NumAnnotations() uint16 {
-	return uint16(C.clang_getCompletionNumAnnotations(cs.c))
+func (cs CompletionString) NumAnnotations() uint32 {
+	return uint32(C.clang_getCompletionNumAnnotations(cs.c))
 }
 
 /*
@@ -123,7 +123,7 @@ func (cs CompletionString) NumAnnotations() uint16 {
 	Returns annotation string associated with the completion at index
 	annotation_number, or a NULL string if that annotation is not available.
 */
-func (cs CompletionString) Annotation(annotationNumber uint16) string {
+func (cs CompletionString) Annotation(annotationNumber uint32) string {
 	o := cxstring{C.clang_getCompletionAnnotation(cs.c, C.uint(annotationNumber))}
 	defer o.Dispose()
 

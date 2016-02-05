@@ -24,8 +24,8 @@ func (cs CursorSet) Dispose() {
 
 	Returns non-zero if the set contains the specified cursor.
 */
-func (cs CursorSet) Contains(cursor Cursor) uint16 {
-	return uint16(C.clang_CXCursorSet_contains(cs.c, cursor.c))
+func (cs CursorSet) Contains(cursor Cursor) uint32 {
+	return uint32(C.clang_CXCursorSet_contains(cs.c, cursor.c))
 }
 
 /*
@@ -33,6 +33,6 @@ func (cs CursorSet) Contains(cursor Cursor) uint16 {
 
 	Returns zero if the CXCursor was already in the set, and non-zero otherwise.
 */
-func (cs CursorSet) Insert(cursor Cursor) uint16 {
-	return uint16(C.clang_CXCursorSet_insert(cs.c, cursor.c))
+func (cs CursorSet) Insert(cursor Cursor) uint32 {
+	return uint32(C.clang_CXCursorSet_insert(cs.c, cursor.c))
 }

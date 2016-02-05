@@ -17,8 +17,8 @@ func (turu TUResourceUsage) Dispose() {
 	C.clang_disposeCXTUResourceUsage(turu.c)
 }
 
-func (turu TUResourceUsage) NumEntries() uint16 {
-	return uint16(turu.c.numEntries)
+func (turu TUResourceUsage) NumEntries() uint32 {
+	return uint32(turu.c.numEntries)
 }
 
 func (turu TUResourceUsage) Entries() []TUResourceUsageEntry {
