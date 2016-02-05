@@ -29,7 +29,7 @@ func TestDiagnostics(t *testing.T) {
 		}
 		t.Log(d)
 		t.Log(d.Severity(), d.Spelling())
-		t.Log(d.FormatDiagnostic(uint16(Diagnostic_DisplayCategoryName | Diagnostic_DisplaySourceLocation)))
+		t.Log(d.FormatDiagnostic(uint32(Diagnostic_DisplayCategoryName | Diagnostic_DisplaySourceLocation)))
 	}
 	assert.True(t, ok)
 }

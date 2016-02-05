@@ -4,7 +4,7 @@ func (ccr *CodeCompleteResults) Diagnostics() []Diagnostic { // TODO this can be
 	s := make([]Diagnostic, ccr.NumDiagnostics())
 
 	for i := range s {
-		s[i] = ccr.Diagnostic(uint16(i))
+		s[i] = ccr.Diagnostic(uint32(i))
 	}
 
 	return s

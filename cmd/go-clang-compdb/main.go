@@ -42,7 +42,7 @@ func main() {
 
 	fmt.Printf(":: got %d compile commands\n", ncmds)
 
-	for i := uint16(0); i < ncmds; i++ {
+	for i := uint32(0); i < ncmds; i++ {
 		cmd := cmds.Command(i)
 
 		fmt.Printf("::  --- cmd=%d ---\n", i)
@@ -52,7 +52,7 @@ func main() {
 		fmt.Printf("::  nargs= %d\n", nargs)
 
 		sargs := make([]string, 0, nargs)
-		for iarg := uint16(0); iarg < nargs; iarg++ {
+		for iarg := uint32(0); iarg < nargs; iarg++ {
 			arg := cmd.Arg(iarg)
 			sfmt := "%q, "
 			if iarg+1 == nargs {

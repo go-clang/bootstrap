@@ -48,7 +48,7 @@ func TestCompilationDatabase(t *testing.T) {
 	}
 
 	for i := 0; i < int(cmds.Size()); i++ {
-		cmd := cmds.Command(uint16(i))
+		cmd := cmds.Command(uint32(i))
 		if cmd.Directory() != table[i].directory {
 			t.Errorf("expected dir=%q. got=%q", table[i].directory, cmd.Directory())
 		}
@@ -61,7 +61,7 @@ func TestCompilationDatabase(t *testing.T) {
 			nargs = len(table[i].args)
 		}
 		for j := 0; j < nargs; j++ {
-			arg := cmd.Arg(uint16(j))
+			arg := cmd.Arg(uint32(j))
 			if arg != table[i].args[j] {
 				t.Errorf("expected arg[%d]=%q. got=%q", j, table[i].args[j], arg)
 			}

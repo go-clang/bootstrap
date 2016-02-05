@@ -37,7 +37,7 @@ func (tu TranslationUnit) Diagnostics() []Diagnostic { // TODO this can be gener
 	s := make([]Diagnostic, tu.NumDiagnostics())
 
 	for i := range s {
-		s[i] = tu.Diagnostic(uint16(i))
+		s[i] = tu.Diagnostic(uint32(i))
 	}
 
 	return s
