@@ -23,8 +23,8 @@ func (cc CompileCommands) Dispose() {
 }
 
 // Get the number of CompileCommand we have for a file
-func (cc CompileCommands) Size() uint16 {
-	return uint16(C.clang_CompileCommands_getSize(cc.c))
+func (cc CompileCommands) Size() uint32 {
+	return uint32(C.clang_CompileCommands_getSize(cc.c))
 }
 
 /*
@@ -32,6 +32,6 @@ func (cc CompileCommands) Size() uint16 {
 
 	Note : 0 <= i < clang_CompileCommands_getSize(CXCompileCommands)
 */
-func (cc CompileCommands) Command(i uint16) CompileCommand {
+func (cc CompileCommands) Command(i uint32) CompileCommand {
 	return CompileCommand{C.clang_CompileCommands_getCommand(cc.c, C.uint(i))}
 }

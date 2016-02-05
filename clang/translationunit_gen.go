@@ -38,18 +38,18 @@ func (tu TranslationUnit) File(fileName string) File {
 }
 
 // Retrieves the source location associated with a given file/line/column in a particular translation unit.
-func (tu TranslationUnit) Location(file File, line uint16, column uint16) SourceLocation {
+func (tu TranslationUnit) Location(file File, line uint32, column uint32) SourceLocation {
 	return SourceLocation{C.clang_getLocation(tu.c, file.c, C.uint(line), C.uint(column))}
 }
 
 // Retrieves the source location associated with a given character offset in a particular translation unit.
-func (tu TranslationUnit) LocationForOffset(file File, offset uint16) SourceLocation {
+func (tu TranslationUnit) LocationForOffset(file File, offset uint32) SourceLocation {
 	return SourceLocation{C.clang_getLocationForOffset(tu.c, file.c, C.uint(offset))}
 }
 
 // Determine the number of diagnostics produced for the given translation unit.
-func (tu TranslationUnit) NumDiagnostics() uint16 {
-	return uint16(C.clang_getNumDiagnostics(tu.c))
+func (tu TranslationUnit) NumDiagnostics() uint32 {
+	return uint32(C.clang_getNumDiagnostics(tu.c))
 }
 
 /*
@@ -61,7 +61,7 @@ func (tu TranslationUnit) NumDiagnostics() uint16 {
 	Returns the requested diagnostic. This diagnostic must be freed
 	via a call to clang_disposeDiagnostic().
 */
-func (tu TranslationUnit) Diagnostic(index uint16) Diagnostic {
+func (tu TranslationUnit) Diagnostic(index uint32) Diagnostic {
 	return Diagnostic{C.clang_getDiagnostic(tu.c, C.uint(index))}
 }
 
@@ -92,8 +92,8 @@ func (tu TranslationUnit) Spelling() string {
 	set contains an unspecified set of options that save translation units with
 	the most commonly-requested data.
 */
-func (tu TranslationUnit) DefaultSaveOptions() uint16 {
-	return uint16(C.clang_defaultSaveOptions(tu.c))
+func (tu TranslationUnit) DefaultSaveOptions() uint32 {
+	return uint32(C.clang_defaultSaveOptions(tu.c))
 }
 
 /*
@@ -119,11 +119,11 @@ func (tu TranslationUnit) DefaultSaveOptions() uint16 {
 	enumeration. Zero (CXSaveError_None) indicates that the translation unit was
 	saved successfully, while a non-zero value indicates that a problem occurred.
 */
-func (tu TranslationUnit) SaveTranslationUnit(fileName string, options uint16) int16 {
+func (tu TranslationUnit) SaveTranslationUnit(fileName string, options uint32) int32 {
 	c_fileName := C.CString(fileName)
 	defer C.free(unsafe.Pointer(c_fileName))
 
-	return int16(C.clang_saveTranslationUnit(tu.c, c_fileName, C.uint(options)))
+	return int32(C.clang_saveTranslationUnit(tu.c, c_fileName, C.uint(options)))
 }
 
 // Destroy the specified CXTranslationUnit object.
@@ -141,8 +141,8 @@ func (tu TranslationUnit) Dispose() {
 	of reparsing. The set of optimizations enabled may change from one version
 	to the next.
 */
-func (tu TranslationUnit) DefaultReparseOptions() uint16 {
-	return uint16(C.clang_defaultReparseOptions(tu.c))
+func (tu TranslationUnit) DefaultReparseOptions() uint32 {
+	return uint32(C.clang_defaultReparseOptions(tu.c))
 }
 
 /*
@@ -183,7 +183,7 @@ func (tu TranslationUnit) DefaultReparseOptions() uint16 {
 	invalid. In such cases, the only valid call for \p TU is
 	clang_disposeTranslationUnit(TU).
 */
-func (tu TranslationUnit) ReparseTranslationUnit(unsavedFiles []UnsavedFile, options uint16) int16 {
+func (tu TranslationUnit) ReparseTranslationUnit(unsavedFiles []UnsavedFile, options uint32) int32 {
 	ca_unsavedFiles := make([]C.struct_CXUnsavedFile, len(unsavedFiles))
 	var cp_unsavedFiles *C.struct_CXUnsavedFile
 	if len(unsavedFiles) > 0 {
@@ -193,7 +193,7 @@ func (tu TranslationUnit) ReparseTranslationUnit(unsavedFiles []UnsavedFile, opt
 		ca_unsavedFiles[i] = unsavedFiles[i].c
 	}
 
-	return int16(C.clang_reparseTranslationUnit(tu.c, C.uint(len(unsavedFiles)), cp_unsavedFiles, C.uint(options)))
+	return int32(C.clang_reparseTranslationUnit(tu.c, C.uint(len(unsavedFiles)), cp_unsavedFiles, C.uint(options)))
 }
 
 // Return the memory usage of a translation unit. This object should be released with clang_disposeCXTUResourceUsage().
@@ -235,8 +235,8 @@ func (tu TranslationUnit) Cursor(sl SourceLocation) Cursor {
 
 	Returns the number of top level headers associated with this module.
 */
-func (tu TranslationUnit) Module_getNumTopLevelHeaders(module Module) uint16 {
-	return uint16(C.clang_Module_getNumTopLevelHeaders(tu.c, module.c))
+func (tu TranslationUnit) Module_getNumTopLevelHeaders(module Module) uint32 {
+	return uint32(C.clang_Module_getNumTopLevelHeaders(tu.c, module.c))
 }
 
 /*
@@ -246,7 +246,7 @@ func (tu TranslationUnit) Module_getNumTopLevelHeaders(module Module) uint16 {
 
 	Returns the specified top level header associated with the module.
 */
-func (tu TranslationUnit) Module_getTopLevelHeader(module Module, index uint16) File {
+func (tu TranslationUnit) Module_getTopLevelHeader(module Module, index uint32) File {
 	return File{C.clang_Module_getTopLevelHeader(tu.c, module.c, C.uint(index))}
 }
 
@@ -386,7 +386,7 @@ func (tu TranslationUnit) DisposeTokens(tokens []Token) {
 	freed with clang_disposeCodeCompleteResults(). If code
 	completion fails, returns NULL.
 */
-func (tu TranslationUnit) CodeCompleteAt(completeFilename string, completeLine uint16, completeColumn uint16, unsavedFiles []UnsavedFile, options uint16) *CodeCompleteResults {
+func (tu TranslationUnit) CodeCompleteAt(completeFilename string, completeLine uint32, completeColumn uint32, unsavedFiles []UnsavedFile, options uint32) *CodeCompleteResults {
 	ca_unsavedFiles := make([]C.struct_CXUnsavedFile, len(unsavedFiles))
 	var cp_unsavedFiles *C.struct_CXUnsavedFile
 	if len(unsavedFiles) > 0 {

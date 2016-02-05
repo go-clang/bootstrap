@@ -44,7 +44,7 @@ func (ia IndexAction) Dispose() {
 
 	The rest of the parameters are the same as #clang_parseTranslationUnit.
 */
-func (ia IndexAction) IndexSourceFile(clientData ClientData, indexCallbacks *IndexerCallbacks, indexCallbacksSize uint16, indexOptions uint16, sourceFilename string, commandLineArgs []string, unsavedFiles []UnsavedFile, outTU *TranslationUnit, tUOptions uint16) int16 {
+func (ia IndexAction) IndexSourceFile(clientData ClientData, indexCallbacks *IndexerCallbacks, indexCallbacksSize uint32, indexOptions uint32, sourceFilename string, commandLineArgs []string, unsavedFiles []UnsavedFile, outTU *TranslationUnit, tUOptions uint32) int32 {
 	ca_commandLineArgs := make([]*C.char, len(commandLineArgs))
 	var cp_commandLineArgs **C.char
 	if len(commandLineArgs) > 0 {
@@ -67,7 +67,7 @@ func (ia IndexAction) IndexSourceFile(clientData ClientData, indexCallbacks *Ind
 	c_sourceFilename := C.CString(sourceFilename)
 	defer C.free(unsafe.Pointer(c_sourceFilename))
 
-	return int16(C.clang_indexSourceFile(ia.c, clientData.c, &indexCallbacks.c, C.uint(indexCallbacksSize), C.uint(indexOptions), c_sourceFilename, cp_commandLineArgs, C.int(len(commandLineArgs)), cp_unsavedFiles, C.uint(len(unsavedFiles)), &outTU.c, C.uint(tUOptions)))
+	return int32(C.clang_indexSourceFile(ia.c, clientData.c, &indexCallbacks.c, C.uint(indexCallbacksSize), C.uint(indexOptions), c_sourceFilename, cp_commandLineArgs, C.int(len(commandLineArgs)), cp_unsavedFiles, C.uint(len(unsavedFiles)), &outTU.c, C.uint(tUOptions)))
 }
 
 /*
@@ -86,6 +86,6 @@ func (ia IndexAction) IndexSourceFile(clientData ClientData, indexCallbacks *Ind
 	Returns If there is a failure from which the there is no recovery, returns
 	non-zero, otherwise returns 0.
 */
-func (ia IndexAction) IndexTranslationUnit(clientData ClientData, indexCallbacks *IndexerCallbacks, indexCallbacksSize uint16, indexOptions uint16, tu TranslationUnit) int16 {
-	return int16(C.clang_indexTranslationUnit(ia.c, clientData.c, &indexCallbacks.c, C.uint(indexCallbacksSize), C.uint(indexOptions), tu.c))
+func (ia IndexAction) IndexTranslationUnit(clientData ClientData, indexCallbacks *IndexerCallbacks, indexCallbacksSize uint32, indexOptions uint32, tu TranslationUnit) int32 {
+	return int32(C.clang_indexTranslationUnit(ia.c, clientData.c, &indexCallbacks.c, C.uint(indexCallbacksSize), C.uint(indexOptions), tu.c))
 }

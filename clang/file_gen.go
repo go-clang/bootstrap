@@ -31,10 +31,10 @@ func (f File) Time() time.Time {
 	Returns If there was a failure getting the unique ID, returns non-zero,
 	otherwise returns 0.
 */
-func (f File) UniqueID() (FileUniqueID, int16) {
+func (f File) UniqueID() (FileUniqueID, int32) {
 	var outID FileUniqueID
 
-	o := int16(C.clang_getFileUniqueID(f.c, &outID.c))
+	o := int32(C.clang_getFileUniqueID(f.c, &outID.c))
 
 	return outID, o
 }

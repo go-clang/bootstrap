@@ -12,8 +12,8 @@ import "unsafe"
 	Returns A set of display options suitable for use with \c
 	clang_formatDiagnostic().
 */
-func DefaultDiagnosticDisplayOptions() uint16 {
-	return uint16(C.clang_defaultDiagnosticDisplayOptions())
+func DefaultDiagnosticDisplayOptions() uint32 {
+	return uint32(C.clang_defaultDiagnosticDisplayOptions())
 }
 
 /*
@@ -26,7 +26,7 @@ func DefaultDiagnosticDisplayOptions() uint16 {
 
 	Returns The name of the given diagnostic category.
 */
-func GetDiagnosticCategoryName(category uint16) string {
+func GetDiagnosticCategoryName(category uint32) string {
 	o := cxstring{C.clang_getDiagnosticCategoryName(C.uint(category))}
 	defer o.Dispose()
 
@@ -45,8 +45,8 @@ func GetDiagnosticCategoryName(category uint16) string {
 	preamble) geared toward improving the performance of these routines. The
 	set of optimizations enabled may change from one version to the next.
 */
-func DefaultEditingTranslationUnitOptions() uint16 {
-	return uint16(C.clang_defaultEditingTranslationUnitOptions())
+func DefaultEditingTranslationUnitOptions() uint32 {
+	return uint32(C.clang_defaultEditingTranslationUnitOptions())
 }
 
 // Construct a USR for a specified Objective-C class.
@@ -96,7 +96,7 @@ func ConstructUSR_ObjCIvar(name string, classUSR cxstring) string {
 }
 
 // Construct a USR for a specified Objective-C method and the USR for its containing class.
-func ConstructUSR_ObjCMethod(name string, isInstanceMethod uint16, classUSR cxstring) string {
+func ConstructUSR_ObjCMethod(name string, isInstanceMethod uint32, classUSR cxstring) string {
 	c_name := C.CString(name)
 	defer C.free(unsafe.Pointer(c_name))
 
@@ -122,8 +122,8 @@ func EnableStackTraces() {
 }
 
 // Returns a default set of code-completion options that can be passed toclang_codeCompleteAt().
-func DefaultCodeCompleteOptions() uint16 {
-	return uint16(C.clang_defaultCodeCompleteOptions())
+func DefaultCodeCompleteOptions() uint32 {
+	return uint32(C.clang_defaultCodeCompleteOptions())
 }
 
 // Return a version string, suitable for showing to a user, but not intended to be parsed (the format is not guaranteed to be stable).
@@ -140,6 +140,6 @@ func GetClangVersion() string {
 	Parameter isEnabled Flag to indicate if crash recovery is enabled. A non-zero
 	value enables crash recovery, while 0 disables it.
 */
-func ToggleCrashRecovery(isEnabled uint16) {
+func ToggleCrashRecovery(isEnabled uint32) {
 	C.clang_toggleCrashRecovery(C.uint(isEnabled))
 }

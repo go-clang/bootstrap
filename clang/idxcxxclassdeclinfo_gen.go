@@ -33,6 +33,6 @@ func (icxxcdi IdxCXXClassDeclInfo) Bases() []*IdxBaseClassInfo {
 	return s
 }
 
-func (icxxcdi IdxCXXClassDeclInfo) NumBases() uint16 {
-	return uint16(icxxcdi.c.numBases)
+func (icxxcdi IdxCXXClassDeclInfo) NumBases() uint32 {
+	return uint32(icxxcdi.c.numBases)
 }

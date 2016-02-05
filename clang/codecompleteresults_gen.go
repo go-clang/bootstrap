@@ -25,8 +25,8 @@ func (ccr *CodeCompleteResults) Dispose() {
 }
 
 // Determine the number of diagnostics produced prior to the location where code completion was performed.
-func (ccr *CodeCompleteResults) NumDiagnostics() uint16 {
-	return uint16(C.clang_codeCompleteGetNumDiagnostics(ccr.c))
+func (ccr *CodeCompleteResults) NumDiagnostics() uint32 {
+	return uint32(C.clang_codeCompleteGetNumDiagnostics(ccr.c))
 }
 
 /*
@@ -38,7 +38,7 @@ func (ccr *CodeCompleteResults) NumDiagnostics() uint16 {
 	Returns the requested diagnostic. This diagnostic must be freed
 	via a call to clang_disposeDiagnostic().
 */
-func (ccr *CodeCompleteResults) Diagnostic(index uint16) Diagnostic {
+func (ccr *CodeCompleteResults) Diagnostic(index uint32) Diagnostic {
 	return Diagnostic{C.clang_codeCompleteGetDiagnostic(ccr.c, C.uint(index))}
 }
 
@@ -71,12 +71,12 @@ func (ccr *CodeCompleteResults) Contexts() uint64 {
 	Returns the container kind, or CXCursor_InvalidCode if there is not a
 	container
 */
-func (ccr *CodeCompleteResults) ContainerKind() (uint16, CursorKind) {
+func (ccr *CodeCompleteResults) ContainerKind() (uint32, CursorKind) {
 	var isIncomplete C.uint
 
 	o := CursorKind(C.clang_codeCompleteGetContainerKind(ccr.c, &isIncomplete))
 
-	return uint16(isIncomplete), o
+	return uint32(isIncomplete), o
 }
 
 /*
@@ -125,6 +125,6 @@ func (ccr CodeCompleteResults) Results() []CompletionResult {
 }
 
 // The number of code-completion results stored in the Results array.
-func (ccr CodeCompleteResults) NumResults() uint16 {
-	return uint16(ccr.c.NumResults)
+func (ccr CodeCompleteResults) NumResults() uint32 {
+	return uint32(ccr.c.NumResults)
 }

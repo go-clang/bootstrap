@@ -50,7 +50,7 @@ type Index struct {
 	-include-pch) allows 'excludeDeclsFromPCH' to remove redundant callbacks
 	(which gives the indexer the same performance benefit as the compiler).
 */
-func NewIndex(excludeDeclarationsFromPCH int16, displayDiagnostics int16) Index {
+func NewIndex(excludeDeclarationsFromPCH int32, displayDiagnostics int32) Index {
 	return Index{C.clang_createIndex(C.int(excludeDeclarationsFromPCH), C.int(displayDiagnostics))}
 }
 
@@ -77,7 +77,7 @@ func (i Index) Dispose() {
 
 	Parameter options A bitmask of options, a bitwise OR of CXGlobalOpt_XXX flags.
 */
-func (i Index) SetGlobalOptions(options uint16) {
+func (i Index) SetGlobalOptions(options uint32) {
 	C.clang_CXIndex_setGlobalOptions(i.c, C.uint(options))
 }
 
@@ -87,8 +87,8 @@ func (i Index) SetGlobalOptions(options uint16) {
 	Returns A bitmask of options, a bitwise OR of CXGlobalOpt_XXX flags that
 	are associated with the given CXIndex object.
 */
-func (i Index) GlobalOptions() uint16 {
-	return uint16(C.clang_CXIndex_getGlobalOptions(i.c))
+func (i Index) GlobalOptions() uint32 {
+	return uint32(C.clang_CXIndex_getGlobalOptions(i.c))
 }
 
 /*
@@ -207,7 +207,7 @@ func (i Index) TranslationUnit(astFilename string) TranslationUnit {
 	any diagnostics produced by the compiler. If there is a failure from which
 	the compiler cannot recover, returns NULL.
 */
-func (i Index) ParseTranslationUnit(sourceFilename string, commandLineArgs []string, unsavedFiles []UnsavedFile, options uint16) TranslationUnit {
+func (i Index) ParseTranslationUnit(sourceFilename string, commandLineArgs []string, unsavedFiles []UnsavedFile, options uint32) TranslationUnit {
 	ca_commandLineArgs := make([]*C.char, len(commandLineArgs))
 	var cp_commandLineArgs **C.char
 	if len(commandLineArgs) > 0 {

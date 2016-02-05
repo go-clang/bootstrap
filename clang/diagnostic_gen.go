@@ -39,7 +39,7 @@ func (d Diagnostic) Dispose() {
 
 	Returns A new string containing for formatted diagnostic.
 */
-func (d Diagnostic) FormatDiagnostic(options uint16) string {
+func (d Diagnostic) FormatDiagnostic(options uint32) string {
 	o := cxstring{C.clang_formatDiagnostic(d.c, C.uint(options))}
 	defer o.Dispose()
 
@@ -101,8 +101,8 @@ func (d Diagnostic) Option() (string, string) {
 	Returns The number of the category that contains this diagnostic, or zero
 	if this diagnostic is uncategorized.
 */
-func (d Diagnostic) Category() uint16 {
-	return uint16(C.clang_getDiagnosticCategory(d.c))
+func (d Diagnostic) Category() uint32 {
+	return uint32(C.clang_getDiagnosticCategory(d.c))
 }
 
 /*
@@ -118,8 +118,8 @@ func (d Diagnostic) CategoryText() string {
 }
 
 // Determine the number of source ranges associated with the given diagnostic.
-func (d Diagnostic) NumRanges() uint16 {
-	return uint16(C.clang_getDiagnosticNumRanges(d.c))
+func (d Diagnostic) NumRanges() uint32 {
+	return uint32(C.clang_getDiagnosticNumRanges(d.c))
 }
 
 /*
@@ -135,13 +135,13 @@ func (d Diagnostic) NumRanges() uint16 {
 
 	Returns the requested source range.
 */
-func (d Diagnostic) Range(r uint16) SourceRange {
+func (d Diagnostic) Range(r uint32) SourceRange {
 	return SourceRange{C.clang_getDiagnosticRange(d.c, C.uint(r))}
 }
 
 // Determine the number of fix-it hints associated with the given diagnostic.
-func (d Diagnostic) NumFixIts() uint16 {
-	return uint16(C.clang_getDiagnosticNumFixIts(d.c))
+func (d Diagnostic) NumFixIts() uint32 {
+	return uint32(C.clang_getDiagnosticNumFixIts(d.c))
 }
 
 /*
@@ -169,7 +169,7 @@ func (d Diagnostic) NumFixIts() uint16 {
 	Returns A string containing text that should be replace the source
 	code indicated by the ReplacementRange.
 */
-func (d Diagnostic) FixIt(fixIt uint16) (SourceRange, string) {
+func (d Diagnostic) FixIt(fixIt uint32) (SourceRange, string) {
 	var replacementRange SourceRange
 
 	o := cxstring{C.clang_getDiagnosticFixIt(d.c, C.uint(fixIt), &replacementRange.c)}

@@ -75,7 +75,7 @@ func (sl SourceLocation) Range(end SourceLocation) SourceRange {
 	Parameter offset [out] if non-NULL, will be set to the offset into the
 	buffer to which the given source location points.
 */
-func (sl SourceLocation) ExpansionLocation() (File, uint16, uint16, uint16) {
+func (sl SourceLocation) ExpansionLocation() (File, uint32, uint32, uint32) {
 	var file File
 	var line C.uint
 	var column C.uint
@@ -83,7 +83,7 @@ func (sl SourceLocation) ExpansionLocation() (File, uint16, uint16, uint16) {
 
 	C.clang_getExpansionLocation(sl.c, &file.c, &line, &column, &offset)
 
-	return file, uint16(line), uint16(column), uint16(offset)
+	return file, uint32(line), uint32(column), uint32(offset)
 }
 
 /*
@@ -126,7 +126,7 @@ func (sl SourceLocation) ExpansionLocation() (File, uint16, uint16, uint16) {
 	Parameter column [out] if non-NULL, will be set to the column number of the
 	source location. For an invalid source location, zero is returned.
 */
-func (sl SourceLocation) PresumedLocation() (string, uint16, uint16) {
+func (sl SourceLocation) PresumedLocation() (string, uint32, uint32) {
 	var filename cxstring
 	defer filename.Dispose()
 	var line C.uint
@@ -134,7 +134,7 @@ func (sl SourceLocation) PresumedLocation() (string, uint16, uint16) {
 
 	C.clang_getPresumedLocation(sl.c, &filename.c, &line, &column)
 
-	return filename.String(), uint16(line), uint16(column)
+	return filename.String(), uint32(line), uint32(column)
 }
 
 /*
@@ -145,7 +145,7 @@ func (sl SourceLocation) PresumedLocation() (string, uint16, uint16) {
 	#clang_getExpansionLocation(). See that interface's documentation for
 	details.
 */
-func (sl SourceLocation) InstantiationLocation() (File, uint16, uint16, uint16) {
+func (sl SourceLocation) InstantiationLocation() (File, uint32, uint32, uint32) {
 	var file File
 	var line C.uint
 	var column C.uint
@@ -153,7 +153,7 @@ func (sl SourceLocation) InstantiationLocation() (File, uint16, uint16, uint16) 
 
 	C.clang_getInstantiationLocation(sl.c, &file.c, &line, &column, &offset)
 
-	return file, uint16(line), uint16(column), uint16(offset)
+	return file, uint32(line), uint32(column), uint32(offset)
 }
 
 /*
@@ -178,7 +178,7 @@ func (sl SourceLocation) InstantiationLocation() (File, uint16, uint16, uint16) 
 	Parameter offset [out] if non-NULL, will be set to the offset into the
 	buffer to which the given source location points.
 */
-func (sl SourceLocation) SpellingLocation() (File, uint16, uint16, uint16) {
+func (sl SourceLocation) SpellingLocation() (File, uint32, uint32, uint32) {
 	var file File
 	var line C.uint
 	var column C.uint
@@ -186,7 +186,7 @@ func (sl SourceLocation) SpellingLocation() (File, uint16, uint16, uint16) {
 
 	C.clang_getSpellingLocation(sl.c, &file.c, &line, &column, &offset)
 
-	return file, uint16(line), uint16(column), uint16(offset)
+	return file, uint32(line), uint32(column), uint32(offset)
 }
 
 /*
@@ -212,7 +212,7 @@ func (sl SourceLocation) SpellingLocation() (File, uint16, uint16, uint16) {
 	Parameter offset [out] if non-NULL, will be set to the offset into the
 	buffer to which the given source location points.
 */
-func (sl SourceLocation) FileLocation() (File, uint16, uint16, uint16) {
+func (sl SourceLocation) FileLocation() (File, uint32, uint32, uint32) {
 	var file File
 	var line C.uint
 	var column C.uint
@@ -220,5 +220,5 @@ func (sl SourceLocation) FileLocation() (File, uint16, uint16, uint16) {
 
 	C.clang_getFileLocation(sl.c, &file.c, &line, &column, &offset)
 
-	return file, uint16(line), uint16(column), uint16(offset)
+	return file, uint32(line), uint32(column), uint32(offset)
 }

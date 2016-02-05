@@ -56,6 +56,6 @@ func (iei IdxEntityInfo) Attributes() []*IdxAttrInfo {
 	return s
 }
 
-func (iei IdxEntityInfo) NumAttributes() uint16 {
-	return uint16(iei.c.numAttributes)
+func (iei IdxEntityInfo) NumAttributes() uint32 {
+	return uint32(iei.c.numAttributes)
 }
