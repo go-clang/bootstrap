@@ -30,7 +30,7 @@ func main() {
 	f.Close()
 
 	err, db := clang.FromDirectory(dir)
-	if err != nil {
+	if err != clang.CompilationDatabase_NoError {
 		fmt.Printf("**error: could not open compilation database at [%s]: %v\n", dir, err)
 
 		os.Exit(1)
