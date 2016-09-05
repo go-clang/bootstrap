@@ -3,6 +3,7 @@ package clang
 // #include "go-clang.h"
 import "C"
 import (
+	"sync"
 	"unsafe"
 )
 
@@ -45,19 +46,54 @@ func (c Cursor) PlatformAvailability(availabilitySize int) (always_deprecated bo
  */
 type CursorVisitor func(cursor, parent Cursor) (status ChildVisitResult)
 
+type funcRegistry struct {
+	sync.RWMutex
+
+	index int
+	funcs map[int]*CursorVisitor
+}
+
+func (fm *funcRegistry) register(f *CursorVisitor) int {
+	fm.Lock()
+	defer fm.Unlock()
+
+	fm.index++
+	for fm.funcs[fm.index] != nil {
+		fm.index++
+	}
+
+	fm.funcs[fm.index] = f
+
+	return fm.index
+}
+
+func (fm *funcRegistry) lookup(index int) *CursorVisitor {
+	fm.RLock()
+	defer fm.RUnlock()
+
+	return fm.funcs[index]
+}
+
+func (fm *funcRegistry) unregister(index int) {
+	fm.Lock()
+
+	delete(fm.funcs, index)
+
+	fm.Unlock()
+}
+
+var visitors = &funcRegistry{
+	funcs: map[int]*CursorVisitor{},
+}
+
 // GoClangCursorVisitor calls the cursor visitor
 //export GoClangCursorVisitor
 func GoClangCursorVisitor(cursor C.CXCursor, parent C.CXCursor, cfct unsafe.Pointer) (status ChildVisitResult) {
-	fct := *(*CursorVisitor)(cfct)
+	i := *(*C.int)(cfct)
+	f := visitors.lookup(int(i))
 
-	return fct(Cursor{cursor}, Cursor{parent})
+	return (*f)(Cursor{cursor}, Cursor{parent})
 }
-
-// forceEscapeVisitor is write-only: to force compiler to escape the address
-// (else the address can become stale if the goroutine stack needs to grow
-// and is forced to move)
-// Explained by rsc in https://golang.org/issue/9125
-var forceEscapeVisitor *CursorVisitor
 
 // Visit does the following.
 /**
@@ -83,9 +119,13 @@ var forceEscapeVisitor *CursorVisitor
  * prematurely by the visitor returning \c CXChildVisit_Break.
  */
 func (c Cursor) Visit(visitor CursorVisitor) bool {
-	forceEscapeVisitor = &visitor
+	i := visitors.register(&visitor)
+	defer visitors.unregister(i)
 
-	o := C.go_clang_visit_children(c.c, unsafe.Pointer(&visitor))
+	// We need a pointer to the index because clang_visitChildren data parameter is a void pointer.
+	ci := C.int(i)
+
+	o := C.go_clang_visit_children(c.c, unsafe.Pointer(&ci))
 
 	return o == C.uint(0)
 }
