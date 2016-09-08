@@ -1,6 +1,6 @@
 language: go
 go:
-  - 1.5
+  - 1.7.1
 
 addons:
   apt:
@@ -13,14 +13,20 @@ addons:
       - libclang1-3.4
       - libclang-3.4-dev
 
+env:
+  global:
+    - CC=clang CXX=clang++
+
 install:
   - mkdir -p /home/travis/bin
+  - sudo ln -s /usr/bin/clang-3.4 /home/travis/bin/clang
   - sudo ln -s /usr/bin/llvm-config-3.4 /home/travis/bin/llvm-config
   - sudo ldconfig
 
   - llvm-config --version
   - llvm-config --includedir
   - llvm-config --libdir
+  - clang --version
 
   - make install-dependencies
   - make install-tools
@@ -30,5 +36,4 @@ script:
   - make install
 
   # Test without any coverage
-  - make test-verbose
-
+  - make test-full
