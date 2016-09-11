@@ -41,6 +41,12 @@ func main() {
 	defer tu.Dispose()
 
 	fmt.Printf("tu: %s\n", tu.Spelling())
+
+	diagnostics := tu.Diagnostics()
+	for _, d := range diagnostics {
+		fmt.Println("PROBLEM:", d.Spelling())
+	}
+
 	cursor := tu.TranslationUnitCursor()
 	fmt.Printf("cursor-isnull: %v\n", cursor.IsNull())
 	fmt.Printf("cursor: %s\n", cursor.Spelling())
@@ -64,6 +70,10 @@ func main() {
 
 		return clang.ChildVisit_Continue
 	})
+
+	if len(diagnostics) > 0 {
+		fmt.Println("NOTE: There were problems while analyzing the given file")
+	}
 
 	fmt.Printf(":: bye.\n")
 }
