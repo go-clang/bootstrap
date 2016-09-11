@@ -184,14 +184,8 @@ func (tu TranslationUnit) DefaultReparseOptions() uint32 {
 	clang_disposeTranslationUnit(TU).
 */
 func (tu TranslationUnit) ReparseTranslationUnit(unsavedFiles []UnsavedFile, options uint32) int32 {
-	ca_unsavedFiles := make([]C.struct_CXUnsavedFile, len(unsavedFiles))
-	var cp_unsavedFiles *C.struct_CXUnsavedFile
-	if len(unsavedFiles) > 0 {
-		cp_unsavedFiles = &ca_unsavedFiles[0]
-	}
-	for i := range unsavedFiles {
-		ca_unsavedFiles[i] = unsavedFiles[i].c
-	}
+	gos_unsavedFiles := (*reflect.SliceHeader)(unsafe.Pointer(&unsavedFiles))
+	cp_unsavedFiles := (*C.struct_CXUnsavedFile)(unsafe.Pointer(gos_unsavedFiles.Data))
 
 	return int32(C.clang_reparseTranslationUnit(tu.c, C.uint(len(unsavedFiles)), cp_unsavedFiles, C.uint(options)))
 }
@@ -306,14 +300,8 @@ func (tu TranslationUnit) Tokenize(r SourceRange) []Token {
 
 // Free the given set of tokens.
 func (tu TranslationUnit) DisposeTokens(tokens []Token) {
-	ca_tokens := make([]C.CXToken, len(tokens))
-	var cp_tokens *C.CXToken
-	if len(tokens) > 0 {
-		cp_tokens = &ca_tokens[0]
-	}
-	for i := range tokens {
-		ca_tokens[i] = tokens[i].c
-	}
+	gos_tokens := (*reflect.SliceHeader)(unsafe.Pointer(&tokens))
+	cp_tokens := (*C.CXToken)(unsafe.Pointer(gos_tokens.Data))
 
 	C.clang_disposeTokens(tu.c, cp_tokens, C.uint(len(tokens)))
 }
@@ -387,14 +375,8 @@ func (tu TranslationUnit) DisposeTokens(tokens []Token) {
 	completion fails, returns NULL.
 */
 func (tu TranslationUnit) CodeCompleteAt(completeFilename string, completeLine uint32, completeColumn uint32, unsavedFiles []UnsavedFile, options uint32) *CodeCompleteResults {
-	ca_unsavedFiles := make([]C.struct_CXUnsavedFile, len(unsavedFiles))
-	var cp_unsavedFiles *C.struct_CXUnsavedFile
-	if len(unsavedFiles) > 0 {
-		cp_unsavedFiles = &ca_unsavedFiles[0]
-	}
-	for i := range unsavedFiles {
-		ca_unsavedFiles[i] = unsavedFiles[i].c
-	}
+	gos_unsavedFiles := (*reflect.SliceHeader)(unsafe.Pointer(&unsavedFiles))
+	cp_unsavedFiles := (*C.struct_CXUnsavedFile)(unsafe.Pointer(gos_unsavedFiles.Data))
 
 	c_completeFilename := C.CString(completeFilename)
 	defer C.free(unsafe.Pointer(c_completeFilename))

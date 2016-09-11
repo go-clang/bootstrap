@@ -3,6 +3,10 @@ package clang
 // #include "./clang-c/Index.h"
 // #include "go-clang.h"
 import "C"
+import (
+	"reflect"
+	"unsafe"
+)
 
 // A single result of code completion.
 type CompletionResult struct {
@@ -17,14 +21,8 @@ type CompletionResult struct {
 	Parameter NumResults The number of results in \p Results.
 */
 func SortCodeCompletionResults(results []CompletionResult) {
-	ca_results := make([]C.CXCompletionResult, len(results))
-	var cp_results *C.CXCompletionResult
-	if len(results) > 0 {
-		cp_results = &ca_results[0]
-	}
-	for i := range results {
-		ca_results[i] = results[i].c
-	}
+	gos_results := (*reflect.SliceHeader)(unsafe.Pointer(&results))
+	cp_results := (*C.CXCompletionResult)(unsafe.Pointer(gos_results.Data))
 
 	C.clang_sortCodeCompletionResults(cp_results, C.uint(len(results)))
 }
