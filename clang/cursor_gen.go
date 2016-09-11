@@ -221,14 +221,8 @@ func (c Cursor) OverriddenCursors() []Cursor {
 
 // Free the set of overridden cursors returned by \c clang_getOverriddenCursors().
 func Dispose(overridden []Cursor) {
-	ca_overridden := make([]C.CXCursor, len(overridden))
-	var cp_overridden *C.CXCursor
-	if len(overridden) > 0 {
-		cp_overridden = &ca_overridden[0]
-	}
-	for i := range overridden {
-		ca_overridden[i] = overridden[i].c
-	}
+	gos_overridden := (*reflect.SliceHeader)(unsafe.Pointer(&overridden))
+	cp_overridden := (*C.CXCursor)(unsafe.Pointer(gos_overridden.Data))
 
 	C.clang_disposeOverriddenCursors(cp_overridden)
 }

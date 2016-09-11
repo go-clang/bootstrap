@@ -3,7 +3,10 @@ package clang
 // #include "./clang-c/Index.h"
 // #include "go-clang.h"
 import "C"
-import "unsafe"
+import (
+	"reflect"
+	"unsafe"
+)
 
 // An "index" that consists of a set of translation units that would typically be linked together into an executable or library.
 type Index struct {
@@ -142,14 +145,8 @@ func (i Index) TranslationUnitFromSourceFile(sourceFilename string, clangCommand
 		defer C.free(unsafe.Pointer(ci_str))
 		ca_clangCommandLineArgs[i] = ci_str
 	}
-	ca_unsavedFiles := make([]C.struct_CXUnsavedFile, len(unsavedFiles))
-	var cp_unsavedFiles *C.struct_CXUnsavedFile
-	if len(unsavedFiles) > 0 {
-		cp_unsavedFiles = &ca_unsavedFiles[0]
-	}
-	for i := range unsavedFiles {
-		ca_unsavedFiles[i] = unsavedFiles[i].c
-	}
+	gos_unsavedFiles := (*reflect.SliceHeader)(unsafe.Pointer(&unsavedFiles))
+	cp_unsavedFiles := (*C.struct_CXUnsavedFile)(unsafe.Pointer(gos_unsavedFiles.Data))
 
 	c_sourceFilename := C.CString(sourceFilename)
 	defer C.free(unsafe.Pointer(c_sourceFilename))
@@ -218,14 +215,8 @@ func (i Index) ParseTranslationUnit(sourceFilename string, commandLineArgs []str
 		defer C.free(unsafe.Pointer(ci_str))
 		ca_commandLineArgs[i] = ci_str
 	}
-	ca_unsavedFiles := make([]C.struct_CXUnsavedFile, len(unsavedFiles))
-	var cp_unsavedFiles *C.struct_CXUnsavedFile
-	if len(unsavedFiles) > 0 {
-		cp_unsavedFiles = &ca_unsavedFiles[0]
-	}
-	for i := range unsavedFiles {
-		ca_unsavedFiles[i] = unsavedFiles[i].c
-	}
+	gos_unsavedFiles := (*reflect.SliceHeader)(unsafe.Pointer(&unsavedFiles))
+	cp_unsavedFiles := (*C.struct_CXUnsavedFile)(unsafe.Pointer(gos_unsavedFiles.Data))
 
 	c_sourceFilename := C.CString(sourceFilename)
 	defer C.free(unsafe.Pointer(c_sourceFilename))
