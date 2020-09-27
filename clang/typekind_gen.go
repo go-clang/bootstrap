@@ -8,7 +8,7 @@ import "C"
 type TypeKind uint32
 
 const (
-	// Reprents an invalid type (e.g., where no type is available).
+	// Represents an invalid type (e.g., where no type is available).
 	Type_Invalid TypeKind = C.CXType_Invalid
 	// A type whose specific kind is not exposed via this interface.
 	Type_Unexposed = C.CXType_Unexposed
@@ -69,6 +69,8 @@ const (
 	// A type whose specific kind is not exposed via this interface.
 	Type_ObjCSel = C.CXType_ObjCSel
 	// A type whose specific kind is not exposed via this interface.
+	Type_Float128 = C.CXType_Float128
+	// A type whose specific kind is not exposed via this interface.
 	Type_FirstBuiltin = C.CXType_FirstBuiltin
 	// A type whose specific kind is not exposed via this interface.
 	Type_LastBuiltin = C.CXType_LastBuiltin
@@ -108,6 +110,14 @@ const (
 	Type_DependentSizedArray = C.CXType_DependentSizedArray
 	// A type whose specific kind is not exposed via this interface.
 	Type_MemberPointer = C.CXType_MemberPointer
+	// A type whose specific kind is not exposed via this interface.
+	Type_Auto = C.CXType_Auto
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_Elaborated = C.CXType_Elaborated
 )
 
 // Retrieve the spelling of a given CXTypeKind.

@@ -5,7 +5,7 @@ package clang
 import "C"
 import "fmt"
 
-// 'Qualifiers' written next to the return and parameter types in ObjC method declarations.
+// 'Qualifiers' written next to the return and parameter types in Objective-C method declarations.
 type DeclQualifierKind uint32
 
 const (

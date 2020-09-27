@@ -78,6 +78,14 @@ func (t Type) Declaration() Cursor {
 	return Cursor{C.clang_getTypeDeclaration(t.c)}
 }
 
+// Returns the Objective-C type encoding for the specified CXType.
+func (t Type) Encoding() string {
+	o := cxstring{C.clang_Type_getObjCEncoding(t.c)}
+	defer o.Dispose()
+
+	return o.String()
+}
+
 /*
 	Retrieve the calling convention associated with a function type.
 
@@ -88,7 +96,7 @@ func (t Type) FunctionTypeCallingConv() CallingConv {
 }
 
 /*
-	Retrieve the result type associated with a function type.
+	Retrieve the return type associated with a function type.
 
 	If a non-function type is passed in, an invalid type is returned.
 */
@@ -97,7 +105,7 @@ func (t Type) ResultType() Type {
 }
 
 /*
-	Retrieve the number of non-variadic arguments associated with a
+	Retrieve the number of non-variadic parameters associated with a
 	function type.
 
 	If a non-function type is passed in, -1 is returned.
@@ -107,7 +115,7 @@ func (t Type) NumArgTypes() int32 {
 }
 
 /*
-	Retrieve the type of an argument of a function type.
+	Retrieve the type of a parameter of a function type.
 
 	If a non-function type is passed in or the function does not have enough
 	parameters, an invalid type is returned.
@@ -169,6 +177,15 @@ func (t Type) ArraySize() int64 {
 }
 
 /*
+	Retrieve the type named by the qualified-id.
+
+	If a non-elaborated type is passed in, an invalid type is returned.
+*/
+func (t Type) NamedType() Type {
+	return Type{C.clang_Type_getNamedType(t.c)}
+}
+
+/*
 	Return the alignment of a type in bytes as per C++[expr.alignof]
 	standard.
 
@@ -224,6 +241,28 @@ func (t Type) OffsetOf(s string) int64 {
 	defer C.free(unsafe.Pointer(c_s))
 
 	return int64(C.clang_Type_getOffsetOf(t.c, c_s))
+}
+
+/*
+	Returns the number of template arguments for given class template
+	specialization, or -1 if type T is not a class template specialization.
+
+	Variadic argument packs count as only one argument, and can not be inspected
+	further.
+*/
+func (t Type) NumTemplateArguments() int32 {
+	return int32(C.clang_Type_getNumTemplateArguments(t.c))
+}
+
+/*
+	Returns the type template argument of a template class specialization
+	at given index.
+
+	This function only returns template type arguments and does not handle
+	template template arguments or variadic packs.
+*/
+func (t Type) TemplateArgumentAsType(i uint32) Type {
+	return Type{C.clang_Type_getTemplateArgumentAsType(t.c, C.uint(i))}
 }
 
 /*

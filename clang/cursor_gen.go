@@ -1,5 +1,6 @@
 package clang
 
+// #include "./clang-c/Documentation.h"
 // #include "./clang-c/Index.h"
 // #include "go-clang.h"
 import "C"
@@ -28,6 +29,11 @@ import (
 */
 type Cursor struct {
 	c C.CXCursor
+}
+
+// Given a cursor that represents a documentable entity (e.g., declaration), return the associated parsed comment as a CXComment_FullComment AST node.
+func (c Cursor) ParsedComment() Comment {
+	return Comment{C.clang_Cursor_getParsedComment(c.c)}
 }
 
 // Retrieve the NULL cursor, which represents no entity.
@@ -59,9 +65,31 @@ func (c Cursor) Kind() CursorKind {
 	return CursorKind(C.clang_getCursorKind(c.c))
 }
 
+// Determine whether the given cursor has any attributes.
+func (c Cursor) HasAttrs() bool {
+	o := C.clang_Cursor_hasAttrs(c.c)
+
+	return o != C.uint(0)
+}
+
 // Determine the linkage of the entity referred to by a given cursor.
 func (c Cursor) Linkage() LinkageKind {
 	return LinkageKind(C.clang_getCursorLinkage(c.c))
+}
+
+/*
+	Describe the visibility of the entity referred to by a cursor.
+
+	This returns the default visibility if not explicitly specified by
+	a visibility attribute. The default visibility may be changed by
+	commandline arguments.
+
+	Parameter cursor The cursor to query.
+
+	Returns The visibility of the cursor.
+*/
+func (c Cursor) Visibility() VisibilityKind {
+	return VisibilityKind(C.clang_getCursorVisibility(c.c))
 }
 
 /*
@@ -103,7 +131,7 @@ func (c Cursor) TranslationUnit() TranslationUnit {
 	void C::f() { }
 	\endcode
 
-	In the out-of-line definition of C::f, the semantic parent is the
+	In the out-of-line definition of C::f, the semantic parent is
 	the class C, of which this function is a member. The lexical parent is
 	the place where the declaration actually occurs in the source code; in this
 	case, the definition occurs in the translation unit. In general, the
@@ -140,7 +168,7 @@ func (c Cursor) SemanticParent() Cursor {
 	void C::f() { }
 	\endcode
 
-	In the out-of-line definition of C::f, the semantic parent is the
+	In the out-of-line definition of C::f, the semantic parent is
 	the class C, of which this function is a member. The lexical parent is
 	the place where the declaration actually occurs in the source code; in this
 	case, the definition occurs in the translation unit. In general, the
@@ -252,7 +280,7 @@ func (c Cursor) Location() SourceLocation {
 
 	The extent of a cursor starts with the file/line/column pointing at the
 	first character within the source construct that the cursor refers to and
-	ends with the last character withinin that source construct. For a
+	ends with the last character within that source construct. For a
 	declaration, the extent covers the declaration itself. For a reference,
 	the extent covers the location of the reference (e.g., where the referenced
 	entity was actually used).
@@ -341,6 +369,131 @@ func (c Cursor) Argument(i uint32) Cursor {
 	return Cursor{C.clang_Cursor_getArgument(c.c, C.uint(i))}
 }
 
+/*
+	Returns the number of template args of a function decl representing a
+	template specialization.
+
+	If the argument cursor cannot be converted into a template function
+	declaration, -1 is returned.
+
+	For example, for the following declaration and specialization:
+	template <typename T, int kInt, bool kBool>
+	void foo() { ... }
+
+	template <>
+	void foo<float, -7, true>();
+
+	The value 3 would be returned from this call.
+*/
+func (c Cursor) NumTemplateArguments() int32 {
+	return int32(C.clang_Cursor_getNumTemplateArguments(c.c))
+}
+
+/*
+	Retrieve the kind of the I'th template argument of the CXCursor C.
+
+	If the argument CXCursor does not represent a FunctionDecl, an invalid
+	template argument kind is returned.
+
+	For example, for the following declaration and specialization:
+	template <typename T, int kInt, bool kBool>
+	void foo() { ... }
+
+	template <>
+	void foo<float, -7, true>();
+
+	For I = 0, 1, and 2, Type, Integral, and Integral will be returned,
+	respectively.
+*/
+func (c Cursor) TemplateArgumentKind(i uint32) TemplateArgumentKind {
+	return TemplateArgumentKind(C.clang_Cursor_getTemplateArgumentKind(c.c, C.uint(i)))
+}
+
+/*
+	Retrieve a CXType representing the type of a TemplateArgument of a
+	function decl representing a template specialization.
+
+	If the argument CXCursor does not represent a FunctionDecl whose I'th
+	template argument has a kind of CXTemplateArgKind_Integral, an invalid type
+	is returned.
+
+	For example, for the following declaration and specialization:
+	template <typename T, int kInt, bool kBool>
+	void foo() { ... }
+
+	template <>
+	void foo<float, -7, true>();
+
+	If called with I = 0, "float", will be returned.
+	Invalid types will be returned for I == 1 or 2.
+*/
+func (c Cursor) TemplateArgumentType(i uint32) Type {
+	return Type{C.clang_Cursor_getTemplateArgumentType(c.c, C.uint(i))}
+}
+
+/*
+	Retrieve the value of an Integral TemplateArgument (of a function
+	decl representing a template specialization) as a signed long long.
+
+	It is undefined to call this function on a CXCursor that does not represent a
+	FunctionDecl or whose I'th template argument is not an integral value.
+
+	For example, for the following declaration and specialization:
+	template <typename T, int kInt, bool kBool>
+	void foo() { ... }
+
+	template <>
+	void foo<float, -7, true>();
+
+	If called with I = 1 or 2, -7 or true will be returned, respectively.
+	For I == 0, this function's behavior is undefined.
+*/
+func (c Cursor) TemplateArgumentValue(i uint32) int64 {
+	return int64(C.clang_Cursor_getTemplateArgumentValue(c.c, C.uint(i)))
+}
+
+/*
+	Retrieve the value of an Integral TemplateArgument (of a function
+	decl representing a template specialization) as an unsigned long long.
+
+	It is undefined to call this function on a CXCursor that does not represent a
+	FunctionDecl or whose I'th template argument is not an integral value.
+
+	For example, for the following declaration and specialization:
+	template <typename T, int kInt, bool kBool>
+	void foo() { ... }
+
+	template <>
+	void foo<float, 2147483649, true>();
+
+	If called with I = 1 or 2, 2147483649 or true will be returned, respectively.
+	For I == 0, this function's behavior is undefined.
+*/
+func (c Cursor) TemplateArgumentUnsignedValue(i uint32) uint64 {
+	return uint64(C.clang_Cursor_getTemplateArgumentUnsignedValue(c.c, C.uint(i)))
+}
+
+// Determine whether a CXCursor that is a macro, is function like.
+func (c Cursor) IsMacroFunctionLike() bool {
+	o := C.clang_Cursor_isMacroFunctionLike(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine whether a CXCursor that is a macro, is a builtin one.
+func (c Cursor) IsMacroBuiltin() bool {
+	o := C.clang_Cursor_isMacroBuiltin(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine whether a CXCursor that is a function declaration, is an inline declaration.
+func (c Cursor) IsFunctionInlined() bool {
+	o := C.clang_Cursor_isFunctionInlined(c.c)
+
+	return o != C.uint(0)
+}
+
 // Returns the Objective-C type encoding for the specified declaration.
 func (c Cursor) DeclObjCTypeEncoding() string {
 	o := cxstring{C.clang_getDeclObjCTypeEncoding(c.c)}
@@ -350,12 +503,36 @@ func (c Cursor) DeclObjCTypeEncoding() string {
 }
 
 /*
-	Retrieve the result type associated with a given cursor.
+	Retrieve the return type associated with a given cursor.
 
 	This only returns a valid type if the cursor refers to a function or method.
 */
 func (c Cursor) ResultType() Type {
 	return Type{C.clang_getCursorResultType(c.c)}
+}
+
+/*
+	Return the offset of the field represented by the Cursor.
+
+	If the cursor is not a field declaration, -1 is returned.
+	If the cursor semantic parent is not a record field declaration,
+	CXTypeLayoutError_Invalid is returned.
+	If the field's type declaration is an incomplete type,
+	CXTypeLayoutError_Incomplete is returned.
+	If the field's type declaration is a dependent type,
+	CXTypeLayoutError_Dependent is returned.
+	If the field's name S is not found,
+	CXTypeLayoutError_InvalidFieldName is returned.
+*/
+func (c Cursor) OffsetOfField() int64 {
+	return int64(C.clang_Cursor_getOffsetOfField(c.c))
+}
+
+// Determine whether the given cursor represents an anonymous record declaration.
+func (c Cursor) IsAnonymous() bool {
+	o := C.clang_Cursor_isAnonymous(c.c)
+
+	return o != C.uint(0)
 }
 
 // Returns non-zero if the cursor specifies a Record member that is a bitfield.
@@ -381,6 +558,16 @@ func (c Cursor) IsVirtualBase() bool {
 */
 func (c Cursor) AccessSpecifier() AccessSpecifier {
 	return AccessSpecifier(C.clang_getCXXAccessSpecifier(c.c))
+}
+
+/*
+	Returns the storage class for a function or variable declaration.
+
+	If the passed in Cursor is not a function or variable declaration,
+	CX_SC_Invalid is returned else the storage class.
+*/
+func (c Cursor) StorageClass() StorageClass {
+	return StorageClass(C.clang_Cursor_getStorageClass(c.c))
 }
 
 /*
@@ -449,8 +636,8 @@ func (c Cursor) Spelling() string {
 /*
 	Retrieve a range for a piece that forms the cursors spelling name.
 	Most of the times there is only one range for the complete spelling but for
-	objc methods and objc message expressions, there are multiple pieces for each
-	selector identifier.
+	Objective-C methods and Objective-C message expressions, there are multiple
+	pieces for each selector identifier.
 
 	Parameter pieceIndex the index of the spelling name piece. If this is greater
 	than the actual number of pieces, it will return a NULL (invalid) range.
@@ -558,13 +745,13 @@ func (c Cursor) CanonicalCursor() Cursor {
 }
 
 /*
-	If the cursor points to a selector identifier in a objc method or
-	message expression, this returns the selector index.
+	If the cursor points to a selector identifier in an Objective-C
+	method or message expression, this returns the selector index.
 
 	After getting a cursor with #clang_getCursor, this can be called to
 	determine if the location points to a selector identifier.
 
-	Returns The selector index if the cursor is an objc method or message
+	Returns The selector index if the cursor is an Objective-C method or message
 	expression and the cursor is pointing to a selector identifier, or -1
 	otherwise.
 */
@@ -573,12 +760,12 @@ func (c Cursor) SelectorIndex() int32 {
 }
 
 /*
-	Given a cursor pointing to a C++ method call or an ObjC message,
-	returns non-zero if the method/message is "dynamic", meaning:
+	Given a cursor pointing to a C++ method call or an Objective-C
+	message, returns non-zero if the method/message is "dynamic", meaning:
 
 	For a C++ method: the call is virtual.
-	For an ObjC message: the receiver is an object instance, not 'super' or a
-	specific class.
+	For an Objective-C message: the receiver is an object instance, not 'super'
+	or a specific class.
 
 	If the method/message is "static" or the cursor does not point to a
 	method/message, it will return zero.
@@ -589,7 +776,7 @@ func (c Cursor) IsDynamicCall() bool {
 	return o != C.int(0)
 }
 
-// Given a cursor pointing to an ObjC message, returns the CXType of the receiver.
+// Given a cursor pointing to an Objective-C message, returns the CXType of the receiver.
 func (c Cursor) ReceiverType() Type {
 	return Type{C.clang_Cursor_getReceiverType(c.c)}
 }
@@ -605,12 +792,12 @@ func (c Cursor) PropertyAttributes(reserved uint32) uint32 {
 	return uint32(C.clang_Cursor_getObjCPropertyAttributes(c.c, C.uint(reserved)))
 }
 
-// Given a cursor that represents an ObjC method or parameter declaration, return the associated ObjC qualifiers for the return type or the parameter respectively. The bits are formed from CXObjCDeclQualifierKind.
+// Given a cursor that represents an Objective-C method or parameter declaration, return the associated Objective-C qualifiers for the return type or the parameter respectively. The bits are formed from CXObjCDeclQualifierKind.
 func (c Cursor) DeclQualifiers() uint32 {
 	return uint32(C.clang_Cursor_getObjCDeclQualifiers(c.c))
 }
 
-// Given a cursor that represents an ObjC method or property declaration, return non-zero if the declaration was affected by "@optional". Returns zero if the cursor is not such a declaration or it is "@required".
+// Given a cursor that represents an Objective-C method or property declaration, return non-zero if the declaration was affected by "@optional". Returns zero if the cursor is not such a declaration or it is "@required".
 func (c Cursor) IsObjCOptional() bool {
 	o := C.clang_Cursor_isObjCOptional(c.c)
 
@@ -645,14 +832,71 @@ func (c Cursor) BriefCommentText() string {
 	return o.String()
 }
 
-// Given a cursor that represents a documentable entity (e.g., declaration), return the associated parsed comment as a CXComment_FullComment AST node.
-func (c Cursor) ParsedComment() Comment {
-	return Comment{C.clang_Cursor_getParsedComment(c.c)}
+// Retrieve the CXString representing the mangled name of the cursor.
+func (c Cursor) Mangling() string {
+	o := cxstring{C.clang_Cursor_getMangling(c.c)}
+	defer o.Dispose()
+
+	return o.String()
+}
+
+// Retrieve the CXStrings representing the mangled symbols of the C++ constructor or destructor at the cursor.
+func (c Cursor) Manglings() *StringSet {
+	o := C.clang_Cursor_getCXXManglings(c.c)
+
+	var gop_o *StringSet
+	if o != nil {
+		gop_o = &StringSet{*o}
+	}
+
+	return gop_o
 }
 
 // Given a CXCursor_ModuleImportDecl cursor, return the associated module.
 func (c Cursor) Module() Module {
 	return Module{C.clang_Cursor_getModule(c.c)}
+}
+
+// Determine if a C++ constructor is a converting constructor.
+func (c Cursor) CXXConstructor_IsConvertingConstructor() bool {
+	o := C.clang_CXXConstructor_isConvertingConstructor(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine if a C++ constructor is a copy constructor.
+func (c Cursor) CXXConstructor_IsCopyConstructor() bool {
+	o := C.clang_CXXConstructor_isCopyConstructor(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine if a C++ constructor is the default constructor.
+func (c Cursor) CXXConstructor_IsDefaultConstructor() bool {
+	o := C.clang_CXXConstructor_isDefaultConstructor(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine if a C++ constructor is a move constructor.
+func (c Cursor) CXXConstructor_IsMoveConstructor() bool {
+	o := C.clang_CXXConstructor_isMoveConstructor(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine if a C++ field is declared 'mutable'.
+func (c Cursor) CXXField_IsMutable() bool {
+	o := C.clang_CXXField_isMutable(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine if a C++ method is declared '= default'.
+func (c Cursor) CXXMethod_IsDefaulted() bool {
+	o := C.clang_CXXMethod_isDefaulted(c.c)
+
+	return o != C.uint(0)
 }
 
 // Determine if a C++ member function or member function template is pure virtual.
@@ -672,6 +916,13 @@ func (c Cursor) CXXMethod_IsStatic() bool {
 // Determine if a C++ member function or member function template is explicitly declared 'virtual' or if it overrides a virtual method from one of the base classes.
 func (c Cursor) CXXMethod_IsVirtual() bool {
 	o := C.clang_CXXMethod_isVirtual(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine if a C++ member function or member function template is declared 'const'.
+func (c Cursor) CXXMethod_IsConst() bool {
+	o := C.clang_CXXMethod_isConst(c.c)
 
 	return o != C.uint(0)
 }
@@ -777,6 +1028,11 @@ func (c Cursor) DefinitionSpellingAndExtent() (string, string, uint32, uint32, u
 */
 func (c Cursor) CompletionString() CompletionString {
 	return CompletionString{C.clang_getCursorCompletionString(c.c)}
+}
+
+// If cursor is a statement declaration tries to evaluate the statement and if its variable, tries to evaluate its initializer, into its corresponding type.
+func (c Cursor) Evaluate() EvalResult {
+	return EvalResult{C.clang_Cursor_Evaluate(c.c)}
 }
 
 /*

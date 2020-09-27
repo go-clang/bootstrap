@@ -22,6 +22,7 @@ const (
 	PropertyAttr_weak                               = C.CXObjCPropertyAttr_weak
 	PropertyAttr_strong                             = C.CXObjCPropertyAttr_strong
 	PropertyAttr_unsafe_unretained                  = C.CXObjCPropertyAttr_unsafe_unretained
+	PropertyAttr_class                              = C.CXObjCPropertyAttr_class
 )
 
 func (pak PropertyAttrKind) Spelling() string {
@@ -52,6 +53,8 @@ func (pak PropertyAttrKind) Spelling() string {
 		return "PropertyAttr=strong"
 	case PropertyAttr_unsafe_unretained:
 		return "PropertyAttr=unsafe_unretained"
+	case PropertyAttr_class:
+		return "PropertyAttr=class"
 	}
 
 	return fmt.Sprintf("PropertyAttrKind unkown %d", int(pak))

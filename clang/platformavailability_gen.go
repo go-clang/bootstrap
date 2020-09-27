@@ -18,7 +18,7 @@ func (pa PlatformAvailability) Dispose() {
 	A string that describes the platform for which this structure
 	provides availability information.
 
-	Possible values are "ios" or "macosx".
+	Possible values are "ios" or "macos".
 */
 func (pa PlatformAvailability) Platform() string {
 	o := cxstring{pa.c.Platform}

@@ -89,6 +89,18 @@ const (
 	TranslationUnit_SkipFunctionBodies = C.CXTranslationUnit_SkipFunctionBodies
 	// Used to indicate that brief documentation comments should be included into the set of code completions returned from this translation unit.
 	TranslationUnit_IncludeBriefCommentsInCodeCompletion = C.CXTranslationUnit_IncludeBriefCommentsInCodeCompletion
+	// Used to indicate that the precompiled preamble should be created on the first parse. Otherwise it will be created on the first reparse. This trades runtime on the first parse (serializing the preamble takes time) for reduced runtime on the second parse (can now reuse the preamble).
+	TranslationUnit_CreatePreambleOnFirstParse = C.CXTranslationUnit_CreatePreambleOnFirstParse
+	/*
+		Do not stop processing when fatal errors are encountered.
+
+		When fatal errors are encountered while parsing a translation unit,
+		semantic analysis is typically stopped early when compiling code. A common
+		source for fatal errors are unresolvable include files. For the
+		purposes of an IDE, this is undesirable behavior and as much information
+		as possible should be reported. Use this flag to enable this behavior.
+	*/
+	TranslationUnit_KeepGoing = C.CXTranslationUnit_KeepGoing
 )
 
 func (tuf TranslationUnit_Flags) Spelling() string {
@@ -111,6 +123,10 @@ func (tuf TranslationUnit_Flags) Spelling() string {
 		return "TranslationUnit=SkipFunctionBodies"
 	case TranslationUnit_IncludeBriefCommentsInCodeCompletion:
 		return "TranslationUnit=IncludeBriefCommentsInCodeCompletion"
+	case TranslationUnit_CreatePreambleOnFirstParse:
+		return "TranslationUnit=CreatePreambleOnFirstParse"
+	case TranslationUnit_KeepGoing:
+		return "TranslationUnit=KeepGoing"
 	}
 
 	return fmt.Sprintf("TranslationUnit_Flags unkown %d", int(tuf))
