@@ -1,4 +1,4 @@
-# go-clang/bootstrap [![GoDoc](https://godoc.org/github.com/go-clang/bootstrap?status.png)](https://godoc.org/github.com/go-clang/bootstrap) [![Build Status](https://travis-ci.org/go-clang/bootstrap.svg?branch=master)](https://travis-ci.org/go-clang/bootstrap)
+# go-clang/bootstrap [![PkgGoDev](https://pkg.go.dev/badge/go-clang/bootstrap)](https://pkg.go.dev/github.com/go-clang/bootstrap) [![Build Status](https://travis-ci.org/go-clang/bootstrap.svg?branch=master)](https://travis-ci.org/go-clang/bootstrap)
 
 Native Go bindings for Clang's C API.
 
@@ -27,4 +27,4 @@ The [go-clang/gen](https://github.com/go-clang/gen) repository is used to automa
 
 # License
 
-This project, like all go-clang projects, is licensed under a BSD-3 license which can be found in the [LICENSE file](https://github.com/go-clang/license/blob/master/LICENSE) in [go-clang's license repository](https://github.com/go-clang/license)
+This project, like all go-clang projects, is licensed under a BSD-3 license which can be found in the [LICENSE](/LICENSE).
