@@ -1,4 +1,6 @@
-# go-clang/bootstrap [![PkgGoDev](https://pkg.go.dev/badge/go-clang/bootstrap)](https://pkg.go.dev/github.com/go-clang/bootstrap) [![Build Status](https://travis-ci.org/go-clang/bootstrap.svg?branch=master)](https://travis-ci.org/go-clang/bootstrap)
+# go-clang/bootstrap
+
+[![PkgGoDev](https://pkg.go.dev/badge/go-clang/bootstrap)](https://pkg.go.dev/github.com/go-clang/bootstrap)
 
 Native Go bindings for Clang's C API.
 
