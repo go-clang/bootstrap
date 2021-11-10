@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+env:
+  LLVM_VERSION: 4
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Test in Docker
+      run: |
+        docker container run -t --mount type=bind,src=$PWD,dst=/go/src/github.com/go-clang/bootstrap -w /go/src/github.com/go-clang/bootstrap goclang/base:${LLVM_VERSION} make test
