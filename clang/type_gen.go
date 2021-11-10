@@ -243,13 +243,7 @@ func (t Type) OffsetOf(s string) int64 {
 	return int64(C.clang_Type_getOffsetOf(t.c, c_s))
 }
 
-/*
-	Returns the number of template arguments for given class template
-	specialization, or -1 if type T is not a class template specialization.
-
-	Variadic argument packs count as only one argument, and can not be inspected
-	further.
-*/
+// Returns the number of template arguments for given template specialization, or -1 if type T is not a template specialization.
 func (t Type) NumTemplateArguments() int32 {
 	return int32(C.clang_Type_getNumTemplateArguments(t.c))
 }

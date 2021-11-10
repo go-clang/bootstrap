@@ -64,6 +64,24 @@ func (tu TranslationUnit) SkippedRanges(file File) *SourceRangeList {
 	return gop_o
 }
 
+/*
+	Retrieve all ranges from all files that were skipped by the
+	preprocessor.
+
+	The preprocessor will skip lines when they are surrounded by an
+	if/ifdef/ifndef directive whose condition does not evaluate to true.
+*/
+func (tu TranslationUnit) AllSkippedRanges() *SourceRangeList {
+	o := C.clang_getAllSkippedRanges(tu.c)
+
+	var gop_o *SourceRangeList
+	if o != nil {
+		gop_o = &SourceRangeList{*o}
+	}
+
+	return gop_o
+}
+
 // Determine the number of diagnostics produced for the given translation unit.
 func (tu TranslationUnit) NumDiagnostics() uint32 {
 	return uint32(C.clang_getNumDiagnostics(tu.c))

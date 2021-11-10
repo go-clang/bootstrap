@@ -553,7 +553,27 @@ const (
 	Cursor_OMPDistributeSimdDirective = C.CXCursor_OMPDistributeSimdDirective
 	// OpenMP target parallel for simd directive.
 	Cursor_OMPTargetParallelForSimdDirective = C.CXCursor_OMPTargetParallelForSimdDirective
-	// OpenMP target parallel for simd directive.
+	// OpenMP target simd directive.
+	Cursor_OMPTargetSimdDirective = C.CXCursor_OMPTargetSimdDirective
+	// OpenMP teams distribute directive.
+	Cursor_OMPTeamsDistributeDirective = C.CXCursor_OMPTeamsDistributeDirective
+	// OpenMP teams distribute simd directive.
+	Cursor_OMPTeamsDistributeSimdDirective = C.CXCursor_OMPTeamsDistributeSimdDirective
+	// OpenMP teams distribute parallel for simd directive.
+	Cursor_OMPTeamsDistributeParallelForSimdDirective = C.CXCursor_OMPTeamsDistributeParallelForSimdDirective
+	// OpenMP teams distribute parallel for directive.
+	Cursor_OMPTeamsDistributeParallelForDirective = C.CXCursor_OMPTeamsDistributeParallelForDirective
+	// OpenMP target teams directive.
+	Cursor_OMPTargetTeamsDirective = C.CXCursor_OMPTargetTeamsDirective
+	// OpenMP target teams distribute directive.
+	Cursor_OMPTargetTeamsDistributeDirective = C.CXCursor_OMPTargetTeamsDistributeDirective
+	// OpenMP target teams distribute parallel for directive.
+	Cursor_OMPTargetTeamsDistributeParallelForDirective = C.CXCursor_OMPTargetTeamsDistributeParallelForDirective
+	// OpenMP target teams distribute parallel for simd directive.
+	Cursor_OMPTargetTeamsDistributeParallelForSimdDirective = C.CXCursor_OMPTargetTeamsDistributeParallelForSimdDirective
+	// OpenMP target teams distribute simd directive.
+	Cursor_OMPTargetTeamsDistributeSimdDirective = C.CXCursor_OMPTargetTeamsDistributeSimdDirective
+	// OpenMP target teams distribute simd directive.
 	Cursor_LastStmt = C.CXCursor_LastStmt
 	/*
 		Cursor that represents the translation unit itself.
@@ -631,9 +651,11 @@ const (
 	Cursor_TypeAliasTemplateDecl = C.CXCursor_TypeAliasTemplateDecl
 	// A static_assert or _Static_assert node
 	Cursor_StaticAssert = C.CXCursor_StaticAssert
-	// A static_assert or _Static_assert node
+	// a friend declaration.
+	Cursor_FriendDecl = C.CXCursor_FriendDecl
+	// a friend declaration.
 	Cursor_FirstExtraDecl = C.CXCursor_FirstExtraDecl
-	// A static_assert or _Static_assert node
+	// a friend declaration.
 	Cursor_LastExtraDecl = C.CXCursor_LastExtraDecl
 	// A code completion overload candidate.
 	Cursor_OverloadCandidate = C.CXCursor_OverloadCandidate

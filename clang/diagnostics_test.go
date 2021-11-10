@@ -3,8 +3,6 @@ package clang
 import (
 	"strings"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestDiagnostics(t *testing.T) {
@@ -12,7 +10,9 @@ func TestDiagnostics(t *testing.T) {
 	defer idx.Dispose()
 
 	tu := idx.ParseTranslationUnit("cursor.c", nil, nil, 0)
-	assert.True(t, tu.IsValid())
+	if !tu.IsValid() {
+		t.Fatal("tu is invalid")
+	}
 	defer tu.Dispose()
 
 	diags := tu.Diagnostics()
@@ -31,5 +31,7 @@ func TestDiagnostics(t *testing.T) {
 		t.Log(d.Severity(), d.Spelling())
 		t.Log(d.FormatDiagnostic(uint32(Diagnostic_DisplayCategoryName | Diagnostic_DisplaySourceLocation)))
 	}
-	assert.True(t, ok)
+	if !ok {
+		t.Fatal("not found _cgo_export.h")
+	}
 }

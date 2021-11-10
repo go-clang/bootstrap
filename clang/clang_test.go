@@ -1,9 +1,8 @@
 package clang
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestBasicParsing(t *testing.T) {
@@ -11,7 +10,9 @@ func TestBasicParsing(t *testing.T) {
 	defer idx.Dispose()
 
 	tu := idx.ParseTranslationUnit("../testdata/basicparsing.c", nil, nil, 0)
-	assert.True(t, tu.IsValid())
+	if !tu.IsValid() {
+		t.Fatal("tu is invalid")
+	}
 	defer tu.Dispose()
 
 	found := 0
@@ -23,11 +24,15 @@ func TestBasicParsing(t *testing.T) {
 
 		switch cursor.Kind() {
 		case Cursor_FunctionDecl:
-			assert.Equal(t, "foo", cursor.Spelling())
+			if "foo" != cursor.Spelling() {
+				t.Fatalf("want foo but got %s", cursor.Spelling())
+			}
 
 			found++
 		case Cursor_ParmDecl:
-			assert.Equal(t, "bar", cursor.Spelling())
+			if "bar" != cursor.Spelling() {
+				t.Fatalf("want bar but got %s", cursor.Spelling())
+			}
 
 			found++
 		}
@@ -35,7 +40,9 @@ func TestBasicParsing(t *testing.T) {
 		return ChildVisit_Recurse
 	})
 
-	assert.Equal(t, 2, found, "Did not find all nodes")
+	if !reflect.DeepEqual(2, found) {
+		t.Fatal("Did not find all nodes")
+	}
 }
 
 func TestReparse(t *testing.T) {
@@ -47,7 +54,9 @@ func TestReparse(t *testing.T) {
 	defer idx.Dispose()
 
 	tu := idx.ParseTranslationUnit("hello.cpp", nil, us, 0)
-	assert.True(t, tu.IsValid())
+	if !tu.IsValid() {
+		t.Fatal("tu is invalid")
+	}
 	defer tu.Dispose()
 
 	ok := false
