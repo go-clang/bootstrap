@@ -1,7 +1,22 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+vendor/
+
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
 *.a
-*.so
 
 # Folders
 _obj
@@ -11,16 +26,23 @@ _test
 *.[568vq]
 [568vq].out
 
+# cgo generated
 *.cgo1.go
 *.cgo2.c
 _cgo_defun.c
 _cgo_gotypes.go
 _cgo_export.*
 
+# test generated
 _testmain.go
 
-*.exe
-*.test
-*.prof
+# benchmark
+old.txt
+new.txt
+bench.txt
 
-vendor/
+# profile
+*.pprof
+
+# coverage
+coverage.*
