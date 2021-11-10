@@ -9,7 +9,7 @@ func TestGoClangDump(t *testing.T) {
 		"../../testdata/basicparsing.c",
 	} {
 		if got, want := cmd([]string{"-fname", fname}), 0; got != want {
-			t.Fatal("got %v but want %v", got, want)
+			t.Fatalf("got %v but want %v", got, want)
 		}
 	}
 }

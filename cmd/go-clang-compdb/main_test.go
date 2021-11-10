@@ -9,7 +9,7 @@ func TestGoClangCompDB(t *testing.T) {
 		"../../testdata",
 	} {
 		if got, want := cmd([]string{path}), 0; got != want {
-			t.Fatal("got %v but want %v", got, want)
+			t.Fatalf("got %v but want %v", got, want)
 		}
 	}
 }
