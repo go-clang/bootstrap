@@ -1,6 +1,6 @@
 # go-clang/bootstrap
 
-[![PkgGoDev](https://pkg.go.dev/badge/go-clang/bootstrap)](https://pkg.go.dev/github.com/go-clang/bootstrap)
+[![PkgGoDev](https://pkg.go.dev/badge/go-clang/bootstrap)](https://pkg.go.dev/github.com/go-clang/bootstrap) ![Test workflow](https://github.com/go-clang/bootstrap/actions/workflows/test.yml/badge.svg)
 
 Native Go bindings for Clang's C API.
 
