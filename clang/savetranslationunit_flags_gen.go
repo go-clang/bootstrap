@@ -25,7 +25,7 @@ func (stuf SaveTranslationUnit_Flags) Spelling() string {
 		return "SaveTranslationUnit=None"
 	}
 
-	return fmt.Sprintf("SaveTranslationUnit_Flags unkown %d", int(stuf))
+	return fmt.Sprintf("SaveTranslationUnit_Flags unknown %d", int(stuf))
 }
 
 func (stuf SaveTranslationUnit_Flags) String() string {

@@ -43,7 +43,7 @@ func (se SaveError) Spelling() string {
 		return "SaveError=InvalidTU"
 	}
 
-	return fmt.Sprintf("SaveError unkown %d", int(se))
+	return fmt.Sprintf("SaveError unknown %d", int(se))
 }
 
 func (se SaveError) String() string {

@@ -27,7 +27,7 @@ func (iecxxtk IdxEntityCXXTemplateKind) Spelling() string {
 		return "IdxEntity=TemplateSpecialization"
 	}
 
-	return fmt.Sprintf("IdxEntityCXXTemplateKind unkown %d", int(iecxxtk))
+	return fmt.Sprintf("IdxEntityCXXTemplateKind unknown %d", int(iecxxtk))
 }
 
 func (iecxxtk IdxEntityCXXTemplateKind) String() string {

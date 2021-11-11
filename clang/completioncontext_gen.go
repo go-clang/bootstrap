@@ -116,7 +116,7 @@ func (cc CompletionContext) Spelling() string {
 		return "CompletionContext=Unknown"
 	}
 
-	return fmt.Sprintf("CompletionContext unkown %d", int(cc))
+	return fmt.Sprintf("CompletionContext unknown %d", int(cc))
 }
 
 func (cc CompletionContext) String() string {

@@ -27,7 +27,7 @@ func (lk LanguageKind) Spelling() string {
 		return "Language=CPlusPlus"
 	}
 
-	return fmt.Sprintf("LanguageKind unkown %d", int(lk))
+	return fmt.Sprintf("LanguageKind unknown %d", int(lk))
 }
 
 func (lk LanguageKind) String() string {

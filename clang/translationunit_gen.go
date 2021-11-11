@@ -161,6 +161,17 @@ func (tu TranslationUnit) SaveTranslationUnit(fileName string, options uint32) i
 	return int32(C.clang_saveTranslationUnit(tu.c, c_fileName, C.uint(options)))
 }
 
+/*
+	Suspend a translation unit in order to free memory associated with it.
+
+	A suspended translation unit uses significantly less memory but on the other
+	side does not support any other calls than clang_reparseTranslationUnit
+	to resume it or clang_disposeTranslationUnit to dispose it completely.
+*/
+func (tu TranslationUnit) SuspendTranslationUnit() uint32 {
+	return uint32(C.clang_suspendTranslationUnit(tu.c))
+}
+
 // Destroy the specified CXTranslationUnit object.
 func (tu TranslationUnit) Dispose() {
 	C.clang_disposeTranslationUnit(tu.c)
@@ -229,6 +240,15 @@ func (tu TranslationUnit) ReparseTranslationUnit(unsavedFiles []UnsavedFile, opt
 // Return the memory usage of a translation unit. This object should be released with clang_disposeCXTUResourceUsage().
 func (tu TranslationUnit) TUResourceUsage() TUResourceUsage {
 	return TUResourceUsage{C.clang_getCXTUResourceUsage(tu.c)}
+}
+
+/*
+	Get target information for this translation unit.
+
+	The CXTargetInfo object cannot outlive the CXTranslationUnit object.
+*/
+func (tu TranslationUnit) TargetInfo() TargetInfo {
+	return TargetInfo{C.clang_getTranslationUnitTargetInfo(tu.c)}
 }
 
 /*

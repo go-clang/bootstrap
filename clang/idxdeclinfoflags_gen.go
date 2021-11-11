@@ -17,7 +17,7 @@ func (idif IdxDeclInfoFlags) Spelling() string {
 		return "IdxDeclFlag=Skipped"
 	}
 
-	return fmt.Sprintf("IdxDeclInfoFlags unkown %d", int(idif))
+	return fmt.Sprintf("IdxDeclInfoFlags unknown %d", int(idif))
 }
 
 func (idif IdxDeclInfoFlags) String() string {

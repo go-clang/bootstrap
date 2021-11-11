@@ -42,7 +42,7 @@ func (gof GlobalOptFlags) Spelling() string {
 		return "GlobalOpt=ThreadBackgroundPriorityForAll"
 	}
 
-	return fmt.Sprintf("GlobalOptFlags unkown %d", int(gof))
+	return fmt.Sprintf("GlobalOptFlags unknown %d", int(gof))
 }
 
 func (gof GlobalOptFlags) String() string {

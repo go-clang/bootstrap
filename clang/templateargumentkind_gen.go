@@ -50,7 +50,7 @@ func (tak TemplateArgumentKind) Spelling() string {
 		return "TemplateArgumentKind=Invalid"
 	}
 
-	return fmt.Sprintf("TemplateArgumentKind unkown %d", int(tak))
+	return fmt.Sprintf("TemplateArgumentKind unknown %d", int(tak))
 }
 
 func (tak TemplateArgumentKind) String() string {

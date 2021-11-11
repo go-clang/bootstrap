@@ -21,7 +21,7 @@ func (cde CompilationDatabase_Error) Spelling() string {
 		return "CompilationDatabase=CanNotLoadDatabase"
 	}
 
-	return fmt.Sprintf("CompilationDatabase_Error unkown %d", int(cde))
+	return fmt.Sprintf("CompilationDatabase_Error unknown %d", int(cde))
 }
 
 func (cde CompilationDatabase_Error) String() string {

@@ -66,7 +66,7 @@ func (turuk TUResourceUsageKind) Spelling() string {
 		return "TUResourceUsage=Preprocessor_HeaderSearch, MEMORY_IN_BYTES_END, Last"
 	}
 
-	return fmt.Sprintf("TUResourceUsageKind unkown %d", int(turuk))
+	return fmt.Sprintf("TUResourceUsageKind unknown %d", int(turuk))
 }
 
 func (turuk TUResourceUsageKind) String() string {

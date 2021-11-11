@@ -39,7 +39,7 @@ func (sc StorageClass) Spelling() string {
 		return "SC=Register"
 	}
 
-	return fmt.Sprintf("StorageClass unkown %d", int(sc))
+	return fmt.Sprintf("StorageClass unknown %d", int(sc))
 }
 
 func (sc StorageClass) String() string {

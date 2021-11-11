@@ -31,7 +31,7 @@ func (lde LoadDiag_Error) Spelling() string {
 		return "LoadDiag=InvalidFile"
 	}
 
-	return fmt.Sprintf("LoadDiag_Error unkown %d", int(lde))
+	return fmt.Sprintf("LoadDiag_Error unknown %d", int(lde))
 }
 
 func (lde LoadDiag_Error) String() string {

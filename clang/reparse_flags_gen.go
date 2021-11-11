@@ -25,7 +25,7 @@ func (rf Reparse_Flags) Spelling() string {
 		return "Reparse=None"
 	}
 
-	return fmt.Sprintf("Reparse_Flags unkown %d", int(rf))
+	return fmt.Sprintf("Reparse_Flags unknown %d", int(rf))
 }
 
 func (rf Reparse_Flags) String() string {

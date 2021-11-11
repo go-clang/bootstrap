@@ -9,7 +9,7 @@ on:
       - "main"
 
 env:
-  LLVM_VERSION: 4
+  LLVM_VERSION: 5
 
 jobs:
   test:
@@ -20,6 +20,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GHCR_TOKEN }}
+
     - name: Test in Docker
       run: |
-        docker container run -t --mount type=bind,src=$PWD,dst=/go/src/github.com/go-clang/bootstrap -w /go/src/github.com/go-clang/bootstrap goclang/base:${LLVM_VERSION} make test
+        docker container run -t --mount type=bind,src=$PWD,dst=/go/src/github.com/go-clang/bootstrap -w /go/src/github.com/go-clang/bootstrap ghcr.io/go-clang/base:${LLVM_VERSION} make test

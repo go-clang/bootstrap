@@ -36,7 +36,7 @@ func (dqk DeclQualifierKind) Spelling() string {
 		return "DeclQualifier=Oneway"
 	}
 
-	return fmt.Sprintf("DeclQualifierKind unkown %d", int(dqk))
+	return fmt.Sprintf("DeclQualifierKind unknown %d", int(dqk))
 }
 
 func (dqk DeclQualifierKind) String() string {

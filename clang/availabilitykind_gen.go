@@ -31,7 +31,7 @@ func (ak AvailabilityKind) Spelling() string {
 		return "Availability=NotAccessible"
 	}
 
-	return fmt.Sprintf("AvailabilityKind unkown %d", int(ak))
+	return fmt.Sprintf("AvailabilityKind unknown %d", int(ak))
 }
 
 func (ak AvailabilityKind) String() string {

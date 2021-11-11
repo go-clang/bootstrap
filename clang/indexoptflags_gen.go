@@ -38,7 +38,7 @@ func (iof IndexOptFlags) Spelling() string {
 		return "IndexOpt=SkipParsedBodiesInSession"
 	}
 
-	return fmt.Sprintf("IndexOptFlags unkown %d", int(iof))
+	return fmt.Sprintf("IndexOptFlags unknown %d", int(iof))
 }
 
 func (iof IndexOptFlags) String() string {

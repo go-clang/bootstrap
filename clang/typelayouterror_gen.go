@@ -42,7 +42,7 @@ func (tle TypeLayoutError) Spelling() string {
 		return "TypeLayoutError=InvalidFieldName"
 	}
 
-	return fmt.Sprintf("TypeLayoutError unkown %d", int(tle))
+	return fmt.Sprintf("TypeLayoutError unknown %d", int(tle))
 }
 
 func (tle TypeLayoutError) String() string {

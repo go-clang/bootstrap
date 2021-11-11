@@ -35,7 +35,7 @@ func (ds DiagnosticSeverity) Spelling() string {
 		return "Diagnostic=Fatal"
 	}
 
-	return fmt.Sprintf("DiagnosticSeverity unkown %d", int(ds))
+	return fmt.Sprintf("DiagnosticSeverity unknown %d", int(ds))
 }
 
 func (ds DiagnosticSeverity) String() string {

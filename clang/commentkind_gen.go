@@ -116,7 +116,7 @@ func (ck CommentKind) Spelling() string {
 		return "Comment=FullComment"
 	}
 
-	return fmt.Sprintf("CommentKind unkown %d", int(ck))
+	return fmt.Sprintf("CommentKind unknown %d", int(ck))
 }
 
 func (ck CommentKind) String() string {

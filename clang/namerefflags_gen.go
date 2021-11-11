@@ -35,7 +35,7 @@ func (nrf NameRefFlags) Spelling() string {
 		return "NameRange=WantSinglePiece"
 	}
 
-	return fmt.Sprintf("NameRefFlags unkown %d", int(nrf))
+	return fmt.Sprintf("NameRefFlags unknown %d", int(nrf))
 }
 
 func (nrf NameRefFlags) String() string {

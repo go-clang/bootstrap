@@ -20,7 +20,7 @@ func (vr VisitorResult) Spelling() string {
 		return "Visit=Continue"
 	}
 
-	return fmt.Sprintf("VisitorResult unkown %d", int(vr))
+	return fmt.Sprintf("VisitorResult unknown %d", int(vr))
 }
 
 func (vr VisitorResult) String() string {

@@ -45,7 +45,7 @@ func (ec ErrorCode) Spelling() string {
 		return "Error=ASTReadError"
 	}
 
-	return fmt.Sprintf("ErrorCode unkown %d", int(ec))
+	return fmt.Sprintf("ErrorCode unknown %d", int(ec))
 }
 
 func (ec ErrorCode) String() string {

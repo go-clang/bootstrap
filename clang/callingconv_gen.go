@@ -19,6 +19,7 @@ const (
 	CallingConv_AAPCS_VFP                 = C.CXCallingConv_AAPCS_VFP
 	CallingConv_X86RegCall                = C.CXCallingConv_X86RegCall
 	CallingConv_IntelOclBicc              = C.CXCallingConv_IntelOclBicc
+	CallingConv_Win64                     = C.CXCallingConv_Win64
 	CallingConv_X86_64Win64               = C.CXCallingConv_X86_64Win64
 	CallingConv_X86_64SysV                = C.CXCallingConv_X86_64SysV
 	CallingConv_X86VectorCall             = C.CXCallingConv_X86VectorCall
@@ -51,8 +52,8 @@ func (cc CallingConv) Spelling() string {
 		return "CallingConv=X86RegCall"
 	case CallingConv_IntelOclBicc:
 		return "CallingConv=IntelOclBicc"
-	case CallingConv_X86_64Win64:
-		return "CallingConv=X86_64Win64"
+	case CallingConv_Win64:
+		return "CallingConv=Win64, X86_64Win64"
 	case CallingConv_X86_64SysV:
 		return "CallingConv=X86_64SysV"
 	case CallingConv_X86VectorCall:
@@ -69,7 +70,7 @@ func (cc CallingConv) Spelling() string {
 		return "CallingConv=Unexposed"
 	}
 
-	return fmt.Sprintf("CallingConv unkown %d", int(cc))
+	return fmt.Sprintf("CallingConv unknown %d", int(cc))
 }
 
 func (cc CallingConv) String() string {

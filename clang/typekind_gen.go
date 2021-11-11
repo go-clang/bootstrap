@@ -71,6 +71,8 @@ const (
 	// A type whose specific kind is not exposed via this interface.
 	Type_Float128 = C.CXType_Float128
 	// A type whose specific kind is not exposed via this interface.
+	Type_Half = C.CXType_Half
+	// A type whose specific kind is not exposed via this interface.
 	Type_FirstBuiltin = C.CXType_FirstBuiltin
 	// A type whose specific kind is not exposed via this interface.
 	Type_LastBuiltin = C.CXType_LastBuiltin
@@ -118,6 +120,252 @@ const (
 		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
 	*/
 	Type_Elaborated = C.CXType_Elaborated
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_Pipe = C.CXType_Pipe
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dRO = C.CXType_OCLImage1dRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dArrayRO = C.CXType_OCLImage1dArrayRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dBufferRO = C.CXType_OCLImage1dBufferRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dRO = C.CXType_OCLImage2dRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayRO = C.CXType_OCLImage2dArrayRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dDepthRO = C.CXType_OCLImage2dDepthRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayDepthRO = C.CXType_OCLImage2dArrayDepthRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dMSAARO = C.CXType_OCLImage2dMSAARO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayMSAARO = C.CXType_OCLImage2dArrayMSAARO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dMSAADepthRO = C.CXType_OCLImage2dMSAADepthRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayMSAADepthRO = C.CXType_OCLImage2dArrayMSAADepthRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage3dRO = C.CXType_OCLImage3dRO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dWO = C.CXType_OCLImage1dWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dArrayWO = C.CXType_OCLImage1dArrayWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dBufferWO = C.CXType_OCLImage1dBufferWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dWO = C.CXType_OCLImage2dWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayWO = C.CXType_OCLImage2dArrayWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dDepthWO = C.CXType_OCLImage2dDepthWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayDepthWO = C.CXType_OCLImage2dArrayDepthWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dMSAAWO = C.CXType_OCLImage2dMSAAWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayMSAAWO = C.CXType_OCLImage2dArrayMSAAWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dMSAADepthWO = C.CXType_OCLImage2dMSAADepthWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayMSAADepthWO = C.CXType_OCLImage2dArrayMSAADepthWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage3dWO = C.CXType_OCLImage3dWO
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dRW = C.CXType_OCLImage1dRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dArrayRW = C.CXType_OCLImage1dArrayRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage1dBufferRW = C.CXType_OCLImage1dBufferRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dRW = C.CXType_OCLImage2dRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayRW = C.CXType_OCLImage2dArrayRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dDepthRW = C.CXType_OCLImage2dDepthRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayDepthRW = C.CXType_OCLImage2dArrayDepthRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dMSAARW = C.CXType_OCLImage2dMSAARW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayMSAARW = C.CXType_OCLImage2dArrayMSAARW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dMSAADepthRW = C.CXType_OCLImage2dMSAADepthRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage2dArrayMSAADepthRW = C.CXType_OCLImage2dArrayMSAADepthRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLImage3dRW = C.CXType_OCLImage3dRW
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLSampler = C.CXType_OCLSampler
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLEvent = C.CXType_OCLEvent
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLQueue = C.CXType_OCLQueue
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLReserveID = C.CXType_OCLReserveID
 )
 
 // Retrieve the spelling of a given CXTypeKind.

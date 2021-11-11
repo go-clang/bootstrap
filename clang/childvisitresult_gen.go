@@ -33,7 +33,7 @@ func (cvr ChildVisitResult) Spelling() string {
 		return "ChildVisit=Recurse"
 	}
 
-	return fmt.Sprintf("ChildVisitResult unkown %d", int(cvr))
+	return fmt.Sprintf("ChildVisitResult unknown %d", int(cvr))
 }
 
 func (cvr ChildVisitResult) String() string {

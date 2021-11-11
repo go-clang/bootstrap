@@ -23,7 +23,7 @@ func (iocck IdxObjCContainerKind) Spelling() string {
 		return "IdxObjCContainer=Implementation"
 	}
 
-	return fmt.Sprintf("IdxObjCContainerKind unkown %d", int(iocck))
+	return fmt.Sprintf("IdxObjCContainerKind unknown %d", int(iocck))
 }
 
 func (iocck IdxObjCContainerKind) String() string {

@@ -143,7 +143,7 @@ const (
 	CompletionChunk_Equal = C.CXCompletionChunk_Equal
 	// Horizontal space (' ').
 	CompletionChunk_HorizontalSpace = C.CXCompletionChunk_HorizontalSpace
-	// Vertical space ('\n'), after which it is generally a good idea to perform indentation.
+	// Vertical space ('\\n'), after which it is generally a good idea to perform indentation.
 	CompletionChunk_VerticalSpace = C.CXCompletionChunk_VerticalSpace
 )
 
@@ -193,7 +193,7 @@ func (cck CompletionChunkKind) Spelling() string {
 		return "CompletionChunk=VerticalSpace"
 	}
 
-	return fmt.Sprintf("CompletionChunkKind unkown %d", int(cck))
+	return fmt.Sprintf("CompletionChunkKind unknown %d", int(cck))
 }
 
 func (cck CompletionChunkKind) String() string {

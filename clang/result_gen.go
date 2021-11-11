@@ -26,7 +26,7 @@ func (r Result) Spelling() string {
 		return "Result=VisitBreak"
 	}
 
-	return fmt.Sprintf("Result unkown %d", int(r))
+	return fmt.Sprintf("Result unknown %d", int(r))
 }
 
 func (r Result) String() string {

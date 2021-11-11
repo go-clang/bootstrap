@@ -101,7 +101,7 @@ func (iek IdxEntityKind) Spelling() string {
 		return "IdxEntity=CXXInterface"
 	}
 
-	return fmt.Sprintf("IdxEntityKind unkown %d", int(iek))
+	return fmt.Sprintf("IdxEntityKind unknown %d", int(iek))
 }
 
 func (iek IdxEntityKind) String() string {

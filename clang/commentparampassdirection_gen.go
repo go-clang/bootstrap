@@ -27,7 +27,7 @@ func (cppd CommentParamPassDirection) Spelling() string {
 		return "CommentParamPassDirection=InOut"
 	}
 
-	return fmt.Sprintf("CommentParamPassDirection unkown %d", int(cppd))
+	return fmt.Sprintf("CommentParamPassDirection unknown %d", int(cppd))
 }
 
 func (cppd CommentParamPassDirection) String() string {

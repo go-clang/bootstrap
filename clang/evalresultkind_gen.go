@@ -35,7 +35,7 @@ func (erk EvalResultKind) Spelling() string {
 		return "Eval=UnExposed"
 	}
 
-	return fmt.Sprintf("EvalResultKind unkown %d", int(erk))
+	return fmt.Sprintf("EvalResultKind unknown %d", int(erk))
 }
 
 func (erk EvalResultKind) String() string {

@@ -30,7 +30,7 @@ func (vk VisibilityKind) Spelling() string {
 		return "Visibility=Default"
 	}
 
-	return fmt.Sprintf("VisibilityKind unkown %d", int(vk))
+	return fmt.Sprintf("VisibilityKind unknown %d", int(vk))
 }
 
 func (vk VisibilityKind) String() string {

@@ -31,7 +31,7 @@ func (cicrk CommentInlineCommandRenderKind) Spelling() string {
 		return "CommentInlineCommandRenderKind=Emphasized"
 	}
 
-	return fmt.Sprintf("CommentInlineCommandRenderKind unkown %d", int(cicrk))
+	return fmt.Sprintf("CommentInlineCommandRenderKind unknown %d", int(cicrk))
 }
 
 func (cicrk CommentInlineCommandRenderKind) String() string {

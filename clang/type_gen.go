@@ -68,6 +68,19 @@ func (t Type) IsRestrictQualifiedType() bool {
 	return o != C.uint(0)
 }
 
+// Returns the address space of the given type.
+func (t Type) AddressSpace() uint32 {
+	return uint32(C.clang_getAddressSpace(t.c))
+}
+
+// Returns the typedef name of the given type.
+func (t Type) DefName() string {
+	o := cxstring{C.clang_getTypedefName(t.c)}
+	defer o.Dispose()
+
+	return o.String()
+}
+
 // For pointer types, returns the type of the pointee.
 func (t Type) PointeeType() Type {
 	return Type{C.clang_getPointeeType(t.c)}
@@ -102,6 +115,15 @@ func (t Type) FunctionTypeCallingConv() CallingConv {
 */
 func (t Type) ResultType() Type {
 	return Type{C.clang_getResultType(t.c)}
+}
+
+/*
+	Retrieve the exception specification type associated with a function type.
+
+	If a non-function type is passed in, an error code of -1 is returned.
+*/
+func (t Type) ExceptionSpecificationType() int32 {
+	return int32(C.clang_getExceptionSpecificationType(t.c))
 }
 
 /*
@@ -183,6 +205,20 @@ func (t Type) ArraySize() int64 {
 */
 func (t Type) NamedType() Type {
 	return Type{C.clang_Type_getNamedType(t.c)}
+}
+
+/*
+	Determine if a typedef is 'transparent' tag.
+
+	A typedef is considered 'transparent' if it shares a name and spelling
+	location with its underlying tag type, as is the case with the NS_ENUM macro.
+
+	Returns non-zero if transparent and zero otherwise.
+*/
+func (t Type) IsTransparentTagTypedef() bool {
+	o := C.clang_Type_isTransparentTagTypedef(t.c)
+
+	return o != C.uint(0)
 }
 
 /*

@@ -57,7 +57,7 @@ func (pak PropertyAttrKind) Spelling() string {
 		return "PropertyAttr=class"
 	}
 
-	return fmt.Sprintf("PropertyAttrKind unkown %d", int(pak))
+	return fmt.Sprintf("PropertyAttrKind unknown %d", int(pak))
 }
 
 func (pak PropertyAttrKind) String() string {

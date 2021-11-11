@@ -26,7 +26,7 @@ func (iak IdxAttrKind) Spelling() string {
 		return "IdxAttr=IBOutletCollection"
 	}
 
-	return fmt.Sprintf("IdxAttrKind unkown %d", int(iak))
+	return fmt.Sprintf("IdxAttrKind unknown %d", int(iak))
 }
 
 func (iak IdxAttrKind) String() string {

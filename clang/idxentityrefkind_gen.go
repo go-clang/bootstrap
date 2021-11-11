@@ -23,7 +23,7 @@ func (ierk IdxEntityRefKind) Spelling() string {
 		return "IdxEntityRef=Implicit"
 	}
 
-	return fmt.Sprintf("IdxEntityRefKind unkown %d", int(ierk))
+	return fmt.Sprintf("IdxEntityRefKind unknown %d", int(ierk))
 }
 
 func (ierk IdxEntityRefKind) String() string {

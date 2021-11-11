@@ -35,7 +35,7 @@ func (tk TokenKind) Spelling() string {
 		return "Token=Comment"
 	}
 
-	return fmt.Sprintf("TokenKind unkown %d", int(tk))
+	return fmt.Sprintf("TokenKind unknown %d", int(tk))
 }
 
 func (tk TokenKind) String() string {

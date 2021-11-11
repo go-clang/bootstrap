@@ -33,7 +33,7 @@ func (ccf CodeComplete_Flags) Spelling() string {
 		return "CodeComplete=IncludeBriefComments"
 	}
 
-	return fmt.Sprintf("CodeComplete_Flags unkown %d", int(ccf))
+	return fmt.Sprintf("CodeComplete_Flags unknown %d", int(ccf))
 }
 
 func (ccf CodeComplete_Flags) String() string {

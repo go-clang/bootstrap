@@ -87,8 +87,8 @@ func (sl SourceLocation) ExpansionLocation() (File, uint32, uint32, uint32) {
 }
 
 /*
-	Retrieve the file, line, column, and offset represented by
-	the given source location, as specified in a # line directive.
+	Retrieve the file, line and column represented by the given source
+	location, as specified in a # line directive.
 
 	Example: given the following source code in a file somefile.c
 

@@ -512,6 +512,15 @@ func (c Cursor) ResultType() Type {
 }
 
 /*
+	Retrieve the exception specification type associated with a given cursor.
+
+	This only returns a valid result if the cursor refers to a function or method.
+*/
+func (c Cursor) ExceptionSpecificationType() int32 {
+	return int32(C.clang_getCursorExceptionSpecificationType(c.c))
+}
+
+/*
 	Return the offset of the field represented by the Cursor.
 
 	If the cursor is not a field declaration, -1 is returned.
@@ -776,7 +785,7 @@ func (c Cursor) IsDynamicCall() bool {
 	return o != C.int(0)
 }
 
-// Given a cursor pointing to an Objective-C message, returns the CXType of the receiver.
+// Given a cursor pointing to an Objective-C message or property reference, or C++ method call, returns the CXType of the receiver.
 func (c Cursor) ReceiverType() Type {
 	return Type{C.clang_Cursor_getReceiverType(c.c)}
 }
@@ -797,7 +806,7 @@ func (c Cursor) DeclQualifiers() uint32 {
 	return uint32(C.clang_Cursor_getObjCDeclQualifiers(c.c))
 }
 
-// Given a cursor that represents an Objective-C method or property declaration, return non-zero if the declaration was affected by "@optional". Returns zero if the cursor is not such a declaration or it is "@required".
+// Given a cursor that represents an Objective-C method or property declaration, return non-zero if the declaration was affected by "\@optional". Returns zero if the cursor is not such a declaration or it is "\@required".
 func (c Cursor) IsObjCOptional() bool {
 	o := C.clang_Cursor_isObjCOptional(c.c)
 
@@ -809,6 +818,31 @@ func (c Cursor) IsVariadic() bool {
 	o := C.clang_Cursor_isVariadic(c.c)
 
 	return o != C.uint(0)
+}
+
+/*
+	Returns non-zero if the given cursor points to a symbol marked with
+	external_source_symbol attribute.
+
+	Parameter language If non-NULL, and the attribute is present, will be set to
+	the 'language' string from the attribute.
+
+	Parameter definedIn If non-NULL, and the attribute is present, will be set to
+	the 'definedIn' string from the attribute.
+
+	Parameter isGenerated If non-NULL, and the attribute is present, will be set to
+	non-zero if the 'generated_declaration' is set in the attribute.
+*/
+func (c Cursor) IsExternalSymbol() (string, string, uint32, bool) {
+	var language cxstring
+	defer language.Dispose()
+	var definedIn cxstring
+	defer definedIn.Dispose()
+	var isGenerated C.uint
+
+	o := C.clang_Cursor_isExternalSymbol(c.c, &language.c, &definedIn.c, &isGenerated)
+
+	return language.String(), definedIn.String(), uint32(isGenerated), o != C.uint(0)
 }
 
 // Given a cursor that represents a declaration, return the associated comment's source range. The range may include multiple consecutive comments with whitespace in between.
@@ -916,6 +950,13 @@ func (c Cursor) CXXMethod_IsStatic() bool {
 // Determine if a C++ member function or member function template is explicitly declared 'virtual' or if it overrides a virtual method from one of the base classes.
 func (c Cursor) CXXMethod_IsVirtual() bool {
 	o := C.clang_CXXMethod_isVirtual(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine if an enum declaration refers to a scoped enum.
+func (c Cursor) EnumDecl_IsScoped() bool {
+	o := C.clang_EnumDecl_isScoped(c.c)
 
 	return o != C.uint(0)
 }

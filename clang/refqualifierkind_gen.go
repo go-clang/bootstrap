@@ -26,7 +26,7 @@ func (rqk RefQualifierKind) Spelling() string {
 		return "RefQualifier=RValue"
 	}
 
-	return fmt.Sprintf("RefQualifierKind unkown %d", int(rqk))
+	return fmt.Sprintf("RefQualifierKind unknown %d", int(rqk))
 }
 
 func (rqk RefQualifierKind) String() string {
