@@ -632,6 +632,42 @@ const (
 	// An attribute whose specific kind is not exposed via this interface.
 	Cursor_DLLImport = C.CXCursor_DLLImport
 	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_NSReturnsRetained = C.CXCursor_NSReturnsRetained
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_NSReturnsNotRetained = C.CXCursor_NSReturnsNotRetained
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_NSReturnsAutoreleased = C.CXCursor_NSReturnsAutoreleased
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_NSConsumesSelf = C.CXCursor_NSConsumesSelf
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_NSConsumed = C.CXCursor_NSConsumed
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCException = C.CXCursor_ObjCException
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCNSObject = C.CXCursor_ObjCNSObject
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCIndependentClass = C.CXCursor_ObjCIndependentClass
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCPreciseLifetime = C.CXCursor_ObjCPreciseLifetime
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCReturnsInnerPointer = C.CXCursor_ObjCReturnsInnerPointer
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCRequiresSuper = C.CXCursor_ObjCRequiresSuper
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCRootClass = C.CXCursor_ObjCRootClass
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCSubclassingRestricted = C.CXCursor_ObjCSubclassingRestricted
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCExplicitProtocolImpl = C.CXCursor_ObjCExplicitProtocolImpl
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCDesignatedInitializer = C.CXCursor_ObjCDesignatedInitializer
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCRuntimeVisible = C.CXCursor_ObjCRuntimeVisible
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ObjCBoxable = C.CXCursor_ObjCBoxable
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_FlagEnum = C.CXCursor_FlagEnum
+	// An attribute whose specific kind is not exposed via this interface.
 	Cursor_LastAttr = C.CXCursor_LastAttr
 	// An attribute whose specific kind is not exposed via this interface.
 	Cursor_PreprocessingDirective = C.CXCursor_PreprocessingDirective

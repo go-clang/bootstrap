@@ -9,25 +9,26 @@ import "fmt"
 type CallingConv uint32
 
 const (
-	CallingConv_Default       CallingConv = C.CXCallingConv_Default
-	CallingConv_C                         = C.CXCallingConv_C
-	CallingConv_X86StdCall                = C.CXCallingConv_X86StdCall
-	CallingConv_X86FastCall               = C.CXCallingConv_X86FastCall
-	CallingConv_X86ThisCall               = C.CXCallingConv_X86ThisCall
-	CallingConv_X86Pascal                 = C.CXCallingConv_X86Pascal
-	CallingConv_AAPCS                     = C.CXCallingConv_AAPCS
-	CallingConv_AAPCS_VFP                 = C.CXCallingConv_AAPCS_VFP
-	CallingConv_X86RegCall                = C.CXCallingConv_X86RegCall
-	CallingConv_IntelOclBicc              = C.CXCallingConv_IntelOclBicc
-	CallingConv_Win64                     = C.CXCallingConv_Win64
-	CallingConv_X86_64Win64               = C.CXCallingConv_X86_64Win64
-	CallingConv_X86_64SysV                = C.CXCallingConv_X86_64SysV
-	CallingConv_X86VectorCall             = C.CXCallingConv_X86VectorCall
-	CallingConv_Swift                     = C.CXCallingConv_Swift
-	CallingConv_PreserveMost              = C.CXCallingConv_PreserveMost
-	CallingConv_PreserveAll               = C.CXCallingConv_PreserveAll
-	CallingConv_Invalid                   = C.CXCallingConv_Invalid
-	CallingConv_Unexposed                 = C.CXCallingConv_Unexposed
+	CallingConv_Default           CallingConv = C.CXCallingConv_Default
+	CallingConv_C                             = C.CXCallingConv_C
+	CallingConv_X86StdCall                    = C.CXCallingConv_X86StdCall
+	CallingConv_X86FastCall                   = C.CXCallingConv_X86FastCall
+	CallingConv_X86ThisCall                   = C.CXCallingConv_X86ThisCall
+	CallingConv_X86Pascal                     = C.CXCallingConv_X86Pascal
+	CallingConv_AAPCS                         = C.CXCallingConv_AAPCS
+	CallingConv_AAPCS_VFP                     = C.CXCallingConv_AAPCS_VFP
+	CallingConv_X86RegCall                    = C.CXCallingConv_X86RegCall
+	CallingConv_IntelOclBicc                  = C.CXCallingConv_IntelOclBicc
+	CallingConv_Win64                         = C.CXCallingConv_Win64
+	CallingConv_X86_64Win64                   = C.CXCallingConv_X86_64Win64
+	CallingConv_X86_64SysV                    = C.CXCallingConv_X86_64SysV
+	CallingConv_X86VectorCall                 = C.CXCallingConv_X86VectorCall
+	CallingConv_Swift                         = C.CXCallingConv_Swift
+	CallingConv_PreserveMost                  = C.CXCallingConv_PreserveMost
+	CallingConv_PreserveAll                   = C.CXCallingConv_PreserveAll
+	CallingConv_AArch64VectorCall             = C.CXCallingConv_AArch64VectorCall
+	CallingConv_Invalid                       = C.CXCallingConv_Invalid
+	CallingConv_Unexposed                     = C.CXCallingConv_Unexposed
 )
 
 func (cc CallingConv) Spelling() string {
@@ -64,6 +65,8 @@ func (cc CallingConv) Spelling() string {
 		return "CallingConv=PreserveMost"
 	case CallingConv_PreserveAll:
 		return "CallingConv=PreserveAll"
+	case CallingConv_AArch64VectorCall:
+		return "CallingConv=AArch64VectorCall"
 	case CallingConv_Invalid:
 		return "CallingConv=Invalid"
 	case CallingConv_Unexposed:

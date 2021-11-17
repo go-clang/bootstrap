@@ -110,6 +110,10 @@ const (
 		The function bodies of the main file are not skipped.
 	*/
 	TranslationUnit_LimitSkipFunctionBodiesToPreamble = C.CXTranslationUnit_LimitSkipFunctionBodiesToPreamble
+	// Used to indicate that attributed types should be included in CXType.
+	TranslationUnit_IncludeAttributedTypes = C.CXTranslationUnit_IncludeAttributedTypes
+	// Used to indicate that implicit attributes should be visited.
+	TranslationUnit_VisitImplicitAttributes = C.CXTranslationUnit_VisitImplicitAttributes
 )
 
 func (tuf TranslationUnit_Flags) Spelling() string {
@@ -140,6 +144,10 @@ func (tuf TranslationUnit_Flags) Spelling() string {
 		return "TranslationUnit=SingleFileParse"
 	case TranslationUnit_LimitSkipFunctionBodiesToPreamble:
 		return "TranslationUnit=LimitSkipFunctionBodiesToPreamble"
+	case TranslationUnit_IncludeAttributedTypes:
+		return "TranslationUnit=IncludeAttributedTypes"
+	case TranslationUnit_VisitImplicitAttributes:
+		return "TranslationUnit=VisitImplicitAttributes"
 	}
 
 	return fmt.Sprintf("TranslationUnit_Flags unknown %d", int(tuf))

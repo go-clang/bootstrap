@@ -147,6 +147,53 @@ func (t Type) ArgType(i uint32) Type {
 	return Type{C.clang_getArgType(t.c, C.uint(i))}
 }
 
+/*
+	Retrieves the base type of the ObjCObjectType.
+
+	If the type is not an ObjC object, an invalid type is returned.
+*/
+func (t Type) ObjectBaseType() Type {
+	return Type{C.clang_Type_getObjCObjectBaseType(t.c)}
+}
+
+/*
+	Retrieve the number of protocol references associated with an ObjC object/id.
+
+	If the type is not an ObjC object, 0 is returned.
+*/
+func (t Type) NumObjCProtocolRefs() uint32 {
+	return uint32(C.clang_Type_getNumObjCProtocolRefs(t.c))
+}
+
+/*
+	Retrieve the decl for a protocol reference for an ObjC object/id.
+
+	If the type is not an ObjC object or there are not enough protocol
+	references, an invalid cursor is returned.
+*/
+func (t Type) ProtocolDecl(i uint32) Cursor {
+	return Cursor{C.clang_Type_getObjCProtocolDecl(t.c, C.uint(i))}
+}
+
+/*
+	Retreive the number of type arguments associated with an ObjC object.
+
+	If the type is not an ObjC object, 0 is returned.
+*/
+func (t Type) NumObjCTypeArgs() uint32 {
+	return uint32(C.clang_Type_getNumObjCTypeArgs(t.c))
+}
+
+/*
+	Retrieve a type argument associated with an ObjC object.
+
+	If the type is not an ObjC or the index is not valid,
+	an invalid type is returned.
+*/
+func (t Type) TypeArg(i uint32) Type {
+	return Type{C.clang_Type_getObjCTypeArg(t.c, C.uint(i))}
+}
+
 // Return 1 if the CXType is a variadic function type, and 0 otherwise.
 func (t Type) IsFunctionTypeVariadic() bool {
 	o := C.clang_isFunctionTypeVariadic(t.c)
@@ -222,6 +269,11 @@ func (t Type) IsTransparentTagTypedef() bool {
 	return o != C.uint(0)
 }
 
+// Retrieve the nullability kind of a pointer type.
+func (t Type) Nullability() TypeNullabilityKind {
+	return TypeNullabilityKind(C.clang_Type_getNullability(t.c))
+}
+
 /*
 	Return the alignment of a type in bytes as per C++[expr.alignof]
 	standard.
@@ -278,6 +330,15 @@ func (t Type) OffsetOf(s string) int64 {
 	defer C.free(unsafe.Pointer(c_s))
 
 	return int64(C.clang_Type_getOffsetOf(t.c, c_s))
+}
+
+/*
+	Return the type that was modified by this attributed type.
+
+	If the type is not an attributed type, an invalid type is returned.
+*/
+func (t Type) ModifiedType() Type {
+	return Type{C.clang_Type_getModifiedType(t.c)}
 }
 
 // Returns the number of template arguments for given template specialization, or -1 if type T is not a template specialization.

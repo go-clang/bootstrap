@@ -60,6 +60,8 @@ const (
 	CompletionContext_MacroName = C.CXCompletionContext_MacroName
 	// Natural language completions should be included in the results.
 	CompletionContext_NaturalLanguage = C.CXCompletionContext_NaturalLanguage
+	// #include file completions should be included in the results.
+	CompletionContext_IncludedFile = C.CXCompletionContext_IncludedFile
 	// The current context is unknown, so set all contexts.
 	CompletionContext_Unknown = C.CXCompletionContext_Unknown
 )
@@ -112,6 +114,8 @@ func (cc CompletionContext) Spelling() string {
 		return "CompletionContext=MacroName"
 	case CompletionContext_NaturalLanguage:
 		return "CompletionContext=NaturalLanguage"
+	case CompletionContext_IncludedFile:
+		return "CompletionContext=IncludedFile"
 	case CompletionContext_Unknown:
 		return "CompletionContext=Unknown"
 	}

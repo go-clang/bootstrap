@@ -380,6 +380,96 @@ const (
 		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
 	*/
 	Type_OCLReserveID = C.CXType_OCLReserveID
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_ObjCObject = C.CXType_ObjCObject
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_ObjCTypeParam = C.CXType_ObjCTypeParam
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_Attributed = C.CXType_Attributed
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCMcePayload = C.CXType_OCLIntelSubgroupAVCMcePayload
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCImePayload = C.CXType_OCLIntelSubgroupAVCImePayload
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCRefPayload = C.CXType_OCLIntelSubgroupAVCRefPayload
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCSicPayload = C.CXType_OCLIntelSubgroupAVCSicPayload
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCMceResult = C.CXType_OCLIntelSubgroupAVCMceResult
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCImeResult = C.CXType_OCLIntelSubgroupAVCImeResult
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCRefResult = C.CXType_OCLIntelSubgroupAVCRefResult
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCSicResult = C.CXType_OCLIntelSubgroupAVCSicResult
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout = C.CXType_OCLIntelSubgroupAVCImeResultSingleRefStreamout
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCImeResultDualRefStreamout = C.CXType_OCLIntelSubgroupAVCImeResultDualRefStreamout
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCImeSingleRefStreamin = C.CXType_OCLIntelSubgroupAVCImeSingleRefStreamin
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_OCLIntelSubgroupAVCImeDualRefStreamin = C.CXType_OCLIntelSubgroupAVCImeDualRefStreamin
 )
 
 // Retrieve the spelling of a given CXTypeKind.

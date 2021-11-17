@@ -4,7 +4,7 @@ export CC := clang
 export CXX := clang++
 
 LLVM_LIBDIR?=$(shell llvm-config --libdir)
-LLVM_VERSION?=7
+LLVM_VERSION?=8
 
 all: test
 
