@@ -67,3 +67,8 @@ func (ieri IdxEntityRefInfo) Container() *IdxContainerInfo {
 
 	return gop_o
 }
+
+// Sets of symbol roles of the reference.
+func (ieri IdxEntityRefInfo) Role() SymbolRole {
+	return SymbolRole(ieri.c.role)
+}

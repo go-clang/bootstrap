@@ -19,6 +19,75 @@ type CodeCompleteResults struct {
 	c *C.CXCodeCompleteResults
 }
 
+/*
+	Retrieve the number of fix-its for the given completion index.
+
+	Calling this makes sense only if CXCodeComplete_IncludeCompletionsWithFixIts
+	option was set.
+
+	Parameter results The structure keeping all completion results
+
+	Parameter completion_index The index of the completion
+
+	\return The number of fix-its which must be applied before the completion at
+	completion_index can be applied
+*/
+func (ccr *CodeCompleteResults) CompletionNumFixIts(completionIndex uint32) uint32 {
+	return uint32(C.clang_getCompletionNumFixIts(ccr.c, C.uint(completionIndex)))
+}
+
+/*
+	Fix-its that *must* be applied before inserting the text for the
+	corresponding completion.
+
+	By default, clang_codeCompleteAt() only returns completions with empty
+	fix-its. Extra completions with non-empty fix-its should be explicitly
+	requested by setting CXCodeComplete_IncludeCompletionsWithFixIts.
+
+	For the clients to be able to compute position of the cursor after applying
+	fix-its, the following conditions are guaranteed to hold for
+	replacement_range of the stored fix-its:
+	- Ranges in the fix-its are guaranteed to never contain the completion
+	point (or identifier under completion point, if any) inside them, except
+	at the start or at the end of the range.
+	- If a fix-it range starts or ends with completion point (or starts or
+	ends after the identifier under completion point), it will contain at
+	least one character. It allows to unambiguously recompute completion
+	point after applying the fix-it.
+
+	The intuition is that provided fix-its change code around the identifier we
+	complete, but are not allowed to touch the identifier itself or the
+	completion point. One example of completions with corrections are the ones
+	replacing '.' with '->' and vice versa:
+
+	std::unique_ptr<std::vector<int>> vec_ptr;
+	In 'vec_ptr.^', one of the completions is 'push_back', it requires
+	replacing '.' with '->'.
+	In 'vec_ptr->^', one of the completions is 'release', it requires
+	replacing '->' with '.'.
+
+	Parameter results The structure keeping all completion results
+
+	Parameter completion_index The index of the completion
+
+	Parameter fixit_index The index of the fix-it for the completion at
+	completion_index
+
+	Parameter replacement_range The fix-it range that must be replaced before the
+	completion at completion_index can be applied
+
+	Returns The fix-it string that must replace the code at replacement_range
+	before the completion at completion_index can be applied
+*/
+func (ccr *CodeCompleteResults) CompletionFixIt(completionIndex uint32, fixitIndex uint32) (SourceRange, string) {
+	var replacementRange SourceRange
+
+	o := cxstring{C.clang_getCompletionFixIt(ccr.c, C.uint(completionIndex), C.uint(fixitIndex), &replacementRange.c)}
+	defer o.Dispose()
+
+	return replacementRange, o.String()
+}
+
 // Free the given set of code-completion results.
 func (ccr *CodeCompleteResults) Dispose() {
 	C.clang_disposeCodeCompleteResults(ccr.c)

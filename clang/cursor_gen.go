@@ -65,6 +65,20 @@ func (c Cursor) Kind() CursorKind {
 	return CursorKind(C.clang_getCursorKind(c.c))
 }
 
+/*
+	Determine whether the given declaration is invalid.
+
+	A declaration is invalid if it could not be parsed successfully.
+
+	Returns non-zero if the cursor represents a declaration and it is
+	invalid, otherwise NULL.
+*/
+func (c Cursor) IsInvalidDeclaration() bool {
+	o := C.clang_isInvalidDeclaration(c.c)
+
+	return o != C.uint(0)
+}
+
 // Determine whether the given cursor has any attributes.
 func (c Cursor) HasAttrs() bool {
 	o := C.clang_Cursor_hasAttrs(c.c)
@@ -518,6 +532,7 @@ func (c Cursor) ResultType() Type {
 
 /*
 	Retrieve the exception specification type associated with a given cursor.
+	This is a value of type CXCursor_ExceptionSpecificationKind.
 
 	This only returns a valid result if the cursor refers to a function or method.
 */
@@ -660,6 +675,34 @@ func (c Cursor) Spelling() string {
 */
 func (c Cursor) SpellingNameRange(pieceIndex uint32, options uint32) SourceRange {
 	return SourceRange{C.clang_Cursor_getSpellingNameRange(c.c, C.uint(pieceIndex), C.uint(options))}
+}
+
+/*
+	Retrieve the default policy for the cursor.
+
+	The policy should be released after use with \c
+	clang_PrintingPolicy_dispose.
+*/
+func (c Cursor) PrintingPolicy() PrintingPolicy {
+	return PrintingPolicy{C.clang_getCursorPrintingPolicy(c.c)}
+}
+
+/*
+	Pretty print declarations.
+
+	Parameter Cursor The cursor representing a declaration.
+
+	Parameter Policy The policy to control the entities being printed. If
+	NULL, a default policy is used.
+
+	Returns The pretty printed declaration or the empty string for
+	other cursors.
+*/
+func (c Cursor) PrettyPrinted(policy PrintingPolicy) string {
+	o := cxstring{C.clang_getCursorPrettyPrinted(c.c, policy.c)}
+	defer o.Dispose()
+
+	return o.String()
 }
 
 /*

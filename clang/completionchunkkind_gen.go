@@ -106,7 +106,7 @@ const (
 		for "int x", indicating that the current argument will initialize that
 		parameter. After typing further, to add(17, (where the code-completion
 		point is after the ","), the code-completion string will contain a
-		"current paremeter" chunk to "int y".
+		"current parameter" chunk to "int y".
 	*/
 	CompletionChunk_CurrentParameter = C.CXCompletionChunk_CurrentParameter
 	// A left parenthesis ('('), used to initiate a function call or signal the beginning of a function parameter list.

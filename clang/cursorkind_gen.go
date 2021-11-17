@@ -380,9 +380,11 @@ const (
 	Cursor_OMPArraySectionExpr = C.CXCursor_OMPArraySectionExpr
 	// Represents an @available(...) check.
 	Cursor_ObjCAvailabilityCheckExpr = C.CXCursor_ObjCAvailabilityCheckExpr
-	// Represents an @available(...) check.
+	// Fixed point literal
+	Cursor_FixedPointLiteral = C.CXCursor_FixedPointLiteral
+	// Fixed point literal
 	Cursor_LastExpr = C.CXCursor_LastExpr
-	// Represents an @available(...) check.
+	// Fixed point literal
 	Cursor_FirstStmt = C.CXCursor_FirstStmt
 	/*
 		A statement whose specific kind is not exposed via this

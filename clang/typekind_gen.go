@@ -75,6 +75,18 @@ const (
 	// A type whose specific kind is not exposed via this interface.
 	Type_Float16 = C.CXType_Float16
 	// A type whose specific kind is not exposed via this interface.
+	Type_ShortAccum = C.CXType_ShortAccum
+	// A type whose specific kind is not exposed via this interface.
+	Type_Accum = C.CXType_Accum
+	// A type whose specific kind is not exposed via this interface.
+	Type_LongAccum = C.CXType_LongAccum
+	// A type whose specific kind is not exposed via this interface.
+	Type_UShortAccum = C.CXType_UShortAccum
+	// A type whose specific kind is not exposed via this interface.
+	Type_UAccum = C.CXType_UAccum
+	// A type whose specific kind is not exposed via this interface.
+	Type_ULongAccum = C.CXType_ULongAccum
+	// A type whose specific kind is not exposed via this interface.
 	Type_FirstBuiltin = C.CXType_FirstBuiltin
 	// A type whose specific kind is not exposed via this interface.
 	Type_LastBuiltin = C.CXType_LastBuiltin

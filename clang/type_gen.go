@@ -119,6 +119,7 @@ func (t Type) ResultType() Type {
 
 /*
 	Retrieve the exception specification type associated with a function type.
+	This is a value of type CXCursor_ExceptionSpecificationKind.
 
 	If a non-function type is passed in, an error code of -1 is returned.
 */

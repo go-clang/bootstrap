@@ -45,3 +45,15 @@ func (f File) IsEqual(file2 File) bool {
 
 	return o != C.int(0)
 }
+
+/*
+	Returns the real path name of file.
+
+	An empty string may be returned. Use clang_getFileName() in that case.
+*/
+func (f File) TryGetRealPathName() string {
+	o := cxstring{C.clang_File_tryGetRealPathName(f.c)}
+	defer o.Dispose()
+
+	return o.String()
+}

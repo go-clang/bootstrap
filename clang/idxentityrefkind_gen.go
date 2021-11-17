@@ -5,7 +5,12 @@ package clang
 import "C"
 import "fmt"
 
-// Data for IndexerCallbacks#indexEntityReference.
+/*
+	Data for IndexerCallbacks#indexEntityReference.
+
+	This may be deprecated in a future version as this duplicates
+	the CXSymbolRole_Implicit bit in CXSymbolRole.
+*/
 type IdxEntityRefKind uint32
 
 const (

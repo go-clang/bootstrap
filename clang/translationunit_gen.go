@@ -306,6 +306,28 @@ func (tu TranslationUnit) Module_getTopLevelHeader(module Module, index uint32) 
 }
 
 /*
+	Get the raw lexical token starting with the given location.
+
+	Parameter TU the translation unit whose text is being tokenized.
+
+	Parameter Location the source location with which the token starts.
+
+	Returns The token starting with the given location or NULL if no such token
+	exist. The returned pointer must be freed with clang_disposeTokens before the
+	translation unit is destroyed.
+*/
+func (tu TranslationUnit) Token(location SourceLocation) *Token {
+	o := C.clang_getToken(tu.c, location.c)
+
+	var gop_o *Token
+	if o != nil {
+		gop_o = &Token{*o}
+	}
+
+	return gop_o
+}
+
+/*
 	Determine the spelling of the given token.
 
 	The spelling of a token is the textual representation of that token, e.g.,
@@ -385,7 +407,7 @@ func (tu TranslationUnit) DisposeTokens(tokens []Token) {
 	user types punctuation characters or whitespace, at which point the
 	code-completion location will coincide with the cursor. For example, if p
 	is a pointer, code-completion might be triggered after the "-" and then
-	after the ">" in p->. When the code-completion location is afer the ">",
+	after the ">" in p->. When the code-completion location is after the ">",
 	the completion results will provide, e.g., the members of the struct that
 	"p" points to. The client is responsible for placing the cursor at the
 	beginning of the token currently being typed, then filtering the results

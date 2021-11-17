@@ -103,6 +103,13 @@ const (
 	TranslationUnit_KeepGoing = C.CXTranslationUnit_KeepGoing
 	// Sets the preprocessor in a mode for parsing a single file only.
 	TranslationUnit_SingleFileParse = C.CXTranslationUnit_SingleFileParse
+	/*
+		Used in combination with CXTranslationUnit_SkipFunctionBodies to
+		constrain the skipping of function bodies to the preamble.
+
+		The function bodies of the main file are not skipped.
+	*/
+	TranslationUnit_LimitSkipFunctionBodiesToPreamble = C.CXTranslationUnit_LimitSkipFunctionBodiesToPreamble
 )
 
 func (tuf TranslationUnit_Flags) Spelling() string {
@@ -131,6 +138,8 @@ func (tuf TranslationUnit_Flags) Spelling() string {
 		return "TranslationUnit=KeepGoing"
 	case TranslationUnit_SingleFileParse:
 		return "TranslationUnit=SingleFileParse"
+	case TranslationUnit_LimitSkipFunctionBodiesToPreamble:
+		return "TranslationUnit=LimitSkipFunctionBodiesToPreamble"
 	}
 
 	return fmt.Sprintf("TranslationUnit_Flags unknown %d", int(tuf))

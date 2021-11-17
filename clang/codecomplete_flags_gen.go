@@ -21,6 +21,10 @@ const (
 	CodeComplete_IncludeCodePatterns = C.CXCodeComplete_IncludeCodePatterns
 	// Whether to include brief documentation within the set of code completions returned.
 	CodeComplete_IncludeBriefComments = C.CXCodeComplete_IncludeBriefComments
+	// Whether to speed up completion by omitting top- or namespace-level entities defined in the preamble. There's no guarantee any particular entity is omitted. This may be useful if the headers are indexed externally.
+	CodeComplete_SkipPreamble = C.CXCodeComplete_SkipPreamble
+	// Whether to include completions with small fix-its, e.g. change '.' to '->' on member access, etc.
+	CodeComplete_IncludeCompletionsWithFixIts = C.CXCodeComplete_IncludeCompletionsWithFixIts
 )
 
 func (ccf CodeComplete_Flags) Spelling() string {
@@ -31,6 +35,10 @@ func (ccf CodeComplete_Flags) Spelling() string {
 		return "CodeComplete=IncludeCodePatterns"
 	case CodeComplete_IncludeBriefComments:
 		return "CodeComplete=IncludeBriefComments"
+	case CodeComplete_SkipPreamble:
+		return "CodeComplete=SkipPreamble"
+	case CodeComplete_IncludeCompletionsWithFixIts:
+		return "CodeComplete=IncludeCompletionsWithFixIts"
 	}
 
 	return fmt.Sprintf("CodeComplete_Flags unknown %d", int(ccf))
