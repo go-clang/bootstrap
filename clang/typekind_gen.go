@@ -73,6 +73,8 @@ const (
 	// A type whose specific kind is not exposed via this interface.
 	Type_Half = C.CXType_Half
 	// A type whose specific kind is not exposed via this interface.
+	Type_Float16 = C.CXType_Float16
+	// A type whose specific kind is not exposed via this interface.
 	Type_FirstBuiltin = C.CXType_FirstBuiltin
 	// A type whose specific kind is not exposed via this interface.
 	Type_LastBuiltin = C.CXType_LastBuiltin

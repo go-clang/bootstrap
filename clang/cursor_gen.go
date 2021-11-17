@@ -109,6 +109,11 @@ func (c Cursor) Language() LanguageKind {
 	return LanguageKind(C.clang_getCursorLanguage(c.c))
 }
 
+// Determine the "thread-local storage (TLS) kind" of the declaration referred to by a cursor.
+func (c Cursor) TLSKind() TLSKind {
+	return TLSKind(C.clang_getCursorTLSKind(c.c))
+}
+
 // Returns the translation unit that a cursor originated from.
 func (c Cursor) TranslationUnit() TranslationUnit {
 	return TranslationUnit{C.clang_Cursor_getTranslationUnit(c.c)}
@@ -875,8 +880,20 @@ func (c Cursor) Mangling() string {
 }
 
 // Retrieve the CXStrings representing the mangled symbols of the C++ constructor or destructor at the cursor.
-func (c Cursor) Manglings() *StringSet {
+func (c Cursor) CXXManglings() *StringSet {
 	o := C.clang_Cursor_getCXXManglings(c.c)
+
+	var gop_o *StringSet
+	if o != nil {
+		gop_o = &StringSet{*o}
+	}
+
+	return gop_o
+}
+
+// Retrieve the CXStrings representing the mangled symbols of the ObjC class interface or implementation at the cursor.
+func (c Cursor) ObjCManglings() *StringSet {
+	o := C.clang_Cursor_getObjCManglings(c.c)
 
 	var gop_o *StringSet
 	if o != nil {
@@ -950,6 +967,13 @@ func (c Cursor) CXXMethod_IsStatic() bool {
 // Determine if a C++ member function or member function template is explicitly declared 'virtual' or if it overrides a virtual method from one of the base classes.
 func (c Cursor) CXXMethod_IsVirtual() bool {
 	o := C.clang_CXXMethod_isVirtual(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine if a C++ record is abstract, i.e. whether a class or struct has a pure virtual member function.
+func (c Cursor) CXXRecord_IsAbstract() bool {
+	o := C.clang_CXXRecord_isAbstract(c.c)
 
 	return o != C.uint(0)
 }
