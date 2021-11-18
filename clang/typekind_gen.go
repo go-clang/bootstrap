@@ -470,6 +470,12 @@ const (
 		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
 	*/
 	Type_OCLIntelSubgroupAVCImeDualRefStreamin = C.CXType_OCLIntelSubgroupAVCImeDualRefStreamin
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_ExtVector = C.CXType_ExtVector
 )
 
 // Retrieve the spelling of a given CXTypeKind.

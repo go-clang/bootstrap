@@ -26,6 +26,8 @@ const (
 	TypeLayoutError_NotConstantSize = C.CXTypeLayoutError_NotConstantSize
 	// The Field name is not valid for this record.
 	TypeLayoutError_InvalidFieldName = C.CXTypeLayoutError_InvalidFieldName
+	// The type is undeduced.
+	TypeLayoutError_Undeduced = C.CXTypeLayoutError_Undeduced
 )
 
 func (tle TypeLayoutError) Spelling() string {
@@ -40,6 +42,8 @@ func (tle TypeLayoutError) Spelling() string {
 		return "TypeLayoutError=NotConstantSize"
 	case TypeLayoutError_InvalidFieldName:
 		return "TypeLayoutError=InvalidFieldName"
+	case TypeLayoutError_Undeduced:
+		return "TypeLayoutError=Undeduced"
 	}
 
 	return fmt.Sprintf("TypeLayoutError unknown %d", int(tle))

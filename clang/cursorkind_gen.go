@@ -575,7 +575,9 @@ const (
 	Cursor_OMPTargetTeamsDistributeParallelForSimdDirective = C.CXCursor_OMPTargetTeamsDistributeParallelForSimdDirective
 	// OpenMP target teams distribute simd directive.
 	Cursor_OMPTargetTeamsDistributeSimdDirective = C.CXCursor_OMPTargetTeamsDistributeSimdDirective
-	// OpenMP target teams distribute simd directive.
+	// C++2a std::bit_cast expression.
+	Cursor_BuiltinBitCastExpr = C.CXCursor_BuiltinBitCastExpr
+	// C++2a std::bit_cast expression.
 	Cursor_LastStmt = C.CXCursor_LastStmt
 	/*
 		Cursor that represents the translation unit itself.
@@ -667,6 +669,14 @@ const (
 	Cursor_ObjCBoxable = C.CXCursor_ObjCBoxable
 	// An attribute whose specific kind is not exposed via this interface.
 	Cursor_FlagEnum = C.CXCursor_FlagEnum
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_ConvergentAttr = C.CXCursor_ConvergentAttr
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_WarnUnusedAttr = C.CXCursor_WarnUnusedAttr
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_WarnUnusedResultAttr = C.CXCursor_WarnUnusedResultAttr
+	// An attribute whose specific kind is not exposed via this interface.
+	Cursor_AlignedAttr = C.CXCursor_AlignedAttr
 	// An attribute whose specific kind is not exposed via this interface.
 	Cursor_LastAttr = C.CXCursor_LastAttr
 	// An attribute whose specific kind is not exposed via this interface.

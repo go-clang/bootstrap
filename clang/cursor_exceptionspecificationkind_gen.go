@@ -31,6 +31,8 @@ const (
 	Cursor_ExceptionSpecificationKind_Uninstantiated = C.CXCursor_ExceptionSpecificationKind_Uninstantiated
 	// The exception specification has not been parsed yet.
 	Cursor_ExceptionSpecificationKind_Unparsed = C.CXCursor_ExceptionSpecificationKind_Unparsed
+	// The cursor has a __declspec(nothrow) exception specification.
+	Cursor_ExceptionSpecificationKind_NoThrow = C.CXCursor_ExceptionSpecificationKind_NoThrow
 )
 
 func (cesk Cursor_ExceptionSpecificationKind) Spelling() string {
@@ -53,6 +55,8 @@ func (cesk Cursor_ExceptionSpecificationKind) Spelling() string {
 		return "Cursor=ExceptionSpecificationKind_Uninstantiated"
 	case Cursor_ExceptionSpecificationKind_Unparsed:
 		return "Cursor=ExceptionSpecificationKind_Unparsed"
+	case Cursor_ExceptionSpecificationKind_NoThrow:
+		return "Cursor=ExceptionSpecificationKind_NoThrow"
 	}
 
 	return fmt.Sprintf("Cursor_ExceptionSpecificationKind unknown %d", int(cesk))

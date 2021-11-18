@@ -114,6 +114,15 @@ const (
 	TranslationUnit_IncludeAttributedTypes = C.CXTranslationUnit_IncludeAttributedTypes
 	// Used to indicate that implicit attributes should be visited.
 	TranslationUnit_VisitImplicitAttributes = C.CXTranslationUnit_VisitImplicitAttributes
+	/*
+		Used to indicate that non-errors from included files should be ignored.
+
+		If set, clang_getDiagnosticSetFromTU() will not report e.g. warnings from
+		included files anymore. This speeds up clang_getDiagnosticSetFromTU() for
+		the case where these warnings are not of interest, as for an IDE for
+		example, which typically shows only the diagnostics in the main file.
+	*/
+	TranslationUnit_IgnoreNonErrorsFromIncludedFiles = C.CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles
 )
 
 func (tuf TranslationUnit_Flags) Spelling() string {
@@ -148,6 +157,8 @@ func (tuf TranslationUnit_Flags) Spelling() string {
 		return "TranslationUnit=IncludeAttributedTypes"
 	case TranslationUnit_VisitImplicitAttributes:
 		return "TranslationUnit=VisitImplicitAttributes"
+	case TranslationUnit_IgnoreNonErrorsFromIncludedFiles:
+		return "TranslationUnit=IgnoreNonErrorsFromIncludedFiles"
 	}
 
 	return fmt.Sprintf("TranslationUnit_Flags unknown %d", int(tuf))

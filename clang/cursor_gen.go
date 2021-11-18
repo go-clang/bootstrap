@@ -557,9 +557,23 @@ func (c Cursor) OffsetOfField() int64 {
 	return int64(C.clang_Cursor_getOffsetOfField(c.c))
 }
 
-// Determine whether the given cursor represents an anonymous record declaration.
+// Determine whether the given cursor represents an anonymous tag or namespace
 func (c Cursor) IsAnonymous() bool {
 	o := C.clang_Cursor_isAnonymous(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine whether the given cursor represents an anonymous record declaration.
+func (c Cursor) IsAnonymousRecordDecl() bool {
+	o := C.clang_Cursor_isAnonymousRecordDecl(c.c)
+
+	return o != C.uint(0)
+}
+
+// Determine whether the given cursor represents an inline namespace declaration.
+func (c Cursor) IsInlineNamespace() bool {
+	o := C.clang_Cursor_isInlineNamespace(c.c)
 
 	return o != C.uint(0)
 }
