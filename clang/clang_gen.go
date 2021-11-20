@@ -1,6 +1,7 @@
 package clang
 
 // #include "./clang-c/BuildSystem.h"
+// #include "./clang-c/FatalErrorHandler.h"
 // #include "./clang-c/Index.h"
 // #include "go-clang.h"
 import "C"
@@ -9,6 +10,16 @@ import "unsafe"
 // Return the timestamp for use with Clang's -fbuild-session-timestamp= option.
 func GetBuildSessionTimestamp() uint64 {
 	return uint64(C.clang_getBuildSessionTimestamp())
+}
+
+// Installs error handler that prints error message to stderr and calls abort(). Replaces currently installed error handler (if any).
+func InstallAbortingFatalErrorHandler() {
+	C.clang_install_aborting_llvm_fatal_error_handler()
+}
+
+// Removes currently installed error handler (if any). If no error handler is intalled, the default strategy is to print error message to stderr and call exit(1).
+func UninstallFatalErrorHandler() {
+	C.clang_uninstall_llvm_fatal_error_handler()
 }
 
 /*

@@ -16,11 +16,10 @@
 #ifndef LLVM_CLANG_C_CXERRORCODE_H
 #define LLVM_CLANG_C_CXERRORCODE_H
 
+#include "clang-c/ExternC.h"
 #include "clang-c/Platform.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+LLVM_CLANG_C_EXTERN_C_BEGIN
 
 /**
  * Error codes returned by libclang routines.
@@ -59,8 +58,7 @@ enum CXErrorCode {
   CXError_ASTReadError = 4
 };
 
-#ifdef __cplusplus
-}
-#endif
+LLVM_CLANG_C_EXTERN_C_END
+
 #endif
 

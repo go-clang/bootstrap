@@ -17,11 +17,10 @@
 #ifndef LLVM_CLANG_C_DOCUMENTATION_H
 #define LLVM_CLANG_C_DOCUMENTATION_H
 
+#include "clang-c/ExternC.h"
 #include "clang-c/Index.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+LLVM_CLANG_C_EXTERN_C_BEGIN
 
 /**
  * \defgroup CINDEX_COMMENT Comment introspection
@@ -184,7 +183,12 @@ enum CXCommentInlineCommandRenderKind {
    * Command argument should be rendered emphasized (typically italic
    * font).
    */
-  CXCommentInlineCommandRenderKind_Emphasized
+  CXCommentInlineCommandRenderKind_Emphasized,
+
+  /**
+   * Command argument should not be rendered (since it only defines an anchor).
+   */
+  CXCommentInlineCommandRenderKind_Anchor
 };
 
 /**
@@ -547,10 +551,7 @@ CINDEX_LINKAGE CXString clang_FullComment_getAsXML(CXComment Comment);
  * @}
  */
 
-
-#ifdef __cplusplus
-}
-#endif
+LLVM_CLANG_C_EXTERN_C_END
 
 #endif /* CLANG_C_DOCUMENTATION_H */
 

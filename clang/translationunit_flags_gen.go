@@ -123,6 +123,8 @@ const (
 		example, which typically shows only the diagnostics in the main file.
 	*/
 	TranslationUnit_IgnoreNonErrorsFromIncludedFiles = C.CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles
+	// Tells the preprocessor not to skip excluded conditional blocks.
+	TranslationUnit_RetainExcludedConditionalBlocks = C.CXTranslationUnit_RetainExcludedConditionalBlocks
 )
 
 func (tuf TranslationUnit_Flags) Spelling() string {
@@ -159,6 +161,8 @@ func (tuf TranslationUnit_Flags) Spelling() string {
 		return "TranslationUnit=VisitImplicitAttributes"
 	case TranslationUnit_IgnoreNonErrorsFromIncludedFiles:
 		return "TranslationUnit=IgnoreNonErrorsFromIncludedFiles"
+	case TranslationUnit_RetainExcludedConditionalBlocks:
+		return "TranslationUnit=RetainExcludedConditionalBlocks"
 	}
 
 	return fmt.Sprintf("TranslationUnit_Flags unknown %d", int(tuf))

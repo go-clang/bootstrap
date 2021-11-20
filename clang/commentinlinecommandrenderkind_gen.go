@@ -17,6 +17,8 @@ const (
 	CommentInlineCommandRenderKind_Monospaced = C.CXCommentInlineCommandRenderKind_Monospaced
 	// Command argument should be rendered emphasized (typically italic font).
 	CommentInlineCommandRenderKind_Emphasized = C.CXCommentInlineCommandRenderKind_Emphasized
+	// Command argument should not be rendered (since it only defines an anchor).
+	CommentInlineCommandRenderKind_Anchor = C.CXCommentInlineCommandRenderKind_Anchor
 )
 
 func (cicrk CommentInlineCommandRenderKind) Spelling() string {
@@ -29,6 +31,8 @@ func (cicrk CommentInlineCommandRenderKind) Spelling() string {
 		return "CommentInlineCommandRenderKind=Monospaced"
 	case CommentInlineCommandRenderKind_Emphasized:
 		return "CommentInlineCommandRenderKind=Emphasized"
+	case CommentInlineCommandRenderKind_Anchor:
+		return "CommentInlineCommandRenderKind=Anchor"
 	}
 
 	return fmt.Sprintf("CommentInlineCommandRenderKind unknown %d", int(cicrk))

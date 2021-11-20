@@ -577,7 +577,17 @@ const (
 	Cursor_OMPTargetTeamsDistributeSimdDirective = C.CXCursor_OMPTargetTeamsDistributeSimdDirective
 	// C++2a std::bit_cast expression.
 	Cursor_BuiltinBitCastExpr = C.CXCursor_BuiltinBitCastExpr
-	// C++2a std::bit_cast expression.
+	// OpenMP master taskloop directive.
+	Cursor_OMPMasterTaskLoopDirective = C.CXCursor_OMPMasterTaskLoopDirective
+	// OpenMP parallel master taskloop directive.
+	Cursor_OMPParallelMasterTaskLoopDirective = C.CXCursor_OMPParallelMasterTaskLoopDirective
+	// OpenMP master taskloop simd directive.
+	Cursor_OMPMasterTaskLoopSimdDirective = C.CXCursor_OMPMasterTaskLoopSimdDirective
+	// OpenMP parallel master taskloop simd directive.
+	Cursor_OMPParallelMasterTaskLoopSimdDirective = C.CXCursor_OMPParallelMasterTaskLoopSimdDirective
+	// OpenMP parallel master directive.
+	Cursor_OMPParallelMasterDirective = C.CXCursor_OMPParallelMasterDirective
+	// OpenMP parallel master directive.
 	Cursor_LastStmt = C.CXCursor_LastStmt
 	/*
 		Cursor that represents the translation unit itself.
