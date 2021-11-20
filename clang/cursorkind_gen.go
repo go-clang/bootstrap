@@ -597,7 +597,19 @@ const (
 	Cursor_OMPDepobjDirective = C.CXCursor_OMPDepobjDirective
 	// OpenMP scan directive.
 	Cursor_OMPScanDirective = C.CXCursor_OMPScanDirective
-	// OpenMP scan directive.
+	// OpenMP tile directive.
+	Cursor_OMPTileDirective = C.CXCursor_OMPTileDirective
+	// OpenMP canonical loop.
+	Cursor_OMPCanonicalLoop = C.CXCursor_OMPCanonicalLoop
+	// OpenMP interop directive.
+	Cursor_OMPInteropDirective = C.CXCursor_OMPInteropDirective
+	// OpenMP dispatch directive.
+	Cursor_OMPDispatchDirective = C.CXCursor_OMPDispatchDirective
+	// OpenMP masked directive.
+	Cursor_OMPMaskedDirective = C.CXCursor_OMPMaskedDirective
+	// OpenMP unroll directive.
+	Cursor_OMPUnrollDirective = C.CXCursor_OMPUnrollDirective
+	// OpenMP unroll directive.
 	Cursor_LastStmt = C.CXCursor_LastStmt
 	/*
 		Cursor that represents the translation unit itself.
