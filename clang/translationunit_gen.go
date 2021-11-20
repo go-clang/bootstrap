@@ -1,6 +1,7 @@
 package clang
 
 // #include "./clang-c/Index.h"
+// #include "./clang-c/Rewrite.h"
 // #include "go-clang.h"
 import "C"
 import (
@@ -488,4 +489,9 @@ func (tu TranslationUnit) CodeCompleteAt(completeFilename string, completeLine u
 */
 func (tu TranslationUnit) FindIncludesInFile(file File, visitor CursorAndRangeVisitor) Result {
 	return Result(C.clang_findIncludesInFile(tu.c, file.c, visitor.c))
+}
+
+// Create CXRewriter.
+func (tu TranslationUnit) Create() Rewriter {
+	return Rewriter{C.clang_CXRewriter_create(tu.c)}
 }

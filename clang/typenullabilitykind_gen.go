@@ -16,6 +16,8 @@ const (
 	TypeNullability_Unspecified = C.CXTypeNullability_Unspecified
 	// Nullability is not applicable to this type.
 	TypeNullability_Invalid = C.CXTypeNullability_Invalid
+	// Generally behaves like Nullable, except when used in a block parameter that was imported into a swift async method. There, swift will assume that the parameter can get null even if no error occured. _Nullable parameters are assumed to only get null on error.
+	TypeNullability_NullableResult = C.CXTypeNullability_NullableResult
 )
 
 func (tnk TypeNullabilityKind) Spelling() string {
@@ -28,6 +30,8 @@ func (tnk TypeNullabilityKind) Spelling() string {
 		return "TypeNullability=Unspecified"
 	case TypeNullability_Invalid:
 		return "TypeNullability=Invalid"
+	case TypeNullability_NullableResult:
+		return "TypeNullability=NullableResult"
 	}
 
 	return fmt.Sprintf("TypeNullabilityKind unknown %d", int(tnk))

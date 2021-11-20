@@ -118,6 +118,25 @@ func (c Cursor) Availability() AvailabilityKind {
 	return AvailabilityKind(C.clang_getCursorAvailability(c.c))
 }
 
+// If cursor refers to a variable declaration and it has initializer returns cursor referring to the initializer otherwise return null cursor.
+func (c Cursor) VarDeclInitializer() Cursor {
+	return Cursor{C.clang_Cursor_getVarDeclInitializer(c.c)}
+}
+
+// If cursor refers to a variable declaration that has global storage returns 1. If cursor refers to a variable declaration that doesn't have global storage returns 0. Otherwise returns -1.
+func (c Cursor) HasVarDeclGlobalStorage() bool {
+	o := C.clang_Cursor_hasVarDeclGlobalStorage(c.c)
+
+	return o != C.int(0)
+}
+
+// If cursor refers to a variable declaration that has external storage returns 1. If cursor refers to a variable declaration that doesn't have external storage returns 0. Otherwise returns -1.
+func (c Cursor) HasVarDeclExternalStorage() bool {
+	o := C.clang_Cursor_hasVarDeclExternalStorage(c.c)
+
+	return o != C.int(0)
+}
+
 // Determine the "language" of the entity referred to by a given cursor.
 func (c Cursor) Language() LanguageKind {
 	return LanguageKind(C.clang_getCursorLanguage(c.c))

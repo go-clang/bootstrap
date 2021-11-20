@@ -306,8 +306,6 @@ const (
 		\endcode
 	*/
 	Cursor_CXXFunctionalCastExpr = C.CXCursor_CXXFunctionalCastExpr
-	// OpenCL's addrspace_cast<> expression.
-	Cursor_CXXAddrspaceCastExpr = C.CXCursor_CXXAddrspaceCastExpr
 	// A C++ typeid expression (C++ [expr.typeid]).
 	Cursor_CXXTypeidExpr = C.CXCursor_CXXTypeidExpr
 	// [C++ 2.13.5] C++ Boolean Literal.
@@ -388,9 +386,11 @@ const (
 	Cursor_OMPArrayShapingExpr = C.CXCursor_OMPArrayShapingExpr
 	// OpenMP 5.0 [2.1.6 Iterators]
 	Cursor_OMPIteratorExpr = C.CXCursor_OMPIteratorExpr
-	// OpenMP 5.0 [2.1.6 Iterators]
+	// OpenCL's addrspace_cast<> expression.
+	Cursor_CXXAddrspaceCastExpr = C.CXCursor_CXXAddrspaceCastExpr
+	// OpenCL's addrspace_cast<> expression.
 	Cursor_LastExpr = C.CXCursor_LastExpr
-	// OpenMP 5.0 [2.1.6 Iterators]
+	// OpenCL's addrspace_cast<> expression.
 	Cursor_FirstStmt = C.CXCursor_FirstStmt
 	/*
 		A statement whose specific kind is not exposed via this
