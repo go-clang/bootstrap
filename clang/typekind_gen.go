@@ -87,6 +87,8 @@ const (
 	// A type whose specific kind is not exposed via this interface.
 	Type_ULongAccum = C.CXType_ULongAccum
 	// A type whose specific kind is not exposed via this interface.
+	Type_BFloat16 = C.CXType_BFloat16
+	// A type whose specific kind is not exposed via this interface.
 	Type_FirstBuiltin = C.CXType_FirstBuiltin
 	// A type whose specific kind is not exposed via this interface.
 	Type_LastBuiltin = C.CXType_LastBuiltin
@@ -476,6 +478,12 @@ const (
 		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
 	*/
 	Type_ExtVector = C.CXType_ExtVector
+	/*
+		Represents a type that was referred to using an elaborated type keyword.
+
+		E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
+	*/
+	Type_Atomic = C.CXType_Atomic
 )
 
 // Retrieve the spelling of a given CXTypeKind.

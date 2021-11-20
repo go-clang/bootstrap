@@ -28,7 +28,7 @@ func (mmd ModuleMapDescriptor) SetFrameworkModuleName(name string) ErrorCode {
 	return ErrorCode(C.clang_ModuleMapDescriptor_setFrameworkModuleName(mmd.c, c_name))
 }
 
-// Sets the umbrealla header name that the module.map describes. Returns 0 for success, non-zero to indicate an error.
+// Sets the umbrella header name that the module.map describes. Returns 0 for success, non-zero to indicate an error.
 func (mmd ModuleMapDescriptor) SetUmbrellaHeader(name string) ErrorCode {
 	c_name := C.CString(name)
 	defer C.free(unsafe.Pointer(c_name))

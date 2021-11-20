@@ -337,9 +337,9 @@ func (c Cursor) EnumDeclIntegerType() Type {
 	Retrieve the integer value of an enum constant declaration as a signed
 	long long.
 
-	If the cursor does not reference an enum constant declaration, LLONG_MIN is returned.
-	Since this is also potentially a valid constant value, the kind of the cursor
-	must be verified before calling this function.
+	If the cursor does not reference an enum constant declaration, LLONG_MIN is
+	returned. Since this is also potentially a valid constant value, the kind of
+	the cursor must be verified before calling this function.
 */
 func (c Cursor) EnumConstantDeclValue() int64 {
 	return int64(C.clang_getEnumConstantDeclValue(c.c))
@@ -349,9 +349,9 @@ func (c Cursor) EnumConstantDeclValue() int64 {
 	Retrieve the integer value of an enum constant declaration as an unsigned
 	long long.
 
-	If the cursor does not reference an enum constant declaration, ULLONG_MAX is returned.
-	Since this is also potentially a valid constant value, the kind of the cursor
-	must be verified before calling this function.
+	If the cursor does not reference an enum constant declaration, ULLONG_MAX is
+	returned. Since this is also potentially a valid constant value, the kind of
+	the cursor must be verified before calling this function.
 */
 func (c Cursor) EnumConstantDeclUnsignedValue() uint64 {
 	return uint64(C.clang_getEnumConstantDeclUnsignedValue(c.c))
@@ -534,7 +534,8 @@ func (c Cursor) ResultType() Type {
 	Retrieve the exception specification type associated with a given cursor.
 	This is a value of type CXCursor_ExceptionSpecificationKind.
 
-	This only returns a valid result if the cursor refers to a function or method.
+	This only returns a valid result if the cursor refers to a function or
+	method.
 */
 func (c Cursor) ExceptionSpecificationType() int32 {
 	return int32(C.clang_getCursorExceptionSpecificationType(c.c))
@@ -595,9 +596,9 @@ func (c Cursor) IsVirtualBase() bool {
 /*
 	Returns the access control level for the referenced object.
 
-	If the cursor refers to a C++ declaration, its access control level within its
-	parent scope is returned. Otherwise, if the cursor refers to a base specifier or
-	access specifier, the specifier itself is returned.
+	If the cursor refers to a C++ declaration, its access control level within
+	its parent scope is returned. Otherwise, if the cursor refers to a base
+	specifier or access specifier, the specifier itself is returned.
 */
 func (c Cursor) AccessSpecifier() AccessSpecifier {
 	return AccessSpecifier(C.clang_getCXXAccessSpecifier(c.c))
@@ -1168,7 +1169,7 @@ func (c Cursor) CompletionString() CompletionString {
 	return CompletionString{C.clang_getCursorCompletionString(c.c)}
 }
 
-// If cursor is a statement declaration tries to evaluate the statement and if its variable, tries to evaluate its initializer, into its corresponding type.
+// If cursor is a statement declaration tries to evaluate the statement and if its variable, tries to evaluate its initializer, into its corresponding type. If it's an expression, tries to evaluate the expression.
 func (c Cursor) Evaluate() EvalResult {
 	return EvalResult{C.clang_Cursor_Evaluate(c.c)}
 }

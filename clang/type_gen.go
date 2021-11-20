@@ -176,7 +176,7 @@ func (t Type) ProtocolDecl(i uint32) Cursor {
 }
 
 /*
-	Retreive the number of type arguments associated with an ObjC object.
+	Retrieve the number of type arguments associated with an ObjC object.
 
 	If the type is not an ObjC object, 0 is returned.
 */
@@ -339,6 +339,15 @@ func (t Type) OffsetOf(s string) int64 {
 */
 func (t Type) ModifiedType() Type {
 	return Type{C.clang_Type_getModifiedType(t.c)}
+}
+
+/*
+	Gets the type contained by this atomic type.
+
+	If a non-atomic type is passed in, an invalid type is returned.
+*/
+func (t Type) ValueType() Type {
+	return Type{C.clang_Type_getValueType(t.c)}
 }
 
 // Returns the number of template arguments for given template specialization, or -1 if type T is not a template specialization.

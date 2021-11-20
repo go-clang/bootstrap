@@ -306,6 +306,8 @@ const (
 		\endcode
 	*/
 	Cursor_CXXFunctionalCastExpr = C.CXCursor_CXXFunctionalCastExpr
+	// OpenCL's addrspace_cast<> expression.
+	Cursor_CXXAddrspaceCastExpr = C.CXCursor_CXXAddrspaceCastExpr
 	// A C++ typeid expression (C++ [expr.typeid]).
 	Cursor_CXXTypeidExpr = C.CXCursor_CXXTypeidExpr
 	// [C++ 2.13.5] C++ Boolean Literal.
@@ -376,15 +378,19 @@ const (
 	Cursor_ObjCBoolLiteralExpr = C.CXCursor_ObjCBoolLiteralExpr
 	// Represents the "self" expression in an Objective-C method.
 	Cursor_ObjCSelfExpr = C.CXCursor_ObjCSelfExpr
-	// OpenMP 4.0 [2.4, Array Section].
+	// OpenMP 5.0 [2.1.5, Array Section].
 	Cursor_OMPArraySectionExpr = C.CXCursor_OMPArraySectionExpr
 	// Represents an @available(...) check.
 	Cursor_ObjCAvailabilityCheckExpr = C.CXCursor_ObjCAvailabilityCheckExpr
 	// Fixed point literal
 	Cursor_FixedPointLiteral = C.CXCursor_FixedPointLiteral
-	// Fixed point literal
+	// OpenMP 5.0 [2.1.4, Array Shaping].
+	Cursor_OMPArrayShapingExpr = C.CXCursor_OMPArrayShapingExpr
+	// OpenMP 5.0 [2.1.6 Iterators]
+	Cursor_OMPIteratorExpr = C.CXCursor_OMPIteratorExpr
+	// OpenMP 5.0 [2.1.6 Iterators]
 	Cursor_LastExpr = C.CXCursor_LastExpr
-	// Fixed point literal
+	// OpenMP 5.0 [2.1.6 Iterators]
 	Cursor_FirstStmt = C.CXCursor_FirstStmt
 	/*
 		A statement whose specific kind is not exposed via this
@@ -587,7 +593,11 @@ const (
 	Cursor_OMPParallelMasterTaskLoopSimdDirective = C.CXCursor_OMPParallelMasterTaskLoopSimdDirective
 	// OpenMP parallel master directive.
 	Cursor_OMPParallelMasterDirective = C.CXCursor_OMPParallelMasterDirective
-	// OpenMP parallel master directive.
+	// OpenMP depobj directive.
+	Cursor_OMPDepobjDirective = C.CXCursor_OMPDepobjDirective
+	// OpenMP scan directive.
+	Cursor_OMPScanDirective = C.CXCursor_OMPScanDirective
+	// OpenMP scan directive.
 	Cursor_LastStmt = C.CXCursor_LastStmt
 	/*
 		Cursor that represents the translation unit itself.
