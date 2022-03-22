@@ -4,7 +4,7 @@ package clang
 // #include "go-clang.h"
 import "C"
 
-// Opaque pointer representing client data that will be passed through to various callbacks and visitors.
+// ClientData opaque pointer representing client data that will be passed through to various callbacks and visitors.
 type ClientData struct {
 	c C.CXClientData
 }

@@ -8,13 +8,13 @@ import "fmt"
 type VisibilityKind uint32
 
 const (
-	// This value indicates that no visibility information is available for a provided CXCursor.
+	// Visibility_Invalid this value indicates that no visibility information is available for a provided CXCursor.
 	Visibility_Invalid VisibilityKind = C.CXVisibility_Invalid
-	// Symbol not seen by the linker.
+	// Visibility_Hidden symbol not seen by the linker.
 	Visibility_Hidden = C.CXVisibility_Hidden
-	// Symbol seen by the linker but resolves to a symbol inside this object.
+	// Visibility_Protected symbol seen by the linker but resolves to a symbol inside this object.
 	Visibility_Protected = C.CXVisibility_Protected
-	// Symbol seen by the linker and acts like a normal symbol.
+	// Visibility_Default symbol seen by the linker and acts like a normal symbol.
 	Visibility_Default = C.CXVisibility_Default
 )
 

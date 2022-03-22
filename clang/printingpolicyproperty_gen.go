@@ -5,11 +5,9 @@ package clang
 import "C"
 import "fmt"
 
-/*
-	Properties for the printing policy.
-
-	See clang::PrintingPolicy for more information.
-*/
+// PrintingPolicyProperty properties for the printing policy.
+//
+// See clang::PrintingPolicy for more information.
 type PrintingPolicyProperty uint32
 
 const (

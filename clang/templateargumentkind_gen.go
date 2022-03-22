@@ -5,12 +5,10 @@ package clang
 import "C"
 import "fmt"
 
-/*
-	Describes the kind of a template argument.
-
-	See the definition of llvm::clang::TemplateArgument::ArgKind for full
-	element descriptions.
-*/
+// TemplateArgumentKind describes the kind of a template argument.
+//
+// See the definition of llvm::clang::TemplateArgument::ArgKind for full
+// element descriptions.
 type TemplateArgumentKind uint32
 
 const (

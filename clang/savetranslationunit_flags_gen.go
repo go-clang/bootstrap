@@ -5,17 +5,15 @@ package clang
 import "C"
 import "fmt"
 
-/*
-	Flags that control how translation units are saved.
-
-	The enumerators in this enumeration type are meant to be bitwise
-	ORed together to specify which options should be used when
-	saving the translation unit.
-*/
+// SaveTranslationUnit_Flags flags that control how translation units are saved.
+//
+// The enumerators in this enumeration type are meant to be bitwise
+// ORed together to specify which options should be used when
+// saving the translation unit.
 type SaveTranslationUnit_Flags uint32
 
 const (
-	// Used to indicate that no special saving options are needed.
+	// SaveTranslationUnit_None used to indicate that no special saving options are needed.
 	SaveTranslationUnit_None SaveTranslationUnit_Flags = C.CXSaveTranslationUnit_None
 )
 

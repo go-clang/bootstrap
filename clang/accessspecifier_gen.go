@@ -5,7 +5,7 @@ package clang
 import "C"
 import "fmt"
 
-// Represents the C++ access control level to a base class for a cursor with kind CX_CXXBaseSpecifier.
+// AccessSpecifier represents the C++ access control level to a base class for a cursor with kind CX_CXXBaseSpecifier.
 type AccessSpecifier uint32
 
 const (

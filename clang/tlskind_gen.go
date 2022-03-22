@@ -5,7 +5,7 @@ package clang
 import "C"
 import "fmt"
 
-// Describe the "thread-local storage (TLS) kind" of the declaration referred to by a cursor.
+// TLSKind describe the "thread-local storage (TLS) kind" of the declaration referred to by a cursor.
 type TLSKind uint32
 
 const (

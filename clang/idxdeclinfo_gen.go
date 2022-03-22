@@ -108,7 +108,7 @@ func (idi IdxDeclInfo) SemanticContainer() *IdxContainerInfo {
 	return gop_o
 }
 
-// Generally same as #semanticContainer but can be different in cases like out-of-line C++ member functions.
+// lexicalContainer generally same as #semanticContainer but can be different in cases like out-of-line C++ member functions.
 func (idi IdxDeclInfo) LexicalContainer() *IdxContainerInfo {
 	o := idi.c.lexicalContainer
 
@@ -149,7 +149,7 @@ func (idi IdxDeclInfo) DeclAsContainer() *IdxContainerInfo {
 	return gop_o
 }
 
-// Whether the declaration exists in code or was created implicitly by the compiler, e.g. implicit Objective-C methods for properties.
+// isImplicit whether the declaration exists in code or was created implicitly by the compiler, e.g. implicit Objective-C methods for properties.
 func (idi IdxDeclInfo) IsImplicit() bool {
 	o := idi.c.isImplicit
 

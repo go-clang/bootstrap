@@ -5,7 +5,7 @@ package clang
 import "C"
 import "fmt"
 
-// Describe the "language" of the entity referred to by a cursor.
+// LanguageKind describe the "language" of the entity referred to by a cursor.
 type LanguageKind uint32
 
 const (

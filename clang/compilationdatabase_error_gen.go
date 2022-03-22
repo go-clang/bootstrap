@@ -5,7 +5,7 @@ package clang
 import "C"
 import "fmt"
 
-// Error codes for Compilation Database
+// CompilationDatabase_Error error codes for Compilation Database
 type CompilationDatabase_Error int32
 
 const (

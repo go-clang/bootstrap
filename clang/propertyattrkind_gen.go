@@ -5,7 +5,7 @@ package clang
 import "C"
 import "fmt"
 
-// Property attributes for a CXCursor_ObjCPropertyDecl.
+// PropertyAttrKind property attributes for a CXCursor_ObjCPropertyDecl.
 type PropertyAttrKind uint32
 
 const (

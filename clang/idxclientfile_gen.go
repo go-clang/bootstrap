@@ -4,7 +4,7 @@ package clang
 // #include "go-clang.h"
 import "C"
 
-// The client's data object that is associated with a CXFile.
+// IdxClientFile the client's data object that is associated with a CXFile.
 type IdxClientFile struct {
 	c C.CXIdxClientFile
 }

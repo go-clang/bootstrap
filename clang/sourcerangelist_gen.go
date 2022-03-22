@@ -8,17 +8,17 @@ import (
 	"unsafe"
 )
 
-// Identifies an array of ranges.
+// SourceRangeList identifies an array of ranges.
 type SourceRangeList struct {
 	c C.CXSourceRangeList
 }
 
-// The number of ranges in the ranges array.
+// count the number of ranges in the ranges array.
 func (srl SourceRangeList) Count() uint32 {
 	return uint32(srl.c.count)
 }
 
-// An array of CXSourceRanges.
+// ranges an array of CXSourceRanges.
 func (srl SourceRangeList) Ranges() []SourceRange {
 	var s []SourceRange
 	gos_s := (*reflect.SliceHeader)(unsafe.Pointer(&s))

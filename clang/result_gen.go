@@ -8,11 +8,11 @@ import "fmt"
 type Result uint32
 
 const (
-	// Function returned successfully.
+	// Result_Success function returned successfully.
 	Result_Success Result = C.CXResult_Success
-	// One of the parameters was invalid for the function.
+	// Result_Invalid one of the parameters was invalid for the function.
 	Result_Invalid = C.CXResult_Invalid
-	// The function was terminated by a callback (e.g. it returned CXVisit_Break)
+	// Result_VisitBreak the function was terminated by a callback (e.g. it returned CXVisit_Break)
 	Result_VisitBreak = C.CXResult_VisitBreak
 )
 

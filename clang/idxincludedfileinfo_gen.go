@@ -4,22 +4,22 @@ package clang
 // #include "go-clang.h"
 import "C"
 
-// Data for ppIncludedFile callback.
+// IdxIncludedFileInfo data for ppIncludedFile callback.
 type IdxIncludedFileInfo struct {
 	c C.CXIdxIncludedFileInfo
 }
 
-// Location of '#' in the \#include/\#import directive.
+// hashLoc location of '#' in the \#include/\#import directive.
 func (iifi IdxIncludedFileInfo) HashLoc() IdxLoc {
 	return IdxLoc{iifi.c.hashLoc}
 }
 
-// Filename as written in the \#include/\#import directive.
+// filename filename as written in the \#include/\#import directive.
 func (iifi IdxIncludedFileInfo) Filename() string {
 	return C.GoString(iifi.c.filename)
 }
 
-// The actual file that the \#include/\#import directive resolved to.
+// file the actual file that the \#include/\#import directive resolved to.
 func (iifi IdxIncludedFileInfo) File() File {
 	return File{iifi.c.file}
 }
@@ -36,7 +36,7 @@ func (iifi IdxIncludedFileInfo) IsAngled() bool {
 	return o != C.int(0)
 }
 
-// Non-zero if the directive was automatically turned into a module import.
+// isModuleImport non-zero if the directive was automatically turned into a module import.
 func (iifi IdxIncludedFileInfo) IsModuleImport() bool {
 	o := iifi.c.isModuleImport
 

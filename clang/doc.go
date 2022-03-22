@@ -1,4 +1,4 @@
-// package clang provides native bindings for the clang C API.
+// Package clang provides native bindings for the clang C API.
 package clang
 
 import (

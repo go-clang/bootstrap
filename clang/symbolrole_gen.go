@@ -5,12 +5,10 @@ package clang
 import "C"
 import "fmt"
 
-/*
-	Roles that are attributed to symbol occurrences.
-
-	Internal: this currently mirrors low 9 bits of clang::index::SymbolRole with
-	higher bits zeroed. These high bits may be exposed in the future.
-*/
+// SymbolRole roles that are attributed to symbol occurrences.
+//
+// Internal: this currently mirrors low 9 bits of clang::index::SymbolRole with
+// higher bits zeroed. These high bits may be exposed in the future.
 type SymbolRole uint32
 
 const (

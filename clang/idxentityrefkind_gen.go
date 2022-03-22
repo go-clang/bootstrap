@@ -5,18 +5,16 @@ package clang
 import "C"
 import "fmt"
 
-/*
-	Data for IndexerCallbacks#indexEntityReference.
-
-	This may be deprecated in a future version as this duplicates
-	the CXSymbolRole_Implicit bit in CXSymbolRole.
-*/
+// IdxEntityRefKind data for IndexerCallbacks#indexEntityReference.
+//
+// This may be deprecated in a future version as this duplicates
+// the CXSymbolRole_Implicit bit in CXSymbolRole.
 type IdxEntityRefKind uint32
 
 const (
-	// The entity is referenced directly in user's code.
+	// IdxEntityRef_Direct the entity is referenced directly in user's code.
 	IdxEntityRef_Direct IdxEntityRefKind = C.CXIdxEntityRef_Direct
-	// An implicit reference, e.g. a reference of an Objective-C method via the dot syntax.
+	// IdxEntityRef_Implicit an implicit reference, e.g. a reference of an Objective-C method via the dot syntax.
 	IdxEntityRef_Implicit = C.CXIdxEntityRef_Implicit
 )
 

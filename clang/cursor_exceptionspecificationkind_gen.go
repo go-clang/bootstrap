@@ -5,33 +5,31 @@ package clang
 import "C"
 import "fmt"
 
-/*
-	Describes the exception specification of a cursor.
-
-	A negative value indicates that the cursor is not a function declaration.
-*/
+// Cursor_ExceptionSpecificationKind describes the exception specification of a cursor.
+//
+// A negative value indicates that the cursor is not a function declaration.
 type Cursor_ExceptionSpecificationKind uint32
 
 const (
-	// The cursor has no exception specification.
+	// Cursor_ExceptionSpecificationKind_None the cursor has no exception specification.
 	Cursor_ExceptionSpecificationKind_None Cursor_ExceptionSpecificationKind = C.CXCursor_ExceptionSpecificationKind_None
-	// The cursor has exception specification throw()
+	// Cursor_ExceptionSpecificationKind_DynamicNone the cursor has exception specification throw()
 	Cursor_ExceptionSpecificationKind_DynamicNone = C.CXCursor_ExceptionSpecificationKind_DynamicNone
-	// The cursor has exception specification throw(T1, T2)
+	// Cursor_ExceptionSpecificationKind_Dynamic the cursor has exception specification throw(T1, T2)
 	Cursor_ExceptionSpecificationKind_Dynamic = C.CXCursor_ExceptionSpecificationKind_Dynamic
-	// The cursor has exception specification throw(...).
+	// Cursor_ExceptionSpecificationKind_MSAny the cursor has exception specification throw(...).
 	Cursor_ExceptionSpecificationKind_MSAny = C.CXCursor_ExceptionSpecificationKind_MSAny
-	// The cursor has exception specification basic noexcept.
+	// Cursor_ExceptionSpecificationKind_BasicNoexcept the cursor has exception specification basic noexcept.
 	Cursor_ExceptionSpecificationKind_BasicNoexcept = C.CXCursor_ExceptionSpecificationKind_BasicNoexcept
-	// The cursor has exception specification computed noexcept.
+	// Cursor_ExceptionSpecificationKind_ComputedNoexcept the cursor has exception specification computed noexcept.
 	Cursor_ExceptionSpecificationKind_ComputedNoexcept = C.CXCursor_ExceptionSpecificationKind_ComputedNoexcept
-	// The exception specification has not yet been evaluated.
+	// Cursor_ExceptionSpecificationKind_Unevaluated the exception specification has not yet been evaluated.
 	Cursor_ExceptionSpecificationKind_Unevaluated = C.CXCursor_ExceptionSpecificationKind_Unevaluated
-	// The exception specification has not yet been instantiated.
+	// Cursor_ExceptionSpecificationKind_Uninstantiated the exception specification has not yet been instantiated.
 	Cursor_ExceptionSpecificationKind_Uninstantiated = C.CXCursor_ExceptionSpecificationKind_Uninstantiated
-	// The exception specification has not been parsed yet.
+	// Cursor_ExceptionSpecificationKind_Unparsed the exception specification has not been parsed yet.
 	Cursor_ExceptionSpecificationKind_Unparsed = C.CXCursor_ExceptionSpecificationKind_Unparsed
-	// The cursor has a __declspec(nothrow) exception specification.
+	// Cursor_ExceptionSpecificationKind_NoThrow the cursor has a __declspec(nothrow) exception specification.
 	Cursor_ExceptionSpecificationKind_NoThrow = C.CXCursor_ExceptionSpecificationKind_NoThrow
 )
 

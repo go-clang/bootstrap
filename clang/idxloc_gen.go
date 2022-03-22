@@ -4,19 +4,17 @@ package clang
 // #include "go-clang.h"
 import "C"
 
-// Source location passed to index callbacks.
+// IdxLoc source location passed to index callbacks.
 type IdxLoc struct {
 	c C.CXIdxLoc
 }
 
-/*
-	Retrieve the CXIdxFile, file, line, column, and offset represented by
-	the given CXIdxLoc.
-
-	If the location refers into a macro expansion, retrieves the
-	location of the macro expansion and if it refers into a macro argument
-	retrieves the location of the argument.
-*/
+// IndexLoc_getFileLocation retrieve the CXIdxFile, file, line, column, and offset represented by
+// the given CXIdxLoc.
+//
+// If the location refers into a macro expansion, retrieves the
+// location of the macro expansion and if it refers into a macro argument
+// retrieves the location of the argument.
 func (il IdxLoc) FileLocation() (IdxClientFile, File, uint32, uint32, uint32) {
 	var indexFile IdxClientFile
 	var file File
@@ -29,7 +27,7 @@ func (il IdxLoc) FileLocation() (IdxClientFile, File, uint32, uint32, uint32) {
 	return indexFile, file, uint32(line), uint32(column), uint32(offset)
 }
 
-// Retrieve the CXSourceLocation represented by the given CXIdxLoc.
+// IndexLoc_getCXSourceLocation retrieve the CXSourceLocation represented by the given CXIdxLoc.
 func (il IdxLoc) SourceLocation() SourceLocation {
 	return SourceLocation{C.clang_indexLoc_getCXSourceLocation(il.c)}
 }

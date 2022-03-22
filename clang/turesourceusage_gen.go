@@ -8,7 +8,7 @@ import (
 	"unsafe"
 )
 
-// The memory usage of a CXTranslationUnit, broken into categories.
+// TUResourceUsage the memory usage of a CXTranslationUnit, broken into categories.
 type TUResourceUsage struct {
 	c C.CXTUResourceUsage
 }

@@ -5,7 +5,7 @@ package clang
 import "C"
 import "fmt"
 
-// Describes the calling convention of a function type
+// CallingConv describes the calling convention of a function type
 type CallingConv uint32
 
 const (
