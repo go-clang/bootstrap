@@ -555,7 +555,11 @@ const (
 	Cursor_OMPMaskedDirective = C.CXCursor_OMPMaskedDirective
 	// Cursor_OMPUnrollDirective openMP unroll directive.
 	Cursor_OMPUnrollDirective = C.CXCursor_OMPUnrollDirective
-	// Cursor_LastStmt openMP unroll directive.
+	// Cursor_OMPMetaDirective openMP metadirective directive.
+	Cursor_OMPMetaDirective = C.CXCursor_OMPMetaDirective
+	// Cursor_OMPGenericLoopDirective openMP loop directive.
+	Cursor_OMPGenericLoopDirective = C.CXCursor_OMPGenericLoopDirective
+	// Cursor_LastStmt openMP loop directive.
 	Cursor_LastStmt = C.CXCursor_LastStmt
 	// Cursor_TranslationUnit cursor that represents the translation unit itself.
 	//

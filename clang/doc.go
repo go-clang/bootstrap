@@ -1,4 +1,4 @@
-// Package clang provides native bindings for the clang C API.
+// Package clang provides the Clang C API bindings for Go.
 package clang
 
 import (

@@ -88,6 +88,8 @@ const (
 	Type_ULongAccum = C.CXType_ULongAccum
 	// Type_BFloat16 a type whose specific kind is not exposed via this interface.
 	Type_BFloat16 = C.CXType_BFloat16
+	// Type_Ibm128 a type whose specific kind is not exposed via this interface.
+	Type_Ibm128 = C.CXType_Ibm128
 	// Type_FirstBuiltin a type whose specific kind is not exposed via this interface.
 	Type_FirstBuiltin = C.CXType_FirstBuiltin
 	// Type_LastBuiltin a type whose specific kind is not exposed via this interface.
