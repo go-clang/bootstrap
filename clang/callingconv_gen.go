@@ -28,6 +28,7 @@ const (
 	CallingConv_PreserveAll                   = C.CXCallingConv_PreserveAll
 	CallingConv_AArch64VectorCall             = C.CXCallingConv_AArch64VectorCall
 	CallingConv_SwiftAsync                    = C.CXCallingConv_SwiftAsync
+	CallingConv_AArch64SVEPCS                 = C.CXCallingConv_AArch64SVEPCS
 	CallingConv_Invalid                       = C.CXCallingConv_Invalid
 	CallingConv_Unexposed                     = C.CXCallingConv_Unexposed
 )
@@ -70,6 +71,8 @@ func (cc CallingConv) Spelling() string {
 		return "CallingConv=AArch64VectorCall"
 	case CallingConv_SwiftAsync:
 		return "CallingConv=SwiftAsync"
+	case CallingConv_AArch64SVEPCS:
+		return "CallingConv=AArch64SVEPCS"
 	case CallingConv_Invalid:
 		return "CallingConv=Invalid"
 	case CallingConv_Unexposed:

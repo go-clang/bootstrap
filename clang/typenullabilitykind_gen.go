@@ -16,7 +16,7 @@ const (
 	TypeNullability_Unspecified = C.CXTypeNullability_Unspecified
 	// TypeNullability_Invalid nullability is not applicable to this type.
 	TypeNullability_Invalid = C.CXTypeNullability_Invalid
-	// TypeNullability_NullableResult generally behaves like Nullable, except when used in a block parameter that was imported into a swift async method. There, swift will assume that the parameter can get null even if no error occured. _Nullable parameters are assumed to only get null on error.
+	// TypeNullability_NullableResult generally behaves like Nullable, except when used in a block parameter that was imported into a swift async method. There, swift will assume that the parameter can get null even if no error occurred. _Nullable parameters are assumed to only get null on error.
 	TypeNullability_NullableResult = C.CXTypeNullability_NullableResult
 )
 

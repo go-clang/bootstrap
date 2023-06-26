@@ -22,7 +22,7 @@ type CodeCompleteResults struct {
 // Calling this makes sense only if CXCodeComplete_IncludeCompletionsWithFixIts
 // option was set.
 //
-// Parameter results The structure keeping all completion results
+// # Parameter results The structure keeping all completion results
 //
 // Parameter completion_index The index of the completion
 //
@@ -61,7 +61,7 @@ func (ccr *CodeCompleteResults) CompletionNumFixIts(completionIndex uint32) uint
 // In 'vec_ptr->^', one of the completions is 'release', it requires
 // replacing '->' with '.'.
 //
-// Parameter results The structure keeping all completion results
+// # Parameter results The structure keeping all completion results
 //
 // Parameter completion_index The index of the completion
 //
@@ -106,7 +106,7 @@ func (ccr *CodeCompleteResults) Diagnostic(index uint32) Diagnostic {
 // CodeCompleteGetContexts determines what completions are appropriate for the context
 // the given code completion.
 //
-// Parameter Results the code completion results to query
+// # Parameter Results the code completion results to query
 //
 // Returns the kinds of completions that are appropriate for use
 // along with the given code completion results.
@@ -120,7 +120,7 @@ func (ccr *CodeCompleteResults) Contexts() uint64 {
 // message sends); if there is not a container, this function will return
 // CXCursor_InvalidCode.
 //
-// Parameter Results the code completion results to query
+// # Parameter Results the code completion results to query
 //
 // Parameter IsIncomplete on return, this value will be false if Clang has complete
 // information about the container. If Clang does not have complete
@@ -140,7 +140,7 @@ func (ccr *CodeCompleteResults) ContainerKind() (uint32, CursorKind) {
 // context. If there is not a container for the current context, this
 // function will return the empty string.
 //
-// Parameter Results the code completion results to query
+// # Parameter Results the code completion results to query
 //
 // Returns the USR for the container
 func (ccr *CodeCompleteResults) ContainerUSR() string {
@@ -155,7 +155,7 @@ func (ccr *CodeCompleteResults) ContainerUSR() string {
 // non-empty string for CXCompletionContext_ObjCInstanceMessage and
 // CXCompletionContext_ObjCClassMessage.
 //
-// Parameter Results the code completion results to query
+// # Parameter Results the code completion results to query
 //
 // Returns the selector (or partial selector) that has been entered thus far
 // for an Objective-C message send.

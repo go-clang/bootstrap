@@ -152,11 +152,11 @@ func (c Cursor) TranslationUnit() TranslationUnit {
 // clang_getCursorLexicalParent()). They diverge when declarations or
 // definitions are provided out-of-line. For example:
 //
-//  class C {
-//  void f();
-//  };
+//	class C {
+//	void f();
+//	};
 //
-//  void C::f() { }
+//	void C::f() { }
 //
 // In the out-of-line definition of C::f, the semantic parent is
 // the class C, of which this function is a member. The lexical parent is
@@ -185,11 +185,11 @@ func (c Cursor) SemanticParent() Cursor {
 // clang_getCursorSemanticParent()). They diverge when declarations or
 // definitions are provided out-of-line. For example:
 //
-//  class C {
-//  void f();
-//  };
+//	class C {
+//	void f();
+//	};
 //
-//  void C::f() { }
+//	void C::f() { }
 //
 // In the out-of-line definition of C::f, the semantic parent is
 // the class C, of which this function is a member. The lexical parent is
@@ -702,10 +702,10 @@ func (c Cursor) Referenced() Cursor {
 // unit, but only one of those declarations can also be a
 // definition. For example, given:
 //
-//  int f(int, int);
-//  int g(int x, int y) { return f(x, y); }
-//  int f(int a, int b) { return a + b; }
-//  int f(int, int);
+//	int f(int, int);
+//	int g(int x, int y) { return f(x, y); }
+//	int f(int a, int b) { return a + b; }
+//	int f(int, int);
 //
 // there are three declarations of the function "f", but only the
 // second one is a definition. The GetCursorDefinition()
@@ -735,11 +735,11 @@ func (c Cursor) IsCursorDefinition() bool {
 // times within a single translation unit. For example, a structure type can
 // be forward-declared (possibly multiple times) and later defined:
 //
-//  struct X;
-//  struct X;
-//  struct X {
-//  int member;
-//  };
+//	struct X;
+//	struct X;
+//	struct X {
+//	int member;
+//	};
 //
 // The declarations and the definition of X are represented by three
 // different cursors, all of which are declarations of the same underlying

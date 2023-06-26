@@ -36,7 +36,7 @@ func (ieri IdxEntityRefInfo) ReferencedEntity() *IdxEntityInfo {
 
 // parentEntity immediate "parent" of the reference. For example:
 //
-//  Foo *var;
+//	Foo *var;
 //
 // The parent of reference of type 'Foo' is the variable 'var'.
 // For references inside statement bodies of functions/methods,

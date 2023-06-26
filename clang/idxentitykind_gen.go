@@ -35,6 +35,7 @@ const (
 	IdxEntity_CXXConversionFunction               = C.CXIdxEntity_CXXConversionFunction
 	IdxEntity_CXXTypeAlias                        = C.CXIdxEntity_CXXTypeAlias
 	IdxEntity_CXXInterface                        = C.CXIdxEntity_CXXInterface
+	IdxEntity_CXXConcept                          = C.CXIdxEntity_CXXConcept
 )
 
 func (iek IdxEntityKind) IsEntityObjCContainerKind() bool {
@@ -99,6 +100,8 @@ func (iek IdxEntityKind) Spelling() string {
 		return "IdxEntity=CXXTypeAlias"
 	case IdxEntity_CXXInterface:
 		return "IdxEntity=CXXInterface"
+	case IdxEntity_CXXConcept:
+		return "IdxEntity=CXXConcept"
 	}
 
 	return fmt.Sprintf("IdxEntityKind unknown %d", int(iek))

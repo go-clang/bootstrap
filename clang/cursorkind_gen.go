@@ -344,9 +344,13 @@ const (
 	Cursor_OMPIteratorExpr = C.CXCursor_OMPIteratorExpr
 	// Cursor_CXXAddrspaceCastExpr openCL's addrspace_cast<> expression.
 	Cursor_CXXAddrspaceCastExpr = C.CXCursor_CXXAddrspaceCastExpr
-	// Cursor_LastExpr openCL's addrspace_cast<> expression.
+	// Cursor_ConceptSpecializationExpr expression that references a C++20 concept.
+	Cursor_ConceptSpecializationExpr = C.CXCursor_ConceptSpecializationExpr
+	// Cursor_RequiresExpr expression that references a C++20 concept.
+	Cursor_RequiresExpr = C.CXCursor_RequiresExpr
+	// Cursor_LastExpr expression that references a C++20 concept.
 	Cursor_LastExpr = C.CXCursor_LastExpr
-	// Cursor_FirstStmt openCL's addrspace_cast<> expression.
+	// Cursor_FirstStmt expression that references a C++20 concept.
 	Cursor_FirstStmt = C.CXCursor_FirstStmt
 	// Cursor_UnexposedStmt a statement whose specific kind is not exposed via this
 	// interface.
@@ -559,7 +563,25 @@ const (
 	Cursor_OMPMetaDirective = C.CXCursor_OMPMetaDirective
 	// Cursor_OMPGenericLoopDirective openMP loop directive.
 	Cursor_OMPGenericLoopDirective = C.CXCursor_OMPGenericLoopDirective
-	// Cursor_LastStmt openMP loop directive.
+	// Cursor_OMPTeamsGenericLoopDirective openMP teams loop directive.
+	Cursor_OMPTeamsGenericLoopDirective = C.CXCursor_OMPTeamsGenericLoopDirective
+	// Cursor_OMPTargetTeamsGenericLoopDirective openMP target teams loop directive.
+	Cursor_OMPTargetTeamsGenericLoopDirective = C.CXCursor_OMPTargetTeamsGenericLoopDirective
+	// Cursor_OMPParallelGenericLoopDirective openMP parallel loop directive.
+	Cursor_OMPParallelGenericLoopDirective = C.CXCursor_OMPParallelGenericLoopDirective
+	// Cursor_OMPTargetParallelGenericLoopDirective openMP target parallel loop directive.
+	Cursor_OMPTargetParallelGenericLoopDirective = C.CXCursor_OMPTargetParallelGenericLoopDirective
+	// Cursor_OMPParallelMaskedDirective openMP parallel masked directive.
+	Cursor_OMPParallelMaskedDirective = C.CXCursor_OMPParallelMaskedDirective
+	// Cursor_OMPMaskedTaskLoopDirective openMP masked taskloop directive.
+	Cursor_OMPMaskedTaskLoopDirective = C.CXCursor_OMPMaskedTaskLoopDirective
+	// Cursor_OMPMaskedTaskLoopSimdDirective openMP masked taskloop simd directive.
+	Cursor_OMPMaskedTaskLoopSimdDirective = C.CXCursor_OMPMaskedTaskLoopSimdDirective
+	// Cursor_OMPParallelMaskedTaskLoopDirective openMP parallel masked taskloop directive.
+	Cursor_OMPParallelMaskedTaskLoopDirective = C.CXCursor_OMPParallelMaskedTaskLoopDirective
+	// Cursor_OMPParallelMaskedTaskLoopSimdDirective openMP parallel masked taskloop simd directive.
+	Cursor_OMPParallelMaskedTaskLoopSimdDirective = C.CXCursor_OMPParallelMaskedTaskLoopSimdDirective
+	// Cursor_LastStmt openMP parallel masked taskloop simd directive.
 	Cursor_LastStmt = C.CXCursor_LastStmt
 	// Cursor_TranslationUnit cursor that represents the translation unit itself.
 	//
@@ -679,9 +701,11 @@ const (
 	Cursor_StaticAssert = C.CXCursor_StaticAssert
 	// Cursor_FriendDecl a friend declaration.
 	Cursor_FriendDecl = C.CXCursor_FriendDecl
-	// Cursor_FirstExtraDecl a friend declaration.
+	// Cursor_ConceptDecl a concept declaration.
+	Cursor_ConceptDecl = C.CXCursor_ConceptDecl
+	// Cursor_FirstExtraDecl a concept declaration.
 	Cursor_FirstExtraDecl = C.CXCursor_FirstExtraDecl
-	// Cursor_LastExtraDecl a friend declaration.
+	// Cursor_LastExtraDecl a concept declaration.
 	Cursor_LastExtraDecl = C.CXCursor_LastExtraDecl
 	// Cursor_OverloadCandidate a code completion overload candidate.
 	Cursor_OverloadCandidate = C.CXCursor_OverloadCandidate

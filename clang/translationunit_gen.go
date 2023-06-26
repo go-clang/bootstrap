@@ -23,7 +23,7 @@ func (tu TranslationUnit) IsFileMultipleIncludeGuarded(file File) bool {
 
 // GetFile retrieve a file handle within the given translation unit.
 //
-// Parameter tu the translation unit
+// # Parameter tu the translation unit
 //
 // Parameter file_name the name of the file.
 //

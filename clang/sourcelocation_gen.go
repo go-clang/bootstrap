@@ -85,12 +85,12 @@ func (sl SourceLocation) ExpansionLocation() (File, uint32, uint32, uint32) {
 //
 // Example: given the following source code in a file somefile.c
 //
-//  #123 "dummy.c" 1
+//	#123 "dummy.c" 1
 //
-//  static int func(void)
-//  {
-//  return 0;
-//  }
+//	static int func(void)
+//	{
+//	return 0;
+//	}
 //
 // the location information returned by this function would be
 //

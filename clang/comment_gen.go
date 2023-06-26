@@ -260,8 +260,10 @@ func (c Comment) TParamCommandComment_IsParamPositionValid() bool {
 // Returns zero-based nesting depth of this parameter in the template parameter list.
 //
 // For example,
-//  template<typename C, template<typename T> class TT>
-//  void test(TT<int> aaa);
+//
+//	template<typename C, template<typename T> class TT>
+//	void test(TT<int> aaa);
+//
 // for C and TT nesting depth is 0,
 // for T nesting depth is 1.
 func (c Comment) TParamCommandComment_getDepth() uint32 {
@@ -274,8 +276,10 @@ func (c Comment) TParamCommandComment_getDepth() uint32 {
 // given nesting depth.
 //
 // For example,
-//  template<typename C, template<typename T> class TT>
-//  void test(TT<int> aaa);
+//
+//	template<typename C, template<typename T> class TT>
+//	void test(TT<int> aaa);
+//
 // for C and TT nesting depth is 0, so we can ask for index at depth 0:
 // at depth 0 C's index is 0, TT's index is 1.
 //

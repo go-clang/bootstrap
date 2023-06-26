@@ -25,26 +25,26 @@ type Index struct {
 //
 // Here is an example:
 //
-//  // excludeDeclsFromPCH = 1, displayDiagnostics=1
-//  Idx = CreateIndex(1, 1);
+//	// excludeDeclsFromPCH = 1, displayDiagnostics=1
+//	Idx = CreateIndex(1, 1);
 //
-//  // IndexTest.pch was produced with the following command:
-//  // "clang -x c IndexTest.h -emit-ast -o IndexTest.pch"
-//  TU = clang_createTranslationUnit(Idx, "IndexTest.pch");
+//	// IndexTest.pch was produced with the following command:
+//	// "clang -x c IndexTest.h -emit-ast -o IndexTest.pch"
+//	TU = clang_createTranslationUnit(Idx, "IndexTest.pch");
 //
-//  // This will load all the symbols from 'IndexTest.pch'
-//  clang_visitChildren(clang_getTranslationUnitCursor(TU),
-//  TranslationUnitVisitor, 0);
-//  clang_disposeTranslationUnit(TU);
+//	// This will load all the symbols from 'IndexTest.pch'
+//	clang_visitChildren(clang_getTranslationUnitCursor(TU),
+//	TranslationUnitVisitor, 0);
+//	clang_disposeTranslationUnit(TU);
 //
-//  // This will load all the symbols from 'IndexTest.c', excluding symbols
-//  // from 'IndexTest.pch'.
-//  char *args[] = { "-Xclang", "-include-pch=IndexTest.pch" };
-//  TU = clang_createTranslationUnitFromSourceFile(Idx, "IndexTest.c", 2, args,
-//  0, 0);
-//  clang_visitChildren(clang_getTranslationUnitCursor(TU),
-//  TranslationUnitVisitor, 0);
-//  clang_disposeTranslationUnit(TU);
+//	// This will load all the symbols from 'IndexTest.c', excluding symbols
+//	// from 'IndexTest.pch'.
+//	char *args[] = { "-Xclang", "-include-pch=IndexTest.pch" };
+//	TU = clang_createTranslationUnitFromSourceFile(Idx, "IndexTest.c", 2, args,
+//	0, 0);
+//	clang_visitChildren(clang_getTranslationUnitCursor(TU),
+//	TranslationUnitVisitor, 0);
+//	clang_disposeTranslationUnit(TU);
 //
 // This process of creating the 'pch', loading it separately, and using it (via
 // -include-pch) allows 'excludeDeclsFromPCH' to remove redundant callbacks
@@ -64,10 +64,11 @@ func (i Index) Dispose() {
 // SetGlobalOptions sets general options associated with a CXIndex.
 //
 // For example:
-//  CXIndex idx = ...;
-//  SetGlobalOptions(idx,
-//  clang_CXIndex_getGlobalOptions(idx) |
-//  CXGlobalOpt_ThreadBackgroundPriorityForIndexing);
+//
+//	CXIndex idx = ...;
+//	SetGlobalOptions(idx,
+//	clang_CXIndex_getGlobalOptions(idx) |
+//	CXGlobalOpt_ThreadBackgroundPriorityForIndexing);
 //
 // Parameter options A bitmask of options, a bitwise OR of CXGlobalOpt_XXX flags.
 func (i Index) SetGlobalOptions(options uint32) {
